@@ -1,65 +1,211 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import React from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import Image from "../components/Image";
+import Form from "../components/Form";
+import Plano from "../components/Plano";
+import Head from "next/head";
+import Table from "../components/Table";
+import Financiamiento from "../components/Financiamiento";
+import { motion } from "framer-motion";
 
-export default function Home() {
+import { useState } from "react";
+
+const stagger = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const Index = () => {
+  const [image, setImage] = useState();
+  const [plano, setPlano] = useState();
+  const [itemsTable, setItemsTable] = useState();
+  const [base, setBase] = useState([]);
+
+  const updateImagenPlano = (modelo, selectorCubierta, selectorFachada) => {
+    let casa;
+    let plano;
+
+    const selector = (temporal, real) => {
+      if (selectorFachada == "top") {
+        if (selectorCubierta == "si") {
+          casa = {
+            src: `images/fachadas/CASA-${temporal}/CASA-${temporal}-01TOPCUBIERTA.jpg`,
+            descripcion: `Fachada ${real} Top Cubierta`,
+          };
+          plano = {
+            src: `images/planos/CASA-${real}.jpg`,
+            descripcion: `Fachada ${real} Top Cubierta`,
+          };
+        } else {
+          casa = {
+            src: `images/fachadas/CASA-${temporal}/CASA-${temporal}-01TOP.jpg`,
+            descripcion: `Fachada ${real} Top `,
+          };
+          plano = {
+            src: `images/planos/CASA-${real}.jpg`,
+            descripcion: `Fachada ${real} Top`,
+          };
+        }
+      } else {
+        if (selectorCubierta == "si") {
+          casa = {
+            src: `images/fachadas/CASA-${temporal}/CASA-${temporal}-01CUBIERTA.jpg`,
+            descripcion: `Fachada ${real} Cubierta`,
+          };
+          plano = {
+            src: `images/planos/CASA-${real}.jpg`,
+            descripcion: `Fachada ${real} Cubierta`,
+          };
+        } else {
+          casa = {
+            src: `images/fachadas/CASA-${temporal}/CASA-${temporal}-01.jpg`,
+            descripcion: `Fachada ${real}`,
+          };
+          plano = {
+            src: `images/planos/CASA-${real}.jpg`,
+            descripcion: `Fachada ${real}`,
+          };
+        }
+      }
+    };
+
+    switch (modelo) {
+      case "B1":
+        selector("B", modelo);
+        break;
+      case "B2":
+        selector("B", modelo);
+        break;
+      case "D2":
+        selector("D", modelo);
+        break;
+      case "E2":
+        selector("E", modelo);
+        break;
+      case "E3":
+        selector("E", modelo);
+        break;
+      case "F1":
+        selector("F", modelo);
+        break;
+      case "F2":
+        selector("F", modelo);
+        break;
+      case "G1A":
+        selector("G", modelo);
+        break;
+      case "G1B":
+        selector("G", modelo);
+        break;
+      case "G2A":
+        selector("G", modelo);
+        break;
+      case "G2B":
+        selector("G", modelo);
+        break;
+      default:
+        selector(modelo, modelo);
+        break;
+    }
+
+    setImage(casa);
+    setPlano(plano);
+  };
+
+  const cargarTabla = (datosFormulario, arregloInformación) => {
+    setBase(arregloInformación);
+    setItemsTable(datosFormulario);
+  };
+
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>La Costa Cotizador</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+      <Header />
+      {/* Page Header*/}
+      <section
+        className="page-header page-header-dark bg-img-repeat bg-secondary"
+        style={{
+          backgroundImage: `url("images/pattern-shapes.png")`,
+          backgroundColor: "#66aebf !important",
+        }}
+      >
+        <div className="page-header-content">
+          <div className="container">
+            <div className="row align-items-center">
+              <motion.div
+                exit="pageExit"
+                initial="initial"
+                animate="animate"
+                variants={stagger}
+                className="col-lg-4"
+              >
+                <Form
+                  actualizarImagenes={updateImagenPlano}
+                  enviarDatos={cargarTabla}
+                />
+              </motion.div>
+              <motion.div
+                exit="pageExit"
+                initial="initial"
+                animate="animate"
+                variants={stagger}
+                className="col-lg-8"
+              >
+                <Image
+                  img={image === undefined ? "images/la-costa.jpg" : image.src}
+                  descripcion={
+                    image === undefined ? "La Costa" : image.descripcion
+                  }
+                />
+                <Plano
+                  img={image == undefined ? "images/la-costa.jpg" : plano.src}
+                  descripcion={
+                    image == undefined ? "La Costa" : plano.descripcion
+                  }
+                />
+              </motion.div>
+            </div>
+            <div className="row align-items-center mt-5">
+              <div className="col-lg-7">
+                {itemsTable == undefined ? (
+                  <br />
+                ) : (
+                  <Table dataCliente={itemsTable} base={base} />
+                )}
+              </div>
+              <div className="col-lg-5">
+                {itemsTable == undefined ? (
+                  <br />
+                ) : (
+                  <Financiamiento dataCliente={itemsTable} base={base} />
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
+        <div className="svg-border-angled text-white">
+          {/* Angled SVG Border*/}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            fill="currentColor"
+          >
+            <polygon points="0,100 100,0 100,100" />
+          </svg>
+        </div>
+      </section>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+      <Footer />
     </div>
-  )
-}
+  );
+};
+
+export default Index;
