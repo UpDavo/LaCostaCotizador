@@ -134,12 +134,27 @@ const Form = ({ actualizarImagenes, enviarDatos }) => {
       solar: document.querySelector("#solar").value,
       areaSolar: document.querySelector("#areaSolar").value,
       modelo: modeloActualizado,
+      modeloReal: document.querySelector("#modelo").value,
       areaConstruccion: document.querySelector("#areaConstruccion").value,
       fachada: document.querySelector("#fachada").value,
       cubierta: document.querySelector("#cubierta").value,
     };
-
-    enviarDatos(datosImportantes, infoCiudadelas);
+    if (datosImportantes.ciudadela == "Costa Verde - Costa Azul") {
+      alert("Datos insuficientes");
+    } else {
+      if (
+        datosImportantes.manzana == "Seleccione primero una Ciudadela" &&
+        datosImportantes.sola == "Seleccione primero una Manzana"
+      ) {
+        alert("Datos insuficientes");
+      } else {
+        if (datosImportantes.modelo == "Seleccione un Modelo") {
+          alert("Datos Insuficientes");
+        } else {
+          enviarDatos(datosImportantes, infoCiudadelas);
+        }
+      }
+    }
   };
 
   return (
@@ -148,7 +163,7 @@ const Form = ({ actualizarImagenes, enviarDatos }) => {
       className="card rounded-lg text-dark formulario"
     >
       <div className="card-header py-4" style={{ color: "#b58648" }}>
-        Datos de la persona que realiza la cotización
+        DATOS DE LA PERSONA QUE REALIZA LA COTIZACIÓN
       </div>
       <div className="card-body">
         <form onSubmit={generarTabla} id="formulario">
@@ -157,26 +172,41 @@ const Form = ({ actualizarImagenes, enviarDatos }) => {
               <label className="small text-gray-600" htmlFor="nombre">
                 Nombre
               </label>
-              <input className="form-control" id="nombre" type="text" />
+              <input
+                className="form-control"
+                id="nombre"
+                type="text"
+                required
+              />
             </div>
             <div className="form-group col-md-6">
               <label className="small text-gray-600" htmlFor="apellido">
                 Apellido
               </label>
-              <input className="form-control" id="apellido" type="text" />
+              <input
+                className="form-control"
+                id="apellido"
+                type="text"
+                required
+              />
             </div>
           </div>
           <div className="form-group">
             <label className="small text-gray-600" htmlFor="correo">
               Correo
             </label>
-            <input className="form-control" id="correo" type="correo" />
+            <input
+              className="form-control"
+              id="correo"
+              type="correo"
+              required
+            />
           </div>
           <div className="form-group">
             <label className="small text-gray-600" htmlFor="celular">
               Número Celular
             </label>
-            <input className="form-control" id="celular" type="text" />
+            <input className="form-control" id="celular" type="text" required />
           </div>
           <div className="form-group">
             <label className="small text-gray-600" htmlFor="ciudadela">
@@ -187,6 +217,9 @@ const Form = ({ actualizarImagenes, enviarDatos }) => {
               id="ciudadela"
               onChange={tomarDatos}
             >
+              <option selected disabled value="Costa Verde - Costa Azul">
+                Costa Verde - Costa Azul
+              </option>
               <option value="verde">Costa Verde</option>
               <option value="azul">Costa Azul</option>
             </select>
@@ -201,10 +234,12 @@ const Form = ({ actualizarImagenes, enviarDatos }) => {
               onChange={presentarSolares}
             >
               {numeroManzanas == undefined ? (
-                <option>Selecccione primero una Ciudadela</option>
+                <option value="Selecccione primero una Ciudadela">
+                  Selecccione primero una Ciudadela
+                </option>
               ) : (
                 numeroManzanas.map((opcion) => {
-                  return <option>{opcion}</option>;
+                  return <option value={opcion}>{opcion}</option>;
                 })
               )}
             </select>
@@ -215,7 +250,9 @@ const Form = ({ actualizarImagenes, enviarDatos }) => {
             </label>
             <select className="form-control" id="solar" onChange={cargarArea}>
               {numeroSolares == undefined ? (
-                <option>Selecccione primero una Manzana</option>
+                <option value="Selecccione primero una Manzana">
+                  Selecccione primero una Manzana
+                </option>
               ) : (
                 numeroSolares.map((solar) => {
                   return <option value={solar}>{solar}</option>;
@@ -252,7 +289,7 @@ const Form = ({ actualizarImagenes, enviarDatos }) => {
               id="modelo"
               onChange={cargarAreaConstruccion}
             >
-              <option value="" selected disabled>
+              <option value="Seleccione un modelo" selected disabled>
                 Seleccione un modelo
               </option>
               <option value="A">A</option>
@@ -329,7 +366,7 @@ const Form = ({ actualizarImagenes, enviarDatos }) => {
             className="btn btn-secondary dorado btn-block font-weight-500 mt-4"
             type="submit"
           >
-            Generar la tabla de pagos
+            Generar información de financiamiento
           </button>
         </form>
       </div>

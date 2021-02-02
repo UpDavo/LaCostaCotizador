@@ -1,36 +1,41 @@
 import DatePicker from "react-datepicker";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-/*
-Precio de lista
-Descuento
-Precio Final
+import Table from "./Table";
+import Print from "./Print";
+import ReactToPrint from "react-to-print";
 
-Cuota de entrada 30%
-Pago contra entrega 70%
-
-Pago a la firma 4%
-
-Fecha de inicio de financiamiento
-Meses de financiamiento
-Valor a pagar
-Cuotas de
-
-*/
 var valorFinal = 0;
 
 const Financiamiento = ({ dataCliente, base }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [precioLista, setPrecioLista] = useState(0);
   const [descuento, setDescuento] = useState(0);
-  const [precioFinal, setPrecioFinal] = useState(0);
+  const [precioFinal, setPrecioFinal] = useState(precioLista - descuento);
+  const [financiamiento, setFinanciamiento] = useState(
+    dataCliente.ciudadela == "verde" ? 24 : 32
+  );
+  const [porcentajes, setPorcentajes] = useState({
+    treinta: precioFinal * 0.3,
+    setenta: precioFinal * 0.7,
+    cuatro: precioFinal * 0.04,
+    pagar: precioFinal * 0.3 - precioFinal * 0.04,
+    cuotas: (precioFinal * 0.3 - precioFinal * 0.04) / financiamiento,
+  });
+
+  const [dataImprimirFinanciamiento, setDataImprimirFinanciamiento] = useState(
+    []
+  );
+
+  const componentRef = useRef();
+
+  /*Funcionalidad Pre Render */
 
   const actualizarPrecio = (casa, cliente) => {
     if (
       casa.MANZANA == parseInt(cliente.manzana) &&
       casa.LOTE == cliente.solar
     ) {
-      console.log(cliente);
       if (cliente.fachada == "estandar") {
         if (cliente.cubierta == "si") {
           valorFinal = casa[cliente.modelo] + 7000;
@@ -53,159 +58,237 @@ const Financiamiento = ({ dataCliente, base }) => {
     event.preventDefault();
     setDescuento(parseInt(document.querySelector("#descuento").value));
     setPrecioFinal(precioLista - descuento);
-    console.log(precioFinal);
   };
 
-  useEffect(() => {
-    base.map((row) => {
-      actualizarPrecio(row, dataCliente);
-    });
-    setPrecioLista(valorFinal);
-    setPrecioFinal(precioLista - descuento);
-    console.log(precioLista);
+  base.map((row) => {
+    actualizarPrecio(row, dataCliente);
   });
 
+  /* Funcionalidad Post Render*/
+  useEffect(() => {
+    setPrecioLista(valorFinal);
+    setPrecioFinal(precioLista - descuento);
+    setPorcentajes({
+      treinta: precioFinal * 0.3,
+      setenta: precioFinal * 0.7,
+      cuatro: precioFinal * 0.04,
+      pagar: precioFinal * 0.3 - precioFinal * 0.04,
+      cuotas: (precioFinal * 0.3 - precioFinal * 0.04) / financiamiento,
+    });
+    setFinanciamiento(dataCliente.ciudadela == "verde" ? 24 : 32);
+  }, [precioFinal, dataCliente, precioLista, descuento]);
+
+  const imprimirFinanciamiento = (arregloCuotas) => {
+    setDataImprimirFinanciamiento(arregloCuotas);
+    console.log(dataImprimirFinanciamiento);
+  };
+
   return (
-    <div className="card rounded-lg text-dark formulario">
-      <div className="card-header py-4" style={{ color: "#b58648" }}>
-        INFORMACIÓN DE FINANCIAMIENTO
+    <div className="row align-items-center mt-5">
+      <div className="col-lg-7">
+        <Table
+          meses={financiamiento}
+          cuota={porcentajes.cuotas}
+          mesInicial={new Date()}
+          anoInicial={2021}
+          functionReturn={imprimirFinanciamiento}
+        />
       </div>
-      <div className="card-body">
-        <form id="formulario2">
-          <div className="form-row">
-            <div className="form-group col-md-4">
-              <fieldset disabled>
-                <label className="small text-gray-600" htmlFor="precioLista">
-                  Precio de Lista
-                </label>
-                <input
-                  className="form-control"
-                  id="correo"
-                  type="precioLista"
-                  placeholder={precioLista}
-                  value={precioLista}
-                />
-              </fieldset>
-            </div>
-            <div className="form-group col-md-4">
-              <label className="small text-gray-600" htmlFor="descuento">
-                Descuento
-              </label>
-              <input
-                className="form-control"
-                id="descuento"
-                type="text"
-              />
-            </div>
-            <div className="form-group col-md-4">
+      <div className="col-lg-5">
+        <div className="card rounded-lg text-dark formulario">
+          <div className="card-header py-4" style={{ color: "#b58648" }}>
+            INFORMACIÓN DE FINANCIAMIENTO
+          </div>
+          <div className="card-body">
+            <form id="formulario2">
+              <div className="form-row">
+                <div className="form-group col-md-4">
+                  <fieldset disabled>
+                    <label
+                      className="small text-gray-600"
+                      htmlFor="precioLista"
+                    >
+                      Precio de Lista
+                    </label>
+                    <input
+                      className="form-control"
+                      id="correo"
+                      type="precioLista"
+                      value={precioLista.toLocaleString("en")}
+                    />
+                  </fieldset>
+                </div>
+                <div className="form-group col-md-4">
+                  <label className="small text-gray-600" htmlFor="descuento">
+                    Descuento
+                  </label>
+                  <input className="form-control" id="descuento" type="text" />
+                </div>
+                <div className="form-group col-md-4">
+                  <button
+                    className="btn btn-secondary dorado btn-block font-weight-200 mt-4"
+                    id="descuentoBtn"
+                    onClick={aplicarDescuento}
+                  >
+                    Actualizar
+                  </button>
+                </div>
+              </div>
+              <div className="form-group">
+                <fieldset disabled>
+                  <label className="small text-gray-600" htmlFor="precioFinal">
+                    Precio Final
+                  </label>
+                  <input
+                    className="form-control"
+                    id="precioFinal"
+                    type="text"
+                    value={precioFinal.toLocaleString("en")}
+                    readOnly
+                  />
+                </fieldset>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <fieldset disabled>
+                    <label
+                      className="small text-gray-600"
+                      htmlFor="cuotaEntrada"
+                    >
+                      Cuota de Entrada 30%
+                    </label>
+                    <input
+                      className="form-control"
+                      id="precioFinal"
+                      type="text"
+                      value={porcentajes.treinta.toLocaleString("en")}
+                      readOnly
+                    />
+                  </fieldset>
+                </div>
+                <div className="form-group col-md-6">
+                  <fieldset disabled>
+                    <label
+                      className="small text-gray-600"
+                      htmlFor="pagoContraEntrega"
+                    >
+                      Pago contra Entrega 70%
+                    </label>
+                    <input
+                      className="form-control"
+                      id="precioFinal"
+                      type="text"
+                      value={porcentajes.setenta.toLocaleString("en")}
+                      readOnly
+                    />
+                  </fieldset>
+                </div>
+              </div>
+
+              <div className="form-group">
+                <fieldset disabled>
+                  <label className="small text-gray-600" htmlFor="pagoFirma">
+                    Pago a la Firma 4%
+                  </label>
+                  <input
+                    className="form-control"
+                    id="precioFinal"
+                    type="text"
+                    value={porcentajes.cuatro.toLocaleString("en")}
+                    readOnly
+                  />
+                </fieldset>
+              </div>
+              <div className="pt-2 pb-2">
+                <hr color="darkGray" />
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <label className="small text-gray-600" htmlFor="pagoFirma">
+                    Fecha de inicio de Financiamiento
+                  </label>
+                  <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    className="form-control"
+                  />
+                </div>
+                <div className="form-group col-md-6">
+                  <fieldset disabled>
+                    <label className="small text-gray-600" htmlFor="pagoFirma">
+                      Financiamiento (meses)
+                    </label>
+                    <input
+                      className="form-control"
+                      id="precioFinal"
+                      type="text"
+                      value={financiamiento}
+                      readOnly
+                    />
+                  </fieldset>
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <fieldset disabled>
+                    <label className="small text-gray-600" htmlFor="pagoFirma">
+                      Valor a Pagar
+                    </label>
+                    <input
+                      className="form-control"
+                      id="precioFinal"
+                      type="text"
+                      value={porcentajes.pagar.toLocaleString("en")}
+                      readOnly
+                    />
+                  </fieldset>
+                </div>
+
+                <div className="form-group col-md-6">
+                  <fieldset disabled>
+                    <label className="small text-gray-600" htmlFor="pagoFirma">
+                      Cuotas de
+                    </label>
+                    <input
+                      className="form-control"
+                      id="precioFinal"
+                      type="text"
+                      value={porcentajes.cuotas.toLocaleString("en")}
+                      readonly
+                    />
+                  </fieldset>
+                </div>
+              </div>
+
               <button
-                className="btn btn-secondary dorado btn-block font-weight-200 mt-4"
-                id="descuentoBtn"
-                onClick={aplicarDescuento}
+                className="btn btn-secondary dorado btn-block font-weight-500"
+                type="submit"
+                style={{ marginBottom: "10%", marginTop: "10%" }}
               >
-                Actualizar
+                Actualizar la tabla con nuevas fechas
               </button>
-            </div>
-          </div>
-          <div className="form-group">
-            <fieldset disabled>
-              <label className="small text-gray-600" htmlFor="precioFinal">
-                Precio Final
-              </label>
-              <input
-                className="form-control"
-                id="precioFinal"
-                type="text"
-                placeholder={precioFinal}
-                value={precioFinal}
-              />
-            </fieldset>
-          </div>
-          <div className="form-row">
-            <div className="form-group col-md-6">
-              <fieldset disabled>
-                <label className="small text-gray-600" htmlFor="cuotaEntrada">
-                  Cuota de Entrada 30%
-                </label>
-                <input className="form-control" id="precioFinal" type="text" />
-              </fieldset>
-            </div>
-            <div className="form-group col-md-6">
-              <fieldset disabled>
-                <label
-                  className="small text-gray-600"
-                  htmlFor="pagoContraEntrega"
+            </form>
+
+            <ReactToPrint
+              trigger={() => (
+                <button
+                  className="btn btn-secondary dorado btn-block font-weight-500"
+                  style={{ marginBottom: "10%", marginTop: "10%" }}
                 >
-                  Pago contra Entrega 70%
-                </label>
-                <input className="form-control" id="precioFinal" type="text" />
-              </fieldset>
-            </div>
-          </div>
+                  Imprimir
+                </button>
+              )}
+              content={() => componentRef.current}
+              bodyClass="blanco"
+            />
 
-          <div className="form-group">
-            <fieldset disabled>
-              <label className="small text-gray-600" htmlFor="pagoFirma">
-                Pago a la Firma 4%
-              </label>
-              <input className="form-control" id="precioFinal" type="text" />
-            </fieldset>
+            <Print
+              ref={componentRef}
+              dataCliente={dataCliente}
+              dataFinanciamiento={dataImprimirFinanciamiento}
+            />
           </div>
-          <div className="pt-2 pb-2">
-            <hr color="darkGray" />
-          </div>
-          <div className="form-row">
-            <div className="form-group col-md-6">
-              <label className="small text-gray-600" htmlFor="pagoFirma">
-                Fecha de inicio de Financiamiento
-              </label>
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-              />
-            </div>
-            <div className="form-group col-md-6">
-              <fieldset disabled>
-                <label className="small text-gray-600" htmlFor="pagoFirma">
-                  Financiamiento (meses)
-                </label>
-                <input className="form-control" id="precioFinal" type="text" />
-              </fieldset>
-            </div>
-          </div>
-          <div className="form-row">
-            <div className="form-group col-md-6">
-              <fieldset disabled>
-                <label className="small text-gray-600" htmlFor="pagoFirma">
-                  Valor a Pagar
-                </label>
-                <input className="form-control" id="precioFinal" type="text" />
-              </fieldset>
-            </div>
-
-            <div className="form-group col-md-6">
-              <fieldset disabled>
-                <label className="small text-gray-600" htmlFor="pagoFirma">
-                  Cuotas de
-                </label>
-                <input
-                  className="form-control"
-                  id="precioFinal"
-                  type="text"
-                  placeholder="A"
-                  readonly
-                />
-              </fieldset>
-            </div>
-          </div>
-
-          <button
-            className="btn btn-secondary dorado btn-block font-weight-500 mt-4"
-            type="submit"
-          >
-            Generar la tabla de pagos
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );

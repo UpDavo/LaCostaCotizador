@@ -1,0 +1,18 @@
+body {
+  background-color: yellow;
+}
+.print-source {
+  display: none;
+  background-color: red;
+}
+
+body > .print-source {
+  display: block;
+}
+
+@media print {
+  .print-source {
+    display: block;
+    background-color: green;
+  }
+}

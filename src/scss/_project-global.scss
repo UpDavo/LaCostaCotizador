@@ -1,5 +1,10 @@
 // This file is intentionally blank
 // Use this file to override SCSS within the project, or to add new SCSS for creating your own CSS components
+.blanco {
+  max-width: 1250px !important;
+  background-color: #fff;
+  border-color: #fff;
+}
 
 .dorado {
   background-color: #b58648;
@@ -13,77 +18,21 @@ header {
   overflow: hidden;
 }
 
-.header-tienda {
-  height: 150px;
+.print-source {
+  display: none;
 }
 
-header .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: black;
-  opacity: 0.5;
-  z-index: 1;
+body > .print-source {
+  display: block;
 }
 
-.texto {
-  font-size: 30px;
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: black;
-  opacity: 0.1;
-  z-index: 1;
-}
-
-.imagen {
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  z-index: 0;
-  -ms-transform: translateX(-50%) translateY(-50%);
-  -moz-transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-}
-
-header .container {
-  position: relative;
-  z-index: 2;
-}
-
-.page-header {
-  padding-top: 6rem !important;
-}
-
-.title {
-  font-size: 3.5rem;
-}
-.subtitle {
-  font-size: 1.8rem !important;
-}
-
-.card > .lift {
-  background-color: #fff;
+@media print {
+  .print-source {
+    display: block;
+  }
 }
 
 @media only screen and (max-width: 600px) {
-  .title {
-    font-size: 2.5rem !important;
-  }
-  .subtitle {
-    font-size: 1.8rem !important;
-  }
-
   .formulario {
     margin-bottom: 40px;
     margin-top: -20px;
@@ -98,110 +47,111 @@ header .container {
 }
 
 html {
-  overflow: scroll;
-}
-::-webkit-scrollbar {
-  width: 0px;
-  background: transparent; /* make scrollbar transparent */
+  background-color: #fff !important;
 }
 
-.page-overflow {
-  min-height: 20px;
-  max-height: 77.1vh;
-}
-
-.categories {
-  height: 120px;
-  object-fit: cover;
-}
-
-.items {
-  height: 200px;
-  object-fit: cover;
-}
-
-.index-menu {
-  height: 300px;
-  object-fit: cover;
-}
-
-.image-modal {
-  height: 500px;
-  object-fit: cover;
-}
-
-.footer-fixed {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-}
-
-/* Centered text */
-.centered {
-  position: absolute;
-  top: 85%;
-  left: 50%;
-  color: #fff;
-  transform: translate(-50%, -50%);
-}
-
-/* Centered text */
-.centered-2 {
-  position: absolute;
-  top: 80%;
-  left: 50%;
-  color: #fff;
-  transform: translate(-50%, -50%);
-}
-
-/* Centered text */
-.centered-3 {
-  position: absolute;
-  top: 30%;
-  right: 20%;
-  left: 28%;
-  color: #fff;
-  transform: translate(-50%, -50%);
-}
-
-/* Top left text */
-.top-left {
-  position: absolute;
-  top: 8px;
-  left: 16px;
-}
-
-/* Loader */
-.loader {
-  width: 10px;
-  height: 10px;
-  margin: 40px auto;
-  border-radius: 50%;
-  background: #5784d6;
-  margin-left: 39%;
-}
-
-.bg {
-  /* The image used */
-  background-image: url("/images/foto4.jpg");
-
-  /* Full height */
-  height: 100%;
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.center {
+.invoice-box {
+  // max-width: 800px;
   margin: auto;
-  width: 50%;
-  border: 3px solid green;
-  padding: 10px;
+  padding: 30px;
+  border: 1px solid #eee;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  font-size: 16px;
+  line-height: 24px;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  color: #555;
 }
 
-svg .menu {
-  fill: white;
+.invoice-box table {
+  width: 100%;
+  line-height: inherit;
+  text-align: left;
+}
+
+.invoice-box table td {
+  padding: 5px;
+  vertical-align: top;
+}
+
+.invoice-box table tr td:nth-child(2) {
+  text-align: right;
+}
+
+.invoice-box table tr.top table td {
+  padding-bottom: 20px;
+}
+
+.invoice-box table tr.top table td.title {
+  font-size: 45px;
+  line-height: 45px;
+  color: #333;
+}
+
+.invoice-box table tr.information table td {
+  padding-bottom: 40px;
+}
+
+.invoice-box table tr.heading td {
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+}
+
+.invoice-box table tr.details td {
+  padding-bottom: 20px;
+}
+
+.invoice-box table tr.item td {
+  border-bottom: 1px solid #eee;
+}
+
+.invoice-box table tr.item.last td {
+  border-bottom: none;
+}
+
+.invoice-box table tr.total td:nth-child(2) {
+  border-top: 2px solid #eee;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+  .invoice-box table tr.top table td {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+
+  .invoice-box table tr.information table td {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+}
+
+/** RTL **/
+.rtl {
+  direction: rtl;
+  font-family: Tahoma, "Helvetica Neue", "Helvetica", Helvetica, Arial,
+    sans-serif;
+}
+
+.rtl table {
+  text-align: right;
+}
+
+.rtl table tr td:nth-child(2) {
+  text-align: left;
+}
+
+//AAAAAAAAAAAAAaa
+
+.scroll::-webkit-scrollbar {
+  width: 8px; /* Tamaño del scroll en vertical */
+  height: 8px; /* Tamaño del scroll en horizontal */
+  display: none; /* Ocultar scroll */
+}
+
+.scroll {
+  height: 57rem;
+  overflow: scroll;
 }

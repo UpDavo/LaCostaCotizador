@@ -5,10 +5,8 @@ import Image from "../components/Image";
 import Form from "../components/Form";
 import Plano from "../components/Plano";
 import Head from "next/head";
-import Table from "../components/Table";
 import Financiamiento from "../components/Financiamiento";
 import { motion } from "framer-motion";
-
 import { useState } from "react";
 
 const stagger = {
@@ -129,6 +127,7 @@ const Index = () => {
       </Head>
       <Header />
       {/* Page Header*/}
+
       <section
         className="page-header page-header-dark bg-img-repeat bg-secondary"
         style={{
@@ -172,21 +171,12 @@ const Index = () => {
                 />
               </motion.div>
             </div>
-            <div className="row align-items-center mt-5">
-              <div className="col-lg-7">
-                {itemsTable == undefined ? (
-                  <br />
-                ) : (
-                  <Table dataCliente={itemsTable} base={base} />
-                )}
-              </div>
-              <div className="col-lg-5">
-                {itemsTable == undefined ? (
-                  <br />
-                ) : (
-                  <Financiamiento dataCliente={itemsTable} base={base} />
-                )}
-              </div>
+            <div>
+              {itemsTable == undefined ? (
+                <br />
+              ) : (
+                <Financiamiento dataCliente={itemsTable} base={base} />
+              )}
             </div>
           </div>
         </div>
@@ -202,7 +192,6 @@ const Index = () => {
           </svg>
         </div>
       </section>
-
       <Footer />
     </div>
   );
