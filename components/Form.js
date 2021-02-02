@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Data from "../pages/json/Data";
+import Data from "../Data";
 import { motion } from "framer-motion";
 var infoCiudadelas;
 const modelos = {
