@@ -9,8 +9,9 @@ const Table = ({ meses, cuota, mesInicial, anoInicial, functionReturn }) => {
 
   useEffect(() => {
     setDataEnviar(enviar);
-    functionReturn(enviar);
-  }, [dataEnviar]);
+    console.log(dataEnviar);
+    functionReturn(dataEnviar);
+  }, [meses, cuota, mesInicial, anoInicial]);
 
   return (
     <div className="card rounded-lg text-dark formulario scroll">

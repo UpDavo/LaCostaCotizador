@@ -366,7 +366,7 @@ const Form = ({ actualizarImagenes, enviarDatos }) => {
             className="btn btn-secondary dorado btn-block font-weight-500 mt-4"
             type="submit"
           >
-            Generar información de financiamiento
+            Generar / Actualizar <br /> Información de Financiamiento
           </button>
         </form>
       </div>

@@ -23,11 +23,18 @@ const Financiamiento = ({ dataCliente, base }) => {
     cuotas: (precioFinal * 0.3 - precioFinal * 0.04) / financiamiento,
   });
 
-  const [dataImprimirFinanciamiento, setDataImprimirFinanciamiento] = useState(
-    []
-  );
-
   const componentRef = useRef();
+
+  let arregloImpresionFinanciamiento = {
+    precioLista: precioLista,
+    descuento: descuento,
+    precioFinal: precioFinal,
+    entrada: porcentajes.treinta,
+    entrega: porcentajes.setenta,
+    firma: porcentajes.cuatro,
+    pagar: porcentajes.pagar,
+    cuotas: porcentajes.cuotas,
+  };
 
   /*Funcionalidad Pre Render */
 
@@ -78,9 +85,23 @@ const Financiamiento = ({ dataCliente, base }) => {
     setFinanciamiento(dataCliente.ciudadela == "verde" ? 24 : 32);
   }, [precioFinal, dataCliente, precioLista, descuento]);
 
+  const [dataImprimirFinanciamiento, setDataImprimirFinanciamiento] = useState(
+    []
+  );
+
   const imprimirFinanciamiento = (arregloCuotas) => {
+    arregloImpresionFinanciamiento = {
+      precioLista: precioLista,
+      descuento: descuento,
+      precioFinal: precioFinal,
+      entrada: porcentajes.treinta,
+      entrega: porcentajes.setenta,
+      firma: porcentajes.cuatro,
+      pagar: porcentajes.pagar,
+      cuotas: porcentajes.cuotas,
+    };
     setDataImprimirFinanciamiento(arregloCuotas);
-    console.log(dataImprimirFinanciamiento);
+    console.log(arregloCuotas);
   };
 
   return (
@@ -89,7 +110,7 @@ const Financiamiento = ({ dataCliente, base }) => {
         <Table
           meses={financiamiento}
           cuota={porcentajes.cuotas}
-          mesInicial={new Date()}
+          mesInicial={startDate}
           anoInicial={2021}
           functionReturn={imprimirFinanciamiento}
         />
@@ -112,8 +133,7 @@ const Financiamiento = ({ dataCliente, base }) => {
                     </label>
                     <input
                       className="form-control"
-                      id="correo"
-                      type="precioLista"
+                      id="precioLista"
                       value={precioLista.toLocaleString("en")}
                     />
                   </fieldset>
@@ -159,7 +179,7 @@ const Financiamiento = ({ dataCliente, base }) => {
                     </label>
                     <input
                       className="form-control"
-                      id="precioFinal"
+                      id="cuotaEntrada"
                       type="text"
                       value={porcentajes.treinta.toLocaleString("en")}
                       readOnly
@@ -176,7 +196,7 @@ const Financiamiento = ({ dataCliente, base }) => {
                     </label>
                     <input
                       className="form-control"
-                      id="precioFinal"
+                      id="contraEntrega"
                       type="text"
                       value={porcentajes.setenta.toLocaleString("en")}
                       readOnly
@@ -192,7 +212,7 @@ const Financiamiento = ({ dataCliente, base }) => {
                   </label>
                   <input
                     className="form-control"
-                    id="precioFinal"
+                    id="pagoFirma"
                     type="text"
                     value={porcentajes.cuatro.toLocaleString("en")}
                     readOnly
@@ -220,7 +240,7 @@ const Financiamiento = ({ dataCliente, base }) => {
                     </label>
                     <input
                       className="form-control"
-                      id="precioFinal"
+                      id="financiamiento"
                       type="text"
                       value={financiamiento}
                       readOnly
@@ -236,7 +256,7 @@ const Financiamiento = ({ dataCliente, base }) => {
                     </label>
                     <input
                       className="form-control"
-                      id="precioFinal"
+                      id="valorPagar"
                       type="text"
                       value={porcentajes.pagar.toLocaleString("en")}
                       readOnly
@@ -251,7 +271,7 @@ const Financiamiento = ({ dataCliente, base }) => {
                     </label>
                     <input
                       className="form-control"
-                      id="precioFinal"
+                      id="cuotasDe"
                       type="text"
                       value={porcentajes.cuotas.toLocaleString("en")}
                       readonly
@@ -259,23 +279,25 @@ const Financiamiento = ({ dataCliente, base }) => {
                   </fieldset>
                 </div>
               </div>
-
-              <button
-                className="btn btn-secondary dorado btn-block font-weight-500"
-                type="submit"
-                style={{ marginBottom: "10%", marginTop: "10%" }}
-              >
-                Actualizar la tabla con nuevas fechas
-              </button>
             </form>
 
             <ReactToPrint
               trigger={() => (
                 <button
                   className="btn btn-secondary dorado btn-block font-weight-500"
-                  style={{ marginBottom: "10%", marginTop: "10%" }}
+                  style={{
+                    marginTop: "3%",
+                    paddingTop: "40px",
+                    paddingBottom: "40px",
+                    fontSize: "20px",
+                  }}
                 >
-                  Imprimir
+                  Imprimir <br />
+                  <img
+                    src="/images/imprimir.png"
+                    width="40px"
+                    style={{ marginTop: "10px" }}
+                  ></img>
                 </button>
               )}
               content={() => componentRef.current}
@@ -286,6 +308,7 @@ const Financiamiento = ({ dataCliente, base }) => {
               ref={componentRef}
               dataCliente={dataCliente}
               dataFinanciamiento={dataImprimirFinanciamiento}
+              dataGeneralFinanciamiento={arregloImpresionFinanciamiento}
             />
           </div>
         </div>

@@ -53,28 +53,80 @@ export class Print extends React.PureComponent {
                   <table>
                     <tbody>
                       <tr>
-                        <td>
-                          {this.props.dataCliente.ciudadela == "azul"
-                            ? "COSTA AZUL"
-                            : "COSTA VERDE"}
+                        <td
+                          style={{ textAlign: "left", marginTop: "20px" }}
+                          width="10%"
+                        >
+                          {this.props.dataCliente.ciudadela == "azul" ? (
+                            <h1>COSTA AZUL</h1>
+                          ) : (
+                            <h1>COSTA VERDE</h1>
+                          )}
                           <br />
-                          {"Manzana " + this.props.dataCliente.manzana}
+                          <b>Manzana {this.props.dataCliente.manzana}</b>
                           <br />
-                          {this.props.dataCliente.solar}
+                          <b>{this.props.dataCliente.solar}</b>
                           <br />
-                          {"Área del Solar: " +
-                            this.props.dataCliente.areaSolar}
+                          <b>Area del Solar: </b>
+                          {this.props.dataCliente.areaSolar}
+                          <br />
+                          <b>Modelo de Fachada: </b>
+                          {this.props.dataCliente.modeloReal}
+                          <br />
+                          <b>Área de Construcción: </b>
+                          {this.props.dataCliente.areaConstruccion}
+                          <br />
+                          <b>Tipo de Fachada: </b>
+                          {this.props.dataCliente.fachada}
+                          <br />
+                          <b>Tiene Cubierta: </b>
+                          {this.props.dataCliente.cubierta}
                         </td>
-                        <td>
-                          {"Modelo de Fachada: " +
-                            this.props.dataCliente.modeloReal}
+                        <td width="30%" style={{ textAlign: "left" }}>
+                          <img
+                            src={`./images/fachadas/CASA-${this.props.dataCliente.modelo}/CASA-${this.props.dataCliente.modelo}-01.jpg`}
+                            width="35%"
+                          />
+                        </td>
+                        <td width="10%" style={{ textAlign: "right" }}>
+                          <b>Precio de Lista: </b>
+                          {this.props.dataGeneralFinanciamiento.precioLista.toLocaleString(
+                            "en"
+                          )}
                           <br />
-                          {"Área de Construcción: " +
-                            this.props.dataCliente.areaConstruccion}
+                          <b>Descuento: </b>
+                          {this.props.dataGeneralFinanciamiento.descuento.toLocaleString(
+                            "en"
+                          )}
                           <br />
-                          {"Tipo de Fachada: " + this.props.dataCliente.fachada}
+                          <b>Precio de Final: </b>
+                          {this.props.dataGeneralFinanciamiento.precioFinal.toLocaleString(
+                            "en"
+                          )}
                           <br />
-                          {"Tiene Cubierta: " + this.props.dataCliente.cubierta}
+                          <b>Entrada: </b>
+                          {this.props.dataGeneralFinanciamiento.entrada.toLocaleString(
+                            "en"
+                          )}
+                          <br />
+                          <b>Pago a la Firma: </b>
+                          {this.props.dataGeneralFinanciamiento.firma.toLocaleString(
+                            "en"
+                          )}
+                          <br />
+                          <b>Cantidad a Pagar: </b>
+                          {this.props.dataGeneralFinanciamiento.pagar.toLocaleString(
+                            "en"
+                          )}
+                          <br />
+                          <b>Cuotas de: </b>
+                          {this.props.dataGeneralFinanciamiento.cuotas.toLocaleString(
+                            "en"
+                          )}
+                          <br />
+                          <b>Fecha de Inicio de Financiamiento: </b>
+                          {/* {this.props.dataGeneralFinanciamiento.descuento} */}
+                          <br />
                         </td>
                       </tr>
                     </tbody>
@@ -83,17 +135,17 @@ export class Print extends React.PureComponent {
               </tr>
               <tr className="information">
                 <td colSpan={3}>
-                  <table>
+                  <table style={{ marginBottom: "-30px", marginTop: "-30px" }}>
                     <tbody>
                       <tr>
-                        <td>
-                          <img
-                            src="./images/fachadas/CASA-A/CASA-A-01.jpg"
-                            width="100%"
-                          />
-                        </td>
-                        <td>
-                          <img src="./images/planos/CASA-A.jpg" width="100%" />
+                        <td
+                          style={{
+                            textAlign: "left",
+                            marginTop: "20px",
+                          }}
+                          width="10%"
+                        >
+                          <h1>Información de Financiamiento</h1>
                         </td>
                       </tr>
                     </tbody>
@@ -112,15 +164,55 @@ export class Print extends React.PureComponent {
                     <td style={{ textAlign: "center" }}>
                       {month[row.mesTemp] + " " + row.anoInicial}
                     </td>
-                    <td>{row.cuota}</td>
+                    <td>{row.cuota.toLocaleString("en")}</td>
                   </tr>
                 );
               })}
-
               <tr className="total" align="center">
                 <td />
                 <td />
-                <td>Total: $385.00</td>
+                <td>
+                  Total:{" "}
+                  {this.props.dataGeneralFinanciamiento.pagar.toLocaleString(
+                    "en"
+                  )}
+                </td>
+              </tr>
+              <tr className="information">
+                <td colSpan={3}>
+                  <table style={{ marginBottom: "-40px", marginTop: "180px" }}>
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td
+                          style={{
+                            textAlign: "center",
+                          }}
+                          width="30%"
+                        >
+                          <h1>Plano de la Vivienda</h1>
+                        </td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <tr className="information">
+                <td colSpan={3}>
+                  <table style={{ marginTop: "100px" }}>
+                    <tbody align="center">
+                      <tr>
+                        <td>
+                          <img
+                            src={`./images/planos/CASA-${this.props.dataCliente.modeloReal}.jpg`}
+                            width="90%"
+                          />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
               </tr>
             </tbody>
           </table>
