@@ -26,7 +26,8 @@ const Image = ({ img, descripcion }) => {
           src={img}
           alt="..."
           style={{
-            height: "330px",
+            minHeight: "330px !important",
+            maxHeight: "330px !important",
             objectFit: "cover",
           }}
         />

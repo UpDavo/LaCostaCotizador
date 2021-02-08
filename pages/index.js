@@ -8,6 +8,7 @@ import Head from "next/head";
 import Financiamiento from "../components/Financiamiento";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Title from "../components/Title";
 
 const stagger = {
   animate: {
@@ -132,11 +133,22 @@ const Index = () => {
         className="page-header page-header-dark bg-img-repeat bg-secondary"
         style={{
           backgroundImage: `url("images/pattern-shapes.png")`,
-          backgroundColor: "#66aebf !important",
+          backgroundColor: "#3c8090 !important",
         }}
       >
         <div className="page-header-content">
           <div className="container">
+            <div className="row">
+              <motion.div
+                exit="pageExit"
+                initial="initial"
+                animate="animate"
+                variants={stagger}
+                className="col-lg-12 d-flex justify-content-center"
+              >
+                <Title />
+              </motion.div>
+            </div>
             <div className="row align-items-center">
               <motion.div
                 exit="pageExit"
@@ -158,13 +170,13 @@ const Index = () => {
                 className="col-lg-8"
               >
                 <Image
-                  img={image === undefined ? "images/la-costa.jpg" : image.src}
+                  img={image === undefined ? "images/la-costa.png" : image.src}
                   descripcion={
                     image === undefined ? "La Costa" : image.descripcion
                   }
                 />
                 <Plano
-                  img={image == undefined ? "images/la-costa.jpg" : plano.src}
+                  img={image == undefined ? "images/la-costa.png" : plano.src}
                   descripcion={
                     image == undefined ? "La Costa" : plano.descripcion
                   }
