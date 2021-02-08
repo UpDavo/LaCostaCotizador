@@ -9,7 +9,7 @@ const Footer = () => {
           <div className="row">
             <div className="col-lg-3">
               <div className="footer-brand">Heimdal</div>
-              <div className="mb-3">Iluminando el Futuro</div>
+              <div className="mb-3">Conectamos el presente con el futuro</div>
               <div className="icon-list-social mb-5">
                 <a
                   className="icon-list-social-link"

@@ -23,8 +23,10 @@ const Financiamiento = ({ dataCliente, base }) => {
     cuotas: (precioFinal * 0.3 - precioFinal * 0.04) / financiamiento,
   });
 
+  //Referencia para el boton de imprimir
   const componentRef = useRef();
 
+  //Arreglo creado para la impresion del financiamiento
   let arregloImpresionFinanciamiento = {
     precioLista: precioLista,
     descuento: descuento,
@@ -37,7 +39,7 @@ const Financiamiento = ({ dataCliente, base }) => {
   };
 
   /*Funcionalidad Pre Render */
-
+  //Actualiza el precio dependiendo de la casa
   const actualizarPrecio = (casa, cliente) => {
     if (
       casa.MANZANA == parseInt(cliente.manzana) &&
@@ -61,12 +63,20 @@ const Financiamiento = ({ dataCliente, base }) => {
     }
   };
 
+  //Funcionalidad para aplicar el descuento
   const aplicarDescuento = (event) => {
     event.preventDefault();
-    setDescuento(parseInt(document.querySelector("#descuento").value));
-    setPrecioFinal(precioLista - descuento);
+    const re = /^[0-9\b]+$/;
+    const tomarDescuento = parseInt(document.querySelector("#descuento").value);
+    if (re.test(tomarDescuento)) {
+      setDescuento(tomarDescuento);
+      setPrecioFinal(precioLista - descuento);
+    } else {
+      alert("Debes ingresar números");
+    }
   };
 
+  //Recorre la base de datos con toda la informacion
   base.map((row) => {
     actualizarPrecio(row, dataCliente);
   });
@@ -142,7 +152,12 @@ const Financiamiento = ({ dataCliente, base }) => {
                   <label className="small text-gray-600" htmlFor="descuento">
                     Descuento
                   </label>
-                  <input className="form-control" id="descuento" type="text" />
+                  <input
+                    className="form-control"
+                    pattern="[0-9]*"
+                    id="descuento"
+                    type="text"
+                  />
                 </div>
                 <div className="form-group col-md-4">
                   <button
