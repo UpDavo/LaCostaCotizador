@@ -5,11 +5,8 @@ const Table = ({ meses, cuota, mesInicial, anoInicial, functionReturn }) => {
   let count = 0;
   let enviar = [];
   let handleChanges = true;
-  //Use effect funciones
-  const [dataEnviar, setDataEnviar] = useState(enviar);
 
   //Modificación de reload de tabla
-
   Array.from({ length: meses }).map((_, index) => {
     let mesTemp;
 
@@ -27,9 +24,31 @@ const Table = ({ meses, cuota, mesInicial, anoInicial, functionReturn }) => {
     enviar.push({ valor, mesTemp, anoInicial, cuota });
   });
 
+  //UseState funciones
+  const [dataEnviar, setDataEnviar] = useState(enviar);
+
   //Funcion para actualizar los rows
   const updateRows = (cuota, valorNuevo) => {
-    enviar[cuota - 1] = valorNuevo;
+    let copiaArray = [];
+    let itemNuevo;
+
+    enviar.map((item, index) => {
+      if (index == cuota - 1) {
+        itemNuevo = {
+          anoInicial: item.anoInicial,
+          cuota: parseInt(valorNuevo),
+          mesTemp: item.mesTemp,
+          valor: item.valor,
+        };
+        copiaArray.push(itemNuevo);
+      } else {
+        copiaArray.push(item);
+      }
+    });
+
+    console.log(copiaArray);
+
+    setDataEnviar(copiaArray);
     handleChanges = !handleChanges;
   };
 
@@ -37,7 +56,6 @@ const Table = ({ meses, cuota, mesInicial, anoInicial, functionReturn }) => {
 
   useEffect(() => {
     setDataEnviar(enviar);
-    console.log(dataEnviar);
     functionReturn(dataEnviar);
   }, [meses, cuota, mesInicial, anoInicial, handleChanges]);
 
@@ -55,7 +73,7 @@ const Table = ({ meses, cuota, mesInicial, anoInicial, functionReturn }) => {
           </tr>
         </thead>
         <tbody align="center">
-          {enviar.map((row) => {
+          {dataEnviar.map((row) => {
             return (
               <Row
                 cuota={row.valor}

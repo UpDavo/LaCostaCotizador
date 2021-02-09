@@ -111,7 +111,6 @@ const Financiamiento = ({ dataCliente, base }) => {
       cuotas: porcentajes.cuotas,
     };
     setDataImprimirFinanciamiento(arregloCuotas);
-    console.log(arregloCuotas);
   };
 
   return (
