@@ -16,7 +16,6 @@ month[10] = "Noviembre";
 month[11] = "Diciembre";
 
 const Row = ({ cuota, mes, pago, ano, updateRows }) => {
-
   //Funcion para activar la actualizacion del row
   const activarActualizacion = (event) => {
     event.preventDefault();
@@ -34,7 +33,7 @@ const Row = ({ cuota, mes, pago, ano, updateRows }) => {
     event.preventDefault();
 
     //test de si es texto o no
-    const re = /^[0-9\b]+$/;
+    const re = /^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$/;
     if (re.test(dinero)) {
       updateRows(cuota, dinero);
 
@@ -44,7 +43,6 @@ const Row = ({ cuota, mes, pago, ano, updateRows }) => {
     } else {
       alert("Debes ingresar números");
     }
-
   };
 
   //Estado luego de que el componente cargue

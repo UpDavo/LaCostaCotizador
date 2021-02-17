@@ -13,12 +13,13 @@ const Financiamiento = ({ dataCliente, base }) => {
   const [descuento, setDescuento] = useState(0);
   const [precioFinal, setPrecioFinal] = useState(precioLista - descuento);
   const [financiamiento, setFinanciamiento] = useState(
-    dataCliente.ciudadela == "verde" ? 24 : 32
+    dataCliente.ciudadela == "verde" ? 32 : 24
   );
   const [porcentajes, setPorcentajes] = useState({
     treinta: precioFinal * 0.3,
     setenta: precioFinal * 0.7,
     cuatro: precioFinal * 0.04,
+    financiar: precioFinal * 0.26,
     pagar: precioFinal * 0.3 - precioFinal * 0.04,
     cuotas: (precioFinal * 0.3 - precioFinal * 0.04) / financiamiento,
   });
@@ -36,6 +37,7 @@ const Financiamiento = ({ dataCliente, base }) => {
     firma: porcentajes.cuatro,
     pagar: porcentajes.pagar,
     cuotas: porcentajes.cuotas,
+    financiar: porcentajes.financiar,
   };
 
   /*Funcionalidad Pre Render */
@@ -66,7 +68,7 @@ const Financiamiento = ({ dataCliente, base }) => {
   //Funcionalidad para aplicar el descuento
   const aplicarDescuento = (event) => {
     event.preventDefault();
-    const re = /^[0-9\b]+$/;
+    const re = /^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$/;
     const tomarDescuento = parseInt(document.querySelector("#descuento").value);
     if (re.test(tomarDescuento)) {
       setDescuento(tomarDescuento);
@@ -91,8 +93,9 @@ const Financiamiento = ({ dataCliente, base }) => {
       cuatro: precioFinal * 0.04,
       pagar: precioFinal * 0.3 - precioFinal * 0.04,
       cuotas: (precioFinal * 0.3 - precioFinal * 0.04) / financiamiento,
+      financiar: precioFinal * 0.26,
     });
-    setFinanciamiento(dataCliente.ciudadela == "verde" ? 24 : 32);
+    setFinanciamiento(dataCliente.ciudadela == "verde" ? 32 : 24);
   }, [precioFinal, dataCliente, precioLista, descuento]);
 
   const [dataImprimirFinanciamiento, setDataImprimirFinanciamiento] = useState(
@@ -109,6 +112,7 @@ const Financiamiento = ({ dataCliente, base }) => {
       firma: porcentajes.cuatro,
       pagar: porcentajes.pagar,
       cuotas: porcentajes.cuotas,
+      financiar: porcentajes.financiar,
     };
     setDataImprimirFinanciamiento(arregloCuotas);
   };
@@ -121,6 +125,7 @@ const Financiamiento = ({ dataCliente, base }) => {
           cuota={porcentajes.cuotas}
           mesInicial={startDate}
           anoInicial={2021}
+          total={precioFinal}
           functionReturn={imprimirFinanciamiento}
         />
       </div>
@@ -189,7 +194,7 @@ const Financiamiento = ({ dataCliente, base }) => {
                       className="small text-gray-600"
                       htmlFor="cuotaEntrada"
                     >
-                      Cuota de Entrada 30%
+                      Cuota de Entrada 30 %
                     </label>
                     <input
                       className="form-control"
@@ -206,7 +211,7 @@ const Financiamiento = ({ dataCliente, base }) => {
                       className="small text-gray-600"
                       htmlFor="pagoContraEntrega"
                     >
-                      Pago contra Entrega 70%
+                      Pago contra Entrega 70 %
                     </label>
                     <input
                       className="form-control"
@@ -218,11 +223,10 @@ const Financiamiento = ({ dataCliente, base }) => {
                   </fieldset>
                 </div>
               </div>
-
               <div className="form-group">
                 <fieldset disabled>
                   <label className="small text-gray-600" htmlFor="pagoFirma">
-                    Pago a la Firma 4%
+                    Pago a la Firma 4 %
                   </label>
                   <input
                     className="form-control"
@@ -250,7 +254,7 @@ const Financiamiento = ({ dataCliente, base }) => {
                 <div className="form-group col-md-6">
                   <fieldset disabled>
                     <label className="small text-gray-600" htmlFor="pagoFirma">
-                      Financiamiento (meses)
+                      Financiamiento(meses)
                     </label>
                     <input
                       className="form-control"
@@ -277,7 +281,6 @@ const Financiamiento = ({ dataCliente, base }) => {
                     />
                   </fieldset>
                 </div>
-
                 <div className="form-group col-md-6">
                   <fieldset disabled>
                     <label className="small text-gray-600" htmlFor="pagoFirma">
@@ -294,7 +297,6 @@ const Financiamiento = ({ dataCliente, base }) => {
                 </div>
               </div>
             </form>
-
             <ReactToPrint
               trigger={() => (
                 <button
@@ -317,7 +319,6 @@ const Financiamiento = ({ dataCliente, base }) => {
               content={() => componentRef.current}
               bodyClass="blanco"
             />
-
             <Print
               ref={componentRef}
               dataCliente={dataCliente}

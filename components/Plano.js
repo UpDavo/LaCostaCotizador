@@ -21,7 +21,12 @@ const Plano = ({ img, descripcion }) => {
   return (
     <motion.div variants={fadeInUp} style={{ marginTop: "32px" }}>
       <a className="card lift" href="#!">
-        <img className="card-img-top" src={img} alt="..." />
+        <img
+          className="card-img-top"
+          src={img}
+          alt="..."
+          style={{ maxHeight: "725px" }}
+        />
         <div className="card-body text-center py-3">
           <h6 className="card-title mb-0">{descripcion}</h6>
         </div>

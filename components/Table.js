@@ -1,7 +1,14 @@
 import Row from "./Row";
 import { useEffect, useState } from "react";
 
-const Table = ({ meses, cuota, mesInicial, anoInicial, functionReturn }) => {
+const Table = ({
+  meses,
+  cuota,
+  mesInicial,
+  anoInicial,
+  functionReturn,
+  total,
+}) => {
   let count = 0;
   let enviar = [];
   let handleChanges = true;
@@ -9,7 +16,6 @@ const Table = ({ meses, cuota, mesInicial, anoInicial, functionReturn }) => {
   //Modificación de reload de tabla
   Array.from({ length: meses }).map((_, index) => {
     let mesTemp;
-
     if (mesInicial.getMonth() + count >= 12) {
       count = 0;
       mesTemp = count;
@@ -18,9 +24,7 @@ const Table = ({ meses, cuota, mesInicial, anoInicial, functionReturn }) => {
       mesTemp = mesInicial.getMonth() + count;
       count++;
     }
-
     let valor = index + 1;
-
     enviar.push({ valor, mesTemp, anoInicial, cuota });
   });
 
@@ -39,15 +43,20 @@ const Table = ({ meses, cuota, mesInicial, anoInicial, functionReturn }) => {
           cuota: parseInt(valorNuevo),
           mesTemp: item.mesTemp,
           valor: item.valor,
+          total: item.cuota * item.valor,
         };
         copiaArray.push(itemNuevo);
       } else {
-        copiaArray.push(item);
+        itemNuevo = {
+          anoInicial: item.anoInicial,
+          cuota: item.cuota,
+          mesTemp: item.mesTemp,
+          valor: item.valor,
+          total: item.cuota * item.valor,
+        };
+        copiaArray.push(itemNuevo);
       }
     });
-
-    console.log(copiaArray);
-
     setDataEnviar(copiaArray);
     handleChanges = !handleChanges;
   };
@@ -57,7 +66,8 @@ const Table = ({ meses, cuota, mesInicial, anoInicial, functionReturn }) => {
   useEffect(() => {
     setDataEnviar(enviar);
     functionReturn(dataEnviar);
-  }, [meses, cuota, mesInicial, anoInicial, handleChanges]);
+    console.log(dataEnviar);
+  }, [meses, cuota, mesInicial, anoInicial, handleChanges, total]);
 
   return (
     <div className="card rounded-lg text-dark formulario scroll">

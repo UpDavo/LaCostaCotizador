@@ -1,4 +1,5 @@
 import React from "react";
+import DataPlanos from "../DataPlanos";
 
 var month = new Array();
 month[0] = "Enero";
@@ -15,6 +16,16 @@ month[10] = "Noviembre";
 month[11] = "Diciembre";
 
 export class Print extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    // Don't call this.setState() here!
+    Object.keys(DataPlanos).map((index) => {
+      if (index == this.props.dataCliente.modeloReal) {
+        this.modeloInfo = DataPlanos[index];
+      }
+    });
+  }
+
   render() {
     return (
       <div className="print-source">
@@ -622,7 +633,8 @@ export class Print extends React.PureComponent {
                                                               this.props
                                                                 .dataCliente
                                                                 .areaSolar
-                                                            }
+                                                            }{" "}
+                                                            m2
                                                           </td>
                                                         </tr>
                                                       </tbody>
@@ -776,11 +788,7 @@ export class Print extends React.PureComponent {
                                                               margin: 0,
                                                             }}
                                                           >
-                                                            {
-                                                              this.props
-                                                                .dataCliente
-                                                                .fachada
-                                                            }
+                                                            {this.props.dataCliente.fachada.toUpperCase()}
                                                           </td>
                                                         </tr>
                                                         <tr
@@ -813,11 +821,7 @@ export class Print extends React.PureComponent {
                                                               margin: 0,
                                                             }}
                                                           >
-                                                            {
-                                                              this.props
-                                                                .dataCliente
-                                                                .cubierta
-                                                            }
+                                                            {this.props.dataCliente.cubierta.toUpperCase()}
                                                           </td>
                                                         </tr>
                                                       </tbody>
@@ -1250,10 +1254,9 @@ export class Print extends React.PureComponent {
                                                               margin: 0,
                                                             }}
                                                           >
-                                                            {"{"}
-                                                            {"{"}
-                                                            {"}"}
-                                                            {"}"}
+                                                            {this.props.dataGeneralFinanciamiento.entrega.toLocaleString(
+                                                              "en"
+                                                            )}
                                                           </td>
                                                         </tr>
                                                       </tbody>
@@ -1371,7 +1374,7 @@ export class Print extends React.PureComponent {
                                                               margin: 0,
                                                             }}
                                                           >
-                                                            {this.props.dataGeneralFinanciamiento.pagar.toLocaleString(
+                                                            {this.props.dataGeneralFinanciamiento.financiar.toLocaleString(
                                                               "en"
                                                             )}
                                                           </td>
@@ -1645,7 +1648,7 @@ export class Print extends React.PureComponent {
                                                                     margin: 0,
                                                                   }}
                                                                 >
-                                                                  60.000
+                                                                  {row.total}
                                                                 </td>
                                                                 <td
                                                                   style={{
@@ -1879,7 +1882,7 @@ export class Print extends React.PureComponent {
                                                   >
                                                     <img
                                                       className="adapt-img"
-                                                      src="https://fodrao.stripocdn.email/content/guids/CABINET_87833819fc781f42211f150e17a54082/images/88471612903720269.jpeg"
+                                                      src={`./images/planos/CASA-${this.props.dataCliente.modeloReal}.jpg`}
                                                       alt="A"
                                                       // src={`./images/planos/CASA-${this.props.dataCliente.modeloReal}.jpg`}
                                                       style={{
@@ -2047,10 +2050,12 @@ export class Print extends React.PureComponent {
                                                               margin: 0,
                                                             }}
                                                           >
-                                                            {"{"}
-                                                            {"{"}
-                                                            {"}"}
-                                                            {"}"}
+                                                            {
+                                                              this.modeloInfo
+                                                                .areas
+                                                                .plantaBaja
+                                                            }{" "}
+                                                            m2
                                                           </td>
                                                         </tr>
                                                         <tr
@@ -2083,10 +2088,12 @@ export class Print extends React.PureComponent {
                                                               margin: 0,
                                                             }}
                                                           >
-                                                            {"{"}
-                                                            {"{"}
-                                                            {"}"}
-                                                            {"}"}
+                                                            {
+                                                              this.modeloInfo
+                                                                .areas
+                                                                .plantaAlta
+                                                            }{" "}
+                                                            m2
                                                           </td>
                                                         </tr>
                                                         <tr
@@ -2119,10 +2126,11 @@ export class Print extends React.PureComponent {
                                                               margin: 0,
                                                             }}
                                                           >
-                                                            {"{"}
-                                                            {"{"}
-                                                            {"}"}
-                                                            {"}"}
+                                                            {
+                                                              this.modeloInfo
+                                                                .areas.total
+                                                            }{" "}
+                                                            m2
                                                           </td>
                                                         </tr>
                                                       </tbody>
@@ -2475,26 +2483,19 @@ export class Print extends React.PureComponent {
                                                           'helvetica, "helvetica neue", arial, verdana, sans-serif',
                                                         lineHeight: 1.5,
                                                         color: "#666666",
+                                                        marginTop: "10px",
                                                       }}
                                                     >
-                                                      -asdads
-                                                      <br />
-                                                      -asdasd
-                                                      <br />
-                                                      -asdasd
-                                                      <br />
-                                                      -asdasd
-                                                      <br />
-                                                      -asdasd
-                                                      <br />
-                                                      -asdasd
-                                                      <br />
-                                                      -asdasd
-                                                      <br />
-                                                      -asdasd
-                                                      <br />
-                                                      -asdasd
-                                                      <br />
+                                                      {this.modeloInfo.detalle.extras.map(
+                                                        (value) => {
+                                                          return (
+                                                            <div>
+                                                              - {value}
+                                                              <br />
+                                                            </div>
+                                                          );
+                                                        }
+                                                      )}
                                                     </p>
                                                   </td>
                                                 </tr>

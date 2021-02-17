@@ -1,6 +1,5 @@
-const DataPlanos = [
-  {
-    id: A,
+const DataPlanos = {
+  A: {
     areas: {
       plantaBaja: 87.88,
       plantaAlta: 11.24,
@@ -22,8 +21,7 @@ const DataPlanos = [
       ],
     },
   },
-  {
-    id: B1,
+  B1: {
     areas: {
       plantaBaja: 88.05,
       plantaAlta: 89.7,
@@ -46,8 +44,7 @@ const DataPlanos = [
       ],
     },
   },
-  {
-    id: B2,
+  B2: {
     areas: {
       plantaBaja: 88.05,
       plantaAlta: 89.7,
@@ -71,8 +68,7 @@ const DataPlanos = [
       ],
     },
   },
-  {
-    id: C,
+  C: {
     areas: {
       plantaBaja: 75.58,
       plantaAlta: 79.81,
@@ -94,8 +90,7 @@ const DataPlanos = [
       ],
     },
   },
-  {
-    id: D,
+  D: {
     areas: {
       plantaBaja: 79.22,
       plantaAlta: 84.38,
@@ -117,8 +112,7 @@ const DataPlanos = [
       ],
     },
   },
-  {
-    id: D2,
+  D2: {
     areas: {
       plantaBaja: 79.22,
       plantaAlta: 84.38,
@@ -141,8 +135,7 @@ const DataPlanos = [
       ],
     },
   },
-  {
-    id: E,
+  E: {
     areas: {
       plantaBaja: 92.58,
       plantaAlta: 108.88,
@@ -165,8 +158,7 @@ const DataPlanos = [
       ],
     },
   },
-  {
-    id: E2,
+  E2: {
     areas: {
       plantaBaja: 93.12,
       plantaAlta: 108.74,
@@ -189,8 +181,7 @@ const DataPlanos = [
       ],
     },
   },
-  {
-    id: E3,
+  E3: {
     areas: {
       plantaBaja: 93.12,
       plantaAlta: 108.74,
@@ -213,8 +204,7 @@ const DataPlanos = [
       ],
     },
   },
-  {
-    id: F1,
+  F1: {
     areas: {
       plantaBaja: 92.58,
       plantaAlta: 106.72,
@@ -238,8 +228,7 @@ const DataPlanos = [
       ],
     },
   },
-  {
-    id: F1,
+  F2: {
     areas: {
       plantaBaja: 92.58,
       plantaAlta: 106.72,
@@ -263,8 +252,7 @@ const DataPlanos = [
       ],
     },
   },
-  {
-    id: G1A,
+  G1A: {
     areas: {
       plantaBaja: 92.54,
       plantaAlta: 86.87,
@@ -288,8 +276,7 @@ const DataPlanos = [
       ],
     },
   },
-  {
-    id: G1B,
+  G1B: {
     areas: {
       plantaBaja: 92.54,
       plantaAlta: 86.87,
@@ -312,8 +299,7 @@ const DataPlanos = [
       ],
     },
   },
-  {
-    id: G2A,
+  G2A: {
     areas: {
       plantaBaja: 92.54,
       plantaAlta: 86.87,
@@ -337,8 +323,7 @@ const DataPlanos = [
       ],
     },
   },
-  {
-    id: G2B,
+  G2B: {
     areas: {
       plantaBaja: 92.54,
       plantaAlta: 86.87,
@@ -361,6 +346,6 @@ const DataPlanos = [
       ],
     },
   },
-];
+};
 
 export default DataPlanos;
