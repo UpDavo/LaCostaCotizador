@@ -14,20 +14,27 @@ const Table = ({
   let handleChanges = true;
 
   //Modificación de reload de tabla
-  Array.from({ length: meses }).map((_, index) => {
-    let mesTemp;
-    if (mesInicial.getMonth() + count >= 12) {
-      count = 0;
-      mesTemp = count;
-      anoInicial += 1;
-    } else {
-      mesTemp = mesInicial.getMonth() + count;
-      count++;
-    }
-    let valor = index + 1;
-    enviar.push({ valor, mesTemp, anoInicial, cuota });
-  });
+  const actualizarTabla = () => {
+    enviar = [];
+    let mesMultiplicar = meses;
+    Array.from({ length: meses }).map((_, index) => {
+      let mesTemp;
+      if (mesInicial.getMonth() + count >= 12) {
+        count = 0;
+        mesTemp = count;
+        anoInicial += 1;
+      } else {
+        mesTemp = mesInicial.getMonth() + count;
+        count++;
+      }
+      let valor = index + 1;
+      let total = cuota * mesMultiplicar;
+      enviar.push({ valor, mesTemp, anoInicial, cuota, total });
+      mesMultiplicar -= 1;
+    });
+  };
 
+  actualizarTabla();
   //UseState funciones
   const [dataEnviar, setDataEnviar] = useState(enviar);
 
@@ -35,6 +42,7 @@ const Table = ({
   const updateRows = (cuota, valorNuevo) => {
     let copiaArray = [];
     let itemNuevo;
+    let mesRestado = meses;
 
     enviar.map((item, index) => {
       if (index == cuota - 1) {
@@ -43,7 +51,7 @@ const Table = ({
           cuota: parseInt(valorNuevo),
           mesTemp: item.mesTemp,
           valor: item.valor,
-          total: item.cuota * item.valor,
+          disminuye: item.cuota * mesRestado,
         };
         copiaArray.push(itemNuevo);
       } else {
@@ -52,10 +60,11 @@ const Table = ({
           cuota: item.cuota,
           mesTemp: item.mesTemp,
           valor: item.valor,
-          total: item.cuota * item.valor,
+          disminuye: item.cuota * mesRestado,
         };
         copiaArray.push(itemNuevo);
       }
+      mesRestado -= 1;
     });
     setDataEnviar(copiaArray);
     handleChanges = !handleChanges;
@@ -64,6 +73,7 @@ const Table = ({
   //Se ejecuta luego de las funciones
 
   useEffect(() => {
+    // actualizarTabla();
     setDataEnviar(enviar);
     functionReturn(dataEnviar);
     console.log(dataEnviar);

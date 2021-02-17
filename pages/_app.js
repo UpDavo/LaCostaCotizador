@@ -1,6 +1,7 @@
 import "../src/scss/styles.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { AnimatePresence } from "framer-motion";
 
 export default function MyApp({ Component, pageProps, router }) {

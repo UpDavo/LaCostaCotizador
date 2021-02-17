@@ -24,6 +24,24 @@ export class Print extends React.PureComponent {
         this.modeloInfo = DataPlanos[index];
       }
     });
+
+    console.log(this.props.dataFinanciamiento);
+  }
+
+  imprimirCasa() {
+    if (this.props.dataCliente.fachada == "top") {
+      if (this.props.dataCliente.cubierta == "si") {
+        return `images/fachadas/CASA-${this.props.dataCliente.modelo}/CASA-${this.props.dataCliente.modelo}-01TOPCUBIERTA.jpg`;
+      } else {
+        return `images/fachadas/CASA-${this.props.dataCliente.modelo}/CASA-${this.props.dataCliente.modelo}-01TOP.jpg`;
+      }
+    } else {
+      if (this.props.dataCliente.cubierta == "si") {
+        return `images/fachadas/CASA-${this.props.dataCliente.modelo}/CASA-${this.props.dataCliente.modelo}-01CUBIERTA.jpg`;
+      } else {
+        return `images/fachadas/CASA-${this.props.dataCliente.modelo}/CASA-${this.props.dataCliente.modelo}-01.jpg`;
+      }
+    }
   }
 
   render() {
@@ -911,7 +929,7 @@ export class Print extends React.PureComponent {
                                                   >
                                                     <img
                                                       className="adapt-img"
-                                                      src={`./images/fachadas/CASA-${this.props.dataCliente.modelo}/CASA-${this.props.dataCliente.modelo}-01.jpg`}
+                                                      src={this.imprimirCasa()}
                                                       alt="A"
                                                       style={{
                                                         display: "block",
@@ -1648,7 +1666,9 @@ export class Print extends React.PureComponent {
                                                                     margin: 0,
                                                                   }}
                                                                 >
-                                                                  {row.total}
+                                                                  {row.total.toLocaleString(
+                                                                    "en"
+                                                                  )}
                                                                 </td>
                                                                 <td
                                                                   style={{

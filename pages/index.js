@@ -9,6 +9,7 @@ import Financiamiento from "../components/Financiamiento";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Title from "../components/Title";
+import CarouselPlanos from "../components/CarouselPlanos";
 
 const stagger = {
   animate: {
@@ -169,15 +170,17 @@ const Index = () => {
                 variants={stagger}
                 className="col-lg-8"
               >
-                <Image
-                  img={image === undefined ? "images/la-costa.png" : image.src}
-                  descripcion={
+                <CarouselPlanos
+                  urlImage={
+                    image === undefined ? "images/la-costa.png" : image.src
+                  }
+                  imageDescription={
                     image === undefined ? "La Costa" : image.descripcion
                   }
-                />
-                <Plano
-                  img={image == undefined ? "images/la-costa.png" : plano.src}
-                  descripcion={
+                  urlPlano={
+                    image == undefined ? "images/la-costa.png" : plano.src
+                  }
+                  planoDescription={
                     image == undefined ? "La Costa" : plano.descripcion
                   }
                 />

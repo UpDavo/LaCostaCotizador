@@ -223,20 +223,37 @@ const Financiamiento = ({ dataCliente, base }) => {
                   </fieldset>
                 </div>
               </div>
-              <div className="form-group">
-                <fieldset disabled>
-                  <label className="small text-gray-600" htmlFor="pagoFirma">
-                    Pago a la Firma 4 %
-                  </label>
-                  <input
-                    className="form-control"
-                    id="pagoFirma"
-                    type="text"
-                    value={porcentajes.cuatro.toLocaleString("en")}
-                    readOnly
-                  />
-                </fieldset>
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <fieldset disabled>
+                    <label className="small text-gray-600" htmlFor="pagoFirma">
+                      Pago a la Firma 4 %
+                    </label>
+                    <input
+                      className="form-control"
+                      id="pagoFirma"
+                      type="text"
+                      value={porcentajes.cuatro.toLocaleString("en")}
+                      readOnly
+                    />
+                  </fieldset>
+                </div>
+                <div className="form-group col-md-6">
+                  <fieldset disabled>
+                    <label className="small text-gray-600" htmlFor="pagoFirma">
+                      Saldo a Financiar 26 %
+                    </label>
+                    <input
+                      className="form-control"
+                      id="saldoFinanciar"
+                      type="text"
+                      value={porcentajes.financiar.toLocaleString("en")}
+                      readOnly
+                    />
+                  </fieldset>
+                </div>
               </div>
+
               <div className="pt-2 pb-2">
                 <hr color="darkGray" />
               </div>

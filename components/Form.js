@@ -89,6 +89,7 @@ const Form = ({ actualizarImagenes, enviarDatos }) => {
     actualizarImagenes(modelo, cubierta, fachada);
   };
 
+  //Esta función envía los datos a la tabla de financiamiento
   const generarTabla = (event) => {
     event.preventDefault();
     let modeloActualizado;
