@@ -36,7 +36,6 @@ const Row = ({ cuota, mes, pago, ano, updateRows }) => {
     const re = /^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$/;
     if (re.test(dinero)) {
       updateRows(cuota, dinero);
-
       document.querySelector(`#pago${cuota}`).disabled = true;
       document.querySelector(`#save${cuota}`).disabled = true;
       document.querySelector(`#edit${cuota}`).disabled = false;

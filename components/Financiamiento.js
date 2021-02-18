@@ -21,7 +21,9 @@ const Financiamiento = ({ dataCliente, base }) => {
     cuatro: precioFinal * 0.04,
     financiar: precioFinal * 0.26,
     pagar: precioFinal * 0.3 - precioFinal * 0.04,
-    cuotas: (precioFinal * 0.3 - precioFinal * 0.04) / financiamiento,
+    cuotas:
+      (precioFinal * 0.3 - precioFinal * 0.04) /
+      (dataCliente.ciudadela == "verde" ? 32 : 24),
   });
 
   //Referencia para el boton de imprimir
@@ -92,7 +94,9 @@ const Financiamiento = ({ dataCliente, base }) => {
       setenta: precioFinal * 0.7,
       cuatro: precioFinal * 0.04,
       pagar: precioFinal * 0.3 - precioFinal * 0.04,
-      cuotas: (precioFinal * 0.3 - precioFinal * 0.04) / financiamiento,
+      cuotas:
+        (precioFinal * 0.3 - precioFinal * 0.04) /
+        (dataCliente.ciudadela == "verde" ? 32 : 24),
       financiar: precioFinal * 0.26,
     });
     setFinanciamiento(dataCliente.ciudadela == "verde" ? 32 : 24);
@@ -125,7 +129,6 @@ const Financiamiento = ({ dataCliente, base }) => {
           cuota={porcentajes.cuotas}
           mesInicial={startDate}
           anoInicial={2021}
-          total={precioFinal}
           functionReturn={imprimirFinanciamiento}
         />
       </div>

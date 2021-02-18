@@ -1,17 +1,14 @@
 import Row from "./Row";
 import { useEffect, useState } from "react";
 
-const Table = ({
-  meses,
-  cuota,
-  mesInicial,
-  anoInicial,
-  functionReturn,
-  total,
-}) => {
-  let count = 0;
-  let enviar = [];
-  let handleChanges = true;
+var count = 0;
+var enviar = [];
+var contadorRowsEditados;
+
+const Table = ({ meses, cuota, mesInicial, anoInicial, functionReturn }) => {
+  //UseState funciones
+  const [dataEnviar, setDataEnviar] = useState(enviar);
+  const [handleChanges, setHandleChanges] = useState(true);
 
   //Modificación de reload de tabla
   const actualizarTabla = () => {
@@ -29,55 +26,71 @@ const Table = ({
       }
       let valor = index + 1;
       let total = cuota * mesMultiplicar;
-      enviar.push({ valor, mesTemp, anoInicial, cuota, total });
+      enviar.push({ valor, mesTemp, anoInicial, cuota, total, editado: false });
       mesMultiplicar -= 1;
     });
   };
 
-  actualizarTabla();
-  //UseState funciones
-  const [dataEnviar, setDataEnviar] = useState(enviar);
-
   //Funcion para actualizar los rows
-  const updateRows = (cuota, valorNuevo) => {
-    let copiaArray = [];
-    let itemNuevo;
-    let mesRestado = meses;
+  const updateRows = (index, valorNuevo) => {
+    let valorInicial = cuota;
+    let total = obtenerTotal();
+    let operacionesPorValor = total - valorNuevo;
+    console.log(
+      "Valor Nuevo: " +
+        valorNuevo +
+        " A: " +
+        operacionesPorValor +
+        " Meses: " +
+        (meses - 1)
+    );
 
-    enviar.map((item, index) => {
-      if (index == cuota - 1) {
-        itemNuevo = {
-          anoInicial: item.anoInicial,
-          cuota: parseInt(valorNuevo),
-          mesTemp: item.mesTemp,
-          valor: item.valor,
-          disminuye: item.cuota * mesRestado,
-        };
-        copiaArray.push(itemNuevo);
+    enviar.map((item) => {
+      if (item.valor == index) {
+        item.cuota = parseFloat(valorNuevo);
+        item.editado = true;
       } else {
-        itemNuevo = {
-          anoInicial: item.anoInicial,
-          cuota: item.cuota,
-          mesTemp: item.mesTemp,
-          valor: item.valor,
-          disminuye: item.cuota * mesRestado,
-        };
-        copiaArray.push(itemNuevo);
+        if (valorNuevo > valorInicial) {
+          if (!item.editado) {
+            item.cuota = operacionesPorValor / (meses - 1);
+          }
+        } else {
+          if (!item.editado) {
+            item.cuota = operacionesPorValor / (meses - 1);
+          }
+        }
       }
-      mesRestado -= 1;
     });
-    setDataEnviar(copiaArray);
-    handleChanges = !handleChanges;
+
+    console.log("Arreglo Actualizado");
+    console.log(enviar);
+    setHandleChanges(!handleChanges);
+  };
+
+  const obtenerTotal = () => {
+    let total = 0;
+    enviar.map((item) => {
+      total += item.cuota;
+    });
+    return total;
   };
 
   //Se ejecuta luego de las funciones
-
   useEffect(() => {
-    // actualizarTabla();
     setDataEnviar(enviar);
     functionReturn(dataEnviar);
+    console.log("Rows Actualizados");
     console.log(dataEnviar);
-  }, [meses, cuota, mesInicial, anoInicial, handleChanges, total]);
+    console.log("total: " + obtenerTotal());
+  }, [handleChanges]);
+
+  useEffect(() => {
+    actualizarTabla();
+    setDataEnviar(enviar);
+    console.log("Rows reiniciados");
+    console.log(dataEnviar);
+    console.log("total: " + obtenerTotal());
+  }, [meses, cuota, mesInicial, anoInicial]);
 
   return (
     <div className="card rounded-lg text-dark formulario scroll">
@@ -99,7 +112,7 @@ const Table = ({
                 cuota={row.valor}
                 mes={row.mesTemp}
                 ano={row.anoInicial}
-                pago={row.cuota}
+                pago={row.cuota.toLocaleString("en")}
                 updateRows={updateRows}
               />
             );
