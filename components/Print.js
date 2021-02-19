@@ -44,6 +44,14 @@ export class Print extends React.PureComponent {
     }
   }
 
+  obtenerTotal() {
+    let total = 0;
+    this.props.dataFinanciamiento.map((item) => {
+      total += item.cuota;
+    });
+    return total.toLocaleString("en");
+  }
+
   render() {
     return (
       <div className="print-source">
@@ -111,7 +119,7 @@ export class Print extends React.PureComponent {
                                 borderCollapse: "collapse",
                                 borderSpacing: 0,
                                 backgroundColor: "transparent",
-                                width: 900,
+                                width: "100%",
                               }}
                               cellSpacing={0}
                               cellPadding={0}
@@ -404,7 +412,7 @@ export class Print extends React.PureComponent {
                                 borderCollapse: "collapse",
                                 borderSpacing: 0,
                                 backgroundColor: "transparent",
-                                width: 900,
+                                width: "100%",
                               }}
                               cellSpacing={0}
                               cellPadding={0}
@@ -935,12 +943,14 @@ export class Print extends React.PureComponent {
                                                         display: "block",
                                                         border: 0,
                                                         outline: "none",
+                                                        marginTop:
+                                                          "8px !important",
                                                         textDecoration: "none",
                                                         msInterpolationMode:
                                                           "bicubic",
                                                       }}
-                                                      width={234}
-                                                      height={234}
+                                                      width={255}
+                                                      height={255}
                                                     />
                                                   </td>
                                                 </tr>
@@ -1451,12 +1461,12 @@ export class Print extends React.PureComponent {
                                     style={{
                                       padding: 0,
                                       margin: 0,
-                                      paddingTop: 10,
+                                      paddingTop: 50,
                                       paddingLeft: 20,
                                       paddingRight: 20,
-                                      backgroundColor: "#FCFCFC",
+                                      backgroundColor: "#fff",
                                     }}
-                                    bgcolor="#fcfcfc"
+                                    bgcolor="#fff"
                                     align="left"
                                   >
                                     <table
@@ -1666,6 +1676,7 @@ export class Print extends React.PureComponent {
                                                                     margin: 0,
                                                                   }}
                                                                 >
+                                                                  ${" "}
                                                                   {row.total.toLocaleString(
                                                                     "en"
                                                                   )}
@@ -1678,6 +1689,7 @@ export class Print extends React.PureComponent {
                                                                     margin: 0,
                                                                   }}
                                                                 >
+                                                                  ${" "}
                                                                   {row.cuota.toLocaleString(
                                                                     "en"
                                                                   )}
@@ -1691,7 +1703,7 @@ export class Print extends React.PureComponent {
                                                                     margin: 0,
                                                                   }}
                                                                 >
-                                                                  0
+                                                                  $ 0
                                                                 </td>
                                                                 <td
                                                                   style={{
@@ -1701,6 +1713,7 @@ export class Print extends React.PureComponent {
                                                                     margin: 0,
                                                                   }}
                                                                 >
+                                                                  ${" "}
                                                                   {row.cuota.toLocaleString(
                                                                     "en"
                                                                   )}
@@ -1753,9 +1766,8 @@ export class Print extends React.PureComponent {
                                                             }}
                                                           >
                                                             <b>
-                                                              {this.props.dataGeneralFinanciamiento.pagar.toLocaleString(
-                                                                "en"
-                                                              )}
+                                                              ${" "}
+                                                              {this.obtenerTotal()}
                                                             </b>
                                                           </td>
                                                           <td
@@ -1765,11 +1777,7 @@ export class Print extends React.PureComponent {
                                                               margin: 0,
                                                             }}
                                                           >
-                                                            <b>
-                                                              {this.props.dataGeneralFinanciamiento.pagar.toLocaleString(
-                                                                "en"
-                                                              )}
-                                                            </b>
+                                                            <b>0</b>
                                                           </td>
                                                           <td
                                                             style={{
@@ -1779,9 +1787,8 @@ export class Print extends React.PureComponent {
                                                             }}
                                                           >
                                                             <b>
-                                                              {this.props.dataGeneralFinanciamiento.pagar.toLocaleString(
-                                                                "en"
-                                                              )}
+                                                              ${" "}
+                                                              {this.obtenerTotal()}
                                                             </b>
                                                           </td>
                                                         </tr>
@@ -1803,6 +1810,9 @@ export class Print extends React.PureComponent {
                         </tr>
                       </tbody>
                     </table>
+                    <br />
+                    <br />
+                    <br />
                     <table
                       className="es-content"
                       cellSpacing={0}
@@ -1827,12 +1837,12 @@ export class Print extends React.PureComponent {
                                 msoTableRspace: "0pt",
                                 borderCollapse: "collapse",
                                 borderSpacing: 0,
-                                backgroundColor: "#FCFCFC",
-                                width: 900,
+                                backgroundColor: "#fff",
+                                width: "100%",
                               }}
                               cellSpacing={0}
                               cellPadding={0}
-                              bgcolor="#fcfcfc"
+                              bgcolor="#fff"
                               align="center"
                             >
                               <tbody>
@@ -1842,7 +1852,7 @@ export class Print extends React.PureComponent {
                                     style={{
                                       padding: 0,
                                       margin: 0,
-                                      paddingTop: 20,
+                                      paddingTop: 100,
                                       paddingLeft: 20,
                                       paddingRight: 20,
                                     }}

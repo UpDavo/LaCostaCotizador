@@ -6,9 +6,12 @@ import Print from "./Print";
 import ReactToPrint from "react-to-print";
 
 var valorFinal = 0;
+var arregloImprimir = [];
 
 const Financiamiento = ({ dataCliente, base }) => {
-  const [startDate, setStartDate] = useState(new Date());
+  var fecha = new Date();
+  fecha.setMonth(fecha.getMonth() + 1);
+  const [startDate, setStartDate] = useState(fecha);
   const [precioLista, setPrecioLista] = useState(0);
   const [descuento, setDescuento] = useState(0);
   const [precioFinal, setPrecioFinal] = useState(precioLista - descuento);
@@ -25,22 +28,6 @@ const Financiamiento = ({ dataCliente, base }) => {
       (precioFinal * 0.3 - precioFinal * 0.04) /
       (dataCliente.ciudadela == "verde" ? 32 : 24),
   });
-
-  //Referencia para el boton de imprimir
-  const componentRef = useRef();
-
-  //Arreglo creado para la impresion del financiamiento
-  let arregloImpresionFinanciamiento = {
-    precioLista: precioLista,
-    descuento: descuento,
-    precioFinal: precioFinal,
-    entrada: porcentajes.treinta,
-    entrega: porcentajes.setenta,
-    firma: porcentajes.cuatro,
-    pagar: porcentajes.pagar,
-    cuotas: porcentajes.cuotas,
-    financiar: porcentajes.financiar,
-  };
 
   /*Funcionalidad Pre Render */
   //Actualiza el precio dependiendo de la casa
@@ -102,11 +89,45 @@ const Financiamiento = ({ dataCliente, base }) => {
     setFinanciamiento(dataCliente.ciudadela == "verde" ? 32 : 24);
   }, [precioFinal, dataCliente, precioLista, descuento]);
 
-  const [dataImprimirFinanciamiento, setDataImprimirFinanciamiento] = useState(
-    []
-  );
+  /*-------------------------------Imprimir-------------------------------- */
 
-  const imprimirFinanciamiento = (arregloCuotas) => {
+  const [dataImprimirFinanciamiento, setDataImprimirFinanciamiento] = useState(
+    arregloImprimir
+  );
+  const [handleChanges, setHandleChanges] = useState(false);
+
+  //Referencia para el boton de imprimir
+  const componentRef = useRef();
+
+  //Arreglo creado para la impresion del financiamiento
+  let arregloImpresionFinanciamiento = {
+    precioLista: precioLista,
+    descuento: descuento,
+    precioFinal: precioFinal,
+    entrada: porcentajes.treinta,
+    entrega: porcentajes.setenta,
+    firma: porcentajes.cuatro,
+    pagar: porcentajes.pagar,
+    cuotas: porcentajes.cuotas,
+    financiar: porcentajes.financiar,
+  };
+
+  const datosDeFinanciamiento = (financiamiento) => {
+    arregloImprimir = [];
+    arregloImprimir = financiamiento;
+    console.log("Este es el financiamiento");
+    console.log(arregloImprimir);
+    setHandleChanges(!handleChanges);
+  };
+
+  const inicializarImpresionFinanciamiento = (dataInicial) => {
+    arregloImprimir = [];
+    arregloImprimir = dataInicial;
+    setHandleChanges(!handleChanges);
+  };
+
+  useEffect(() => {
+    //Esto organiza los datos de los valores superiores de la tabla
     arregloImpresionFinanciamiento = {
       precioLista: precioLista,
       descuento: descuento,
@@ -118,8 +139,11 @@ const Financiamiento = ({ dataCliente, base }) => {
       cuotas: porcentajes.cuotas,
       financiar: porcentajes.financiar,
     };
-    setDataImprimirFinanciamiento(arregloCuotas);
-  };
+
+    setDataImprimirFinanciamiento(arregloImprimir);
+  }, [handleChanges]);
+
+  /*-------------------------------Imprimir-------------------------------- */
 
   return (
     <div className="row align-items-center mt-5">
@@ -129,7 +153,10 @@ const Financiamiento = ({ dataCliente, base }) => {
           cuota={porcentajes.cuotas}
           mesInicial={startDate}
           anoInicial={2021}
-          functionReturn={imprimirFinanciamiento}
+          setDataImprimirFinanciamiento={datosDeFinanciamiento}
+          inicializarImpresionFinanciamiento={
+            inicializarImpresionFinanciamiento
+          }
         />
       </div>
       <div className="col-lg-5">
@@ -263,7 +290,7 @@ const Financiamiento = ({ dataCliente, base }) => {
               <div className="form-row">
                 <div className="form-group col-md-6">
                   <label className="small text-gray-600" htmlFor="pagoFirma">
-                    Fecha de inicio de Financiamiento
+                    Inicio de Financiamiento
                   </label>
                   <DatePicker
                     selected={startDate}

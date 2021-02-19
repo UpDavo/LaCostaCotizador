@@ -38,7 +38,7 @@ const Index = () => {
           };
           plano = {
             src: `images/planos/CASA-${real}.jpg`,
-            descripcion: `Fachada ${real} Top Cubierta`,
+            descripcion: `Plano - Fachada ${real} Top Cubierta`,
           };
         } else {
           casa = {
@@ -47,7 +47,7 @@ const Index = () => {
           };
           plano = {
             src: `images/planos/CASA-${real}.jpg`,
-            descripcion: `Fachada ${real} Top`,
+            descripcion: `Plano - Fachada ${real} Top`,
           };
         }
       } else {
@@ -58,7 +58,7 @@ const Index = () => {
           };
           plano = {
             src: `images/planos/CASA-${real}.jpg`,
-            descripcion: `Fachada ${real} Cubierta`,
+            descripcion: `Plano - Fachada ${real} Cubierta`,
           };
         } else {
           casa = {
@@ -67,7 +67,7 @@ const Index = () => {
           };
           plano = {
             src: `images/planos/CASA-${real}.jpg`,
-            descripcion: `Fachada ${real}`,
+            descripcion: `Plano - Fachada ${real}`,
           };
         }
       }
@@ -134,7 +134,7 @@ const Index = () => {
         className="page-header page-header-dark bg-img-repeat bg-secondary"
         style={{
           backgroundImage: `url("images/pattern-shapes.png")`,
-          backgroundColor: "#3c8090 !important",
+          backgroundColor: "#346f7c !important",
         }}
       >
         <div className="page-header-content">
@@ -175,13 +175,15 @@ const Index = () => {
                     image === undefined ? "images/la-costa.png" : image.src
                   }
                   imageDescription={
-                    image === undefined ? "La Costa" : image.descripcion
+                    image === undefined
+                      ? "Fachada - La Costa"
+                      : image.descripcion
                   }
                   urlPlano={
                     image == undefined ? "images/la-costa.png" : plano.src
                   }
                   planoDescription={
-                    image == undefined ? "La Costa" : plano.descripcion
+                    image == undefined ? "Plano - La Costa" : plano.descripcion
                   }
                 />
               </motion.div>

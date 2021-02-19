@@ -41,16 +41,23 @@ const CarouselPlanos = ({
             objectFit: "cover",
           }}
         />
-        <p
-          className="legend"
-          style={{
-            bottom: "3px !important",
-            left: "47% !important",
-            width: "96% !important",
-          }}
-        >
-          {imageDescription}
-        </p>
+        {urlImage == "images/la-costa.png" ? (
+          ""
+        ) : (
+          <>
+            <p
+              className="legend"
+              style={{
+                bottom: "3px !important",
+                left: "47% !important",
+                width: "96% !important",
+                opacity: 1,
+              }}
+            >
+              {imageDescription}
+            </p>
+          </>
+        )}
       </div>
       <div key="content-1" className="my-slide content">
         <img
@@ -63,16 +70,23 @@ const CarouselPlanos = ({
                 }
           }
         />
-        <p
-          className="legend"
-          style={{
-            bottom: "3px !important",
-            left: "47% !important",
-            width: "96% !important",
-          }}
-        >
-          {planoDescription}
-        </p>
+        {urlPlano == "images/la-costa.png" ? (
+          ""
+        ) : (
+          <>
+            <p
+              className="legend"
+              style={{
+                bottom: "3px !important",
+                left: "47% !important",
+                width: "96% !important",
+                opacity: 1,
+              }}
+            >
+              {planoDescription}
+            </p>
+          </>
+        )}
       </div>
     </Carousel>
   </motion.div>

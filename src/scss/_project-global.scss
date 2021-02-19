@@ -420,6 +420,11 @@ $slide-secondary-color: #4d0099;
 $slide-content-color: #004d99;
 
 .presentation-mode {
+  border-radius: 200px !important;
+  box-shadow: 5px 10px 18px #464545 !important;
+}
+
+.presentation-mode {
   .my-slide {
     display: flex;
     align-items: center;

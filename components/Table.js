@@ -1,19 +1,27 @@
 import Row from "./Row";
 import { useEffect, useState } from "react";
 
-var count = 0;
 var enviar = [];
 var contadorRowsEditados;
 
-const Table = ({ meses, cuota, mesInicial, anoInicial, functionReturn }) => {
+const Table = ({
+  meses,
+  cuota,
+  mesInicial,
+  anoInicial,
+  setDataImprimirFinanciamiento,
+  inicializarImpresionFinanciamiento,
+}) => {
   //UseState funciones
   const [dataEnviar, setDataEnviar] = useState(enviar);
   const [handleChanges, setHandleChanges] = useState(true);
 
+  var count = 0;
+
   //Modificación de reload de tabla
   const actualizarTabla = () => {
     enviar = [];
-    let mesMultiplicar = meses;
+    let mesMultiplicar = meses - 1;
     Array.from({ length: meses }).map((_, index) => {
       let mesTemp;
       if (mesInicial.getMonth() + count >= 12) {
@@ -78,7 +86,7 @@ const Table = ({ meses, cuota, mesInicial, anoInicial, functionReturn }) => {
   //Se ejecuta luego de las funciones
   useEffect(() => {
     setDataEnviar(enviar);
-    functionReturn(dataEnviar);
+    setDataImprimirFinanciamiento(dataEnviar);
     console.log("Rows Actualizados");
     console.log(dataEnviar);
     console.log("total: " + obtenerTotal());
@@ -90,6 +98,7 @@ const Table = ({ meses, cuota, mesInicial, anoInicial, functionReturn }) => {
     console.log("Rows reiniciados");
     console.log(dataEnviar);
     console.log("total: " + obtenerTotal());
+    inicializarImpresionFinanciamiento(dataEnviar);
   }, [meses, cuota, mesInicial, anoInicial]);
 
   return (

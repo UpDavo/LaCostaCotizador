@@ -77,7 +77,7 @@ const extra = () => {
                             borderCollapse: "collapse",
                             borderSpacing: 0,
                             backgroundColor: "transparent",
-                            width: 900,
+                            width: "100%",
                           }}
                           cellSpacing={0}
                           cellPadding={0}
@@ -353,7 +353,7 @@ const extra = () => {
                             borderCollapse: "collapse",
                             borderSpacing: 0,
                             backgroundColor: "transparent",
-                            width: 900,
+                            width: "100%",
                           }}
                           cellSpacing={0}
                           cellPadding={0}
@@ -1391,9 +1391,9 @@ const extra = () => {
                                   paddingTop: 10,
                                   paddingLeft: 20,
                                   paddingRight: 20,
-                                  backgroundColor: "#FCFCFC",
+                                  backgroundColor: "#fff",
                                 }}
-                                bgcolor="#fcfcfc"
+                                bgcolor="#fff"
                                 align="left"
                               >
                                 <table
@@ -2355,12 +2355,12 @@ const extra = () => {
                             msoTableRspace: "0pt",
                             borderCollapse: "collapse",
                             borderSpacing: 0,
-                            backgroundColor: "#FCFCFC",
-                            width: 900,
+                            backgroundColor: "#fff",
+                            width: "100%",
                           }}
                           cellSpacing={0}
                           cellPadding={0}
-                          bgcolor="#fcfcfc"
+                          bgcolor="#fff"
                           align="center"
                         >
                           <tbody>
