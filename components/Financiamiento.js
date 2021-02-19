@@ -135,7 +135,7 @@ const Financiamiento = ({ dataCliente, base }) => {
   const inicializarImpresionFinanciamiento = (dataInicial) => {
     arregloImprimir = [];
     arregloImprimir = dataInicial;
-    setHandleChanges(!handleChanges);
+    setDataImprimirFinanciamiento(arregloImprimir);
   };
 
   useEffect(() => {

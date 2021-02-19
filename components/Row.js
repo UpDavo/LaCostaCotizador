@@ -15,7 +15,7 @@ month[9] = "Octubre";
 month[10] = "Noviembre";
 month[11] = "Diciembre";
 
-const Row = ({ cuota, mes, pago, ano, updateRows }) => {
+const Row = ({ cuota, mes, pago, ano, updateRows, limitarEdicion }) => {
   //Funcion para activar la actualizacion del row
   const activarActualizacion = (event) => {
     event.preventDefault();

@@ -2,7 +2,7 @@ import Row from "./Row";
 import { useEffect, useState } from "react";
 
 var enviar = [];
-var contadorRowsEditados;
+var contadorRowsEditados = false;
 
 const Table = ({
   meses,
@@ -37,6 +37,12 @@ const Table = ({
       enviar.push({ valor, mesTemp, anoInicial, cuota, total, editado: false });
       mesMultiplicar -= 1;
     });
+  };
+
+  const limitarEdicion = () => {
+    if (!contadorRowsEditados) {
+      contadorRowsEditados = true;
+    }
   };
 
   //Funcion para actualizar los rows
@@ -123,6 +129,7 @@ const Table = ({
                 ano={row.anoInicial}
                 pago={row.cuota.toLocaleString("en")}
                 updateRows={updateRows}
+                limitarEdicion={limitarEdicion}
               />
             );
           })}
