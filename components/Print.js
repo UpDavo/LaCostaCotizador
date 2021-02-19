@@ -2536,6 +2536,246 @@ export class Print extends React.PureComponent {
                                       </tbody>
                                     </table>
                                     {/*[if mso]></td></tr></table><![endif]*/}
+                                    <table
+                                      className="es-content"
+                                      cellSpacing={0}
+                                      cellPadding={0}
+                                      style={{
+                                        msoTableLspace: "0pt",
+                                        msoTableRspace: "0pt",
+                                        borderCollapse: "collapse",
+                                        borderSpacing: 0,
+                                        tableLayout: "fixed !important",
+                                        width: "100%",
+                                      }}
+                                    >
+                                      <tbody>
+                                        <tr
+                                          style={{ borderCollapse: "collapse" }}
+                                        >
+                                          <td style={{ padding: 0, margin: 0 }}>
+                                            <tr
+                                              style={{
+                                                borderCollapse: "collapse",
+                                              }}
+                                            >
+                                              <td
+                                                style={{
+                                                  padding: 0,
+                                                  margin: 0,
+                                                  paddingTop: 10,
+                                                  paddingLeft: 0,
+                                                  paddingRight: 20,
+                                                  backgroundColor: "#fff",
+                                                }}
+                                                bgcolor="#fff"
+                                                align="left"
+                                              >
+                                                <br />
+                                                <h3>
+                                                  <b>
+                                                    Cuotas de Crédito
+                                                    Hipotecario
+                                                  </b>
+                                                </h3>
+                                                <table
+                                                  width="52%"
+                                                  cellSpacing={0}
+                                                  cellPadding={0}
+                                                  style={{
+                                                    msoTableLspace: "0pt",
+                                                    msoTableRspace: "0pt",
+                                                    borderCollapse: "collapse",
+                                                    borderSpacing: 0,
+                                                  }}
+                                                >
+                                                  <tbody>
+                                                    <tr
+                                                      style={{
+                                                        borderCollapse:
+                                                          "collapse",
+                                                      }}
+                                                    >
+                                                      <td
+                                                        valign="top"
+                                                        style={{
+                                                          padding: 0,
+                                                          margin: 0,
+                                                          width: 860,
+                                                        }}
+                                                      >
+                                                        <table
+                                                          style={{
+                                                            msoTableLspace:
+                                                              "0pt",
+                                                            msoTableRspace:
+                                                              "0pt",
+                                                            borderCollapse:
+                                                              "separate",
+                                                            borderSpacing: 0,
+                                                            borderColor:
+                                                              "#EFEFEF",
+                                                            borderStyle:
+                                                              "solid",
+                                                            borderWidth: 1,
+                                                            borderRadius: 3,
+                                                            backgroundColor:
+                                                              "#FFFFFF",
+                                                          }}
+                                                          width="100%"
+                                                          cellSpacing={0}
+                                                          cellPadding={0}
+                                                          bgcolor="#ffffff"
+                                                          role="presentation"
+                                                        >
+                                                          <tbody>
+                                                            <tr
+                                                              style={{
+                                                                borderCollapse:
+                                                                  "collapse",
+                                                              }}
+                                                            >
+                                                              <td
+                                                                style={{
+                                                                  padding: 0,
+                                                                  margin: 0,
+                                                                }}
+                                                              >
+                                                                <table
+                                                                  className="tablaPrintGrande"
+                                                                  role="presentation"
+                                                                  style={{
+                                                                    fontFamily:
+                                                                      "Helvetica",
+                                                                    width:
+                                                                      "100%",
+                                                                    color:
+                                                                      "#666666",
+                                                                    fontSize: 11,
+                                                                    msoTableLspace:
+                                                                      "0pt",
+                                                                    msoTableRspace:
+                                                                      "0pt",
+                                                                    borderCollapse:
+                                                                      "collapse",
+                                                                    borderSpacing: 0,
+                                                                  }}
+                                                                >
+                                                                  <thead>
+                                                                    <tr
+                                                                      style={{
+                                                                        borderCollapse:
+                                                                          "collapse",
+                                                                      }}
+                                                                    >
+                                                                      <th
+                                                                        style={{
+                                                                          border:
+                                                                            "3px solid #DDDDDD",
+                                                                          textAlign:
+                                                                            "left",
+                                                                          padding:
+                                                                            "8px !important",
+                                                                        }}
+                                                                      >
+                                                                        <b>
+                                                                          10
+                                                                          años
+                                                                        </b>
+                                                                      </th>
+                                                                      <th
+                                                                        style={{
+                                                                          border:
+                                                                            "3px solid #DDDDDD",
+                                                                          textAlign:
+                                                                            "left",
+                                                                          padding:
+                                                                            "8px !important",
+                                                                        }}
+                                                                      >
+                                                                        <b>
+                                                                          15
+                                                                          años
+                                                                        </b>
+                                                                      </th>
+                                                                      <th
+                                                                        style={{
+                                                                          border:
+                                                                            "3px solid #DDDDDD",
+                                                                          textAlign:
+                                                                            "left",
+                                                                          padding:
+                                                                            "8px !important",
+                                                                        }}
+                                                                      >
+                                                                        <b>
+                                                                          20
+                                                                          años
+                                                                        </b>
+                                                                      </th>
+                                                                    </tr>
+                                                                  </thead>
+                                                                  <tbody>
+                                                                    <tr
+                                                                      style={{
+                                                                        borderCollapse:
+                                                                          "collapse",
+                                                                      }}
+                                                                    >
+                                                                      <td
+                                                                        style={{
+                                                                          textAlign:
+                                                                            "left",
+                                                                          padding: 0,
+                                                                          margin: 0,
+                                                                        }}
+                                                                      >
+                                                                        {this.props.creditoHipotecario.diez.toLocaleString(
+                                                                          "en"
+                                                                        )}
+                                                                      </td>
+                                                                      <td
+                                                                        style={{
+                                                                          textAlign:
+                                                                            "left",
+                                                                          padding: 0,
+                                                                          margin: 0,
+                                                                        }}
+                                                                      >
+                                                                        {this.props.creditoHipotecario.quince.toLocaleString(
+                                                                          "en"
+                                                                        )}
+                                                                      </td>
+                                                                      <td
+                                                                        style={{
+                                                                          textAlign:
+                                                                            "left",
+                                                                          padding: 0,
+                                                                          margin: 0,
+                                                                        }}
+                                                                      >
+                                                                        {this.props.creditoHipotecario.veinte.toLocaleString(
+                                                                          "en"
+                                                                        )}
+                                                                      </td>
+                                                                    </tr>
+                                                                  </tbody>
+                                                                </table>
+                                                              </td>
+                                                            </tr>
+                                                          </tbody>
+                                                        </table>
+                                                      </td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                              </td>
+                                            </tr>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                    {/*AAAAAAAAAAAAAAAAAA */}
                                   </td>
                                 </tr>
                               </tbody>

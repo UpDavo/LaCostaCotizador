@@ -18,6 +18,7 @@ const Financiamiento = ({ dataCliente, base }) => {
   const [financiamiento, setFinanciamiento] = useState(
     dataCliente.ciudadela == "verde" ? 32 : 24
   );
+
   const [porcentajes, setPorcentajes] = useState({
     treinta: precioFinal * 0.3,
     setenta: precioFinal * 0.7,
@@ -27,6 +28,12 @@ const Financiamiento = ({ dataCliente, base }) => {
     cuotas:
       (precioFinal * 0.3 - precioFinal * 0.04) /
       (dataCliente.ciudadela == "verde" ? 32 : 24),
+  });
+
+  const [creditoHipotecario, setCreditoHipotecario] = useState({
+    diez: PMT(0.095 / 12, 10 * 12, precioFinal * 0.7),
+    quince: PMT(0.095 / 12, 15 * 12, precioFinal * 0.7),
+    veinte: PMT(0.095 / 12, 20 * 12, precioFinal * 0.7),
   });
 
   /*Funcionalidad Pre Render */
@@ -87,6 +94,11 @@ const Financiamiento = ({ dataCliente, base }) => {
       financiar: precioFinal * 0.26,
     });
     setFinanciamiento(dataCliente.ciudadela == "verde" ? 32 : 24);
+    setCreditoHipotecario({
+      diez: PMT(0.095 / 12, 10 * 12, -(precioFinal * 0.7)),
+      quince: PMT(0.095 / 12, 15 * 12, -(precioFinal * 0.7)),
+      veinte: PMT(0.095 / 12, 20 * 12, -(precioFinal * 0.7)),
+    });
   }, [precioFinal, dataCliente, precioLista, descuento]);
 
   /*-------------------------------Imprimir-------------------------------- */
@@ -343,6 +355,48 @@ const Financiamiento = ({ dataCliente, base }) => {
                   </fieldset>
                 </div>
               </div>
+              <div align="center" className="pt-2 pb-3">
+                <hr color="darkGray" />
+                <h2 className="pt-2">Credito hipotecario</h2>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-4">
+                  <fieldset disabled>
+                    <label className="small text-gray-600">10 Años</label>
+                    <input
+                      className="form-control"
+                      id="10anos"
+                      type="text"
+                      value={creditoHipotecario.diez.toLocaleString("en")}
+                      readOnly
+                    />
+                  </fieldset>
+                </div>
+                <div className="form-group col-md-4">
+                  <fieldset disabled>
+                    <label className="small text-gray-600">15 Años</label>
+                    <input
+                      className="form-control"
+                      id="15anos"
+                      type="text"
+                      value={creditoHipotecario.quince.toLocaleString("en")}
+                      readonly
+                    />
+                  </fieldset>
+                </div>
+                <div className="form-group col-md-4">
+                  <fieldset disabled>
+                    <label className="small text-gray-600">20 Años</label>
+                    <input
+                      className="form-control"
+                      id="20anos"
+                      type="text"
+                      value={creditoHipotecario.veinte.toLocaleString("en")}
+                      readonly
+                    />
+                  </fieldset>
+                </div>
+              </div>
             </form>
             <ReactToPrint
               trigger={() => (
@@ -371,6 +425,7 @@ const Financiamiento = ({ dataCliente, base }) => {
               dataCliente={dataCliente}
               dataFinanciamiento={dataImprimirFinanciamiento}
               dataGeneralFinanciamiento={arregloImpresionFinanciamiento}
+              creditoHipotecario={creditoHipotecario}
             />
           </div>
         </div>
@@ -378,5 +433,30 @@ const Financiamiento = ({ dataCliente, base }) => {
     </div>
   );
 };
+
+function PMT(ir, np, pv, fv, type) {
+  /*
+   * ir   - interest rate per month
+   * np   - number of periods (months)
+   * pv   - present value
+   * fv   - future value
+   * type - when the payments are due:
+   *        0: end of the period, e.g. end of month (default)
+   *        1: beginning of period
+   */
+  var pmt, pvif;
+
+  fv || (fv = 0);
+  type || (type = 0);
+
+  if (ir === 0) return -(pv + fv) / np;
+
+  pvif = Math.pow(1 + ir, np);
+  pmt = (-ir * pv * (pvif + fv)) / (pvif - 1);
+
+  if (type === 1) pmt /= 1 + ir;
+
+  return pmt;
+}
 
 export default Financiamiento;

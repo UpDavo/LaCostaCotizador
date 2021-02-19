@@ -32,7 +32,6 @@ const CarouselPlanos = ({
       showIndicators={false}
       useKeyboardArrows
       className="presentation-mode"
-      style={{ borderRadius: "20px !important" }}
     >
       <div key="content-0" className="my-slide content">
         <img
@@ -54,7 +53,7 @@ const CarouselPlanos = ({
                 opacity: 1,
               }}
             >
-              {imageDescription}
+              <b>{imageDescription}</b>
             </p>
           </>
         )}
@@ -83,7 +82,7 @@ const CarouselPlanos = ({
                 opacity: 1,
               }}
             >
-              {planoDescription}
+              <b>{planoDescription}</b>
             </p>
           </>
         )}

@@ -163,7 +163,7 @@ const Form = ({ actualizarImagenes, enviarDatos }) => {
       variants={fadeInRight}
       className="card rounded-lg text-dark formulario"
     >
-      <div className="card-header py-4" style={{ color: "#b58648" }}>
+      <div className="card-header py-4" style={{ color: "#b58648 !important" }}>
         DATOS DE LA PERSONA QUE REALIZA LA COTIZACIÓN
       </div>
       <div className="card-body">

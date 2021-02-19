@@ -152,7 +152,7 @@ html {
 }
 
 .scroll {
-  height: 57rem;
+  height: 69.5rem;
   overflow: scroll;
 }
 
@@ -420,8 +420,8 @@ $slide-secondary-color: #4d0099;
 $slide-content-color: #004d99;
 
 .presentation-mode {
-  border-radius: 200px !important;
-  box-shadow: 5px 10px 18px #464545 !important;
+  // border-radius: 200px !important;
+  box-shadow: 5px 10px 16px #5c5b5b !important;
 }
 
 .presentation-mode {
@@ -551,4 +551,21 @@ $slide-content-color: #004d99;
       background-color: $slide-content-color;
     }
   }
+}
+
+.legend {
+  transition: all 0.5s ease-in-out !important;
+  position: absolute !important;
+  bottom: -10px !important;
+  left: 45% !important;
+  margin-left: -45% !important;
+  width: 100% !important;
+  border-radius: 1px !important;
+  background: #b58648 !important;
+  color: #fff !important;
+  padding: 13px !important;
+  font-size: 12px !important;
+  text-align: center !important;
+  opacity: 1 !important;
+  transition: opacity 0.35s ease-in-out !important;
 }
