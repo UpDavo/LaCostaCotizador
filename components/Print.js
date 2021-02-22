@@ -1536,7 +1536,11 @@ export class Print extends React.PureComponent {
                                                       color: "#FFFFFF",
                                                     }}
                                                   >
-                                                    Modelo G2B
+                                                    Modelo{" "}
+                                                    {
+                                                      this.props.dataCliente
+                                                        .modeloReal
+                                                    }
                                                   </h2>
                                                 </td>
                                               </tr>
