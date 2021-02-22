@@ -1,5 +1,6 @@
 import React from "react";
 import DataPlanos from "../DataPlanos";
+import Head from "next/head";
 
 var month = new Array();
 month[0] = "Enero";
@@ -49,150 +50,172 @@ export class Print extends React.PureComponent {
     this.props.dataFinanciamiento.map((item) => {
       total += item.cuota;
     });
-    return total.toLocaleString("en");
+    return total.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
   }
 
   render() {
     return (
       <div className="print-source">
+        <Head>
+          <title>
+            {this.props.dataCliente.nombre +
+              " " +
+              this.props.dataCliente.apellido}{" "}
+            -{" "}
+            {this.props.dataCliente.ciudadela == "azul"
+              ? "COSTA AZUL"
+              : "COSTA VERDE"}
+          </title>
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
+          />
+        </Head>
         <div
-          style={{
-            width: "100%",
-            fontFamily:
-              'helvetica, "helvetica neue", arial, verdana, sans-serif',
-            WebkitTextSizeAdjust: "100%",
-            msTextSizeAdjust: "100%",
-            padding: 0,
-            margin: 0,
-          }}
+          className="es-wrapper-color"
+          style={{ backgroundColor: "#FFFFFF" }}
         >
-          <div
-            className="es-wrapper-color"
-            style={{ backgroundColor: "#FFFFFF" }}
+          {/*[if gte mso 9]>
+  <v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
+    <v:fill type="tile" color="#ffffff"></v:fill>
+  </v:background>
+<![endif]*/}
+          <table
+            className="es-wrapper"
+            style={{
+              msoTableLspace: "0pt",
+              msoTableRspace: "0pt",
+              borderCollapse: "collapse",
+              borderSpacing: 0,
+              padding: 0,
+              margin: 0,
+              width: "100%",
+              height: "100%",
+              backgroundRepeat: "repeat",
+              backgroundPosition: "center top",
+            }}
+            width="100%"
+            cellSpacing={0}
+            cellPadding={0}
           >
-            <table
-              className="es-wrapper"
-              style={{
-                msoTableLspace: "0pt",
-                msoTableRspace: "0pt",
-                borderCollapse: "collapse",
-                borderSpacing: 0,
-                padding: 0,
-                margin: 0,
-                width: "100%",
-                height: "100%",
-                backgroundRepeat: "repeat",
-                backgroundPosition: "center top",
-              }}
-              width="100%"
-              cellSpacing={0}
-              cellPadding={0}
-            >
-              <tbody>
-                <tr style={{ borderCollapse: "collapse" }}>
-                  <td valign="top" style={{ padding: 0, margin: 0 }}>
-                    <table
-                      className="es-header"
-                      cellSpacing={0}
-                      cellPadding={0}
-                      align="center"
-                      style={{
-                        msoTableLspace: "0pt",
-                        msoTableRspace: "0pt",
-                        borderCollapse: "collapse",
-                        borderSpacing: 0,
-                        tableLayout: "fixed !important",
-                        width: "100%",
-                        backgroundColor: "transparent",
-                        backgroundRepeat: "repeat",
-                        backgroundPosition: "center top",
-                      }}
-                    >
-                      <tbody>
-                        <tr style={{ borderCollapse: "collapse" }}>
-                          <td align="center" style={{ padding: 0, margin: 0 }}>
-                            <table
-                              className="es-header-body"
-                              style={{
-                                msoTableLspace: "0pt",
-                                msoTableRspace: "0pt",
-                                borderCollapse: "collapse",
-                                borderSpacing: 0,
-                                backgroundColor: "transparent",
-                                width: "100%",
-                              }}
-                              cellSpacing={0}
-                              cellPadding={0}
-                              align="center"
-                            >
-                              <tbody>
-                                <tr style={{ borderCollapse: "collapse" }}>
-                                  <td
-                                    align="left"
+            <tbody>
+              <tr style={{ borderCollapse: "collapse" }}>
+                <td valign="top" style={{ padding: 0, margin: 0 }}>
+                  <table
+                    className="es-header"
+                    cellSpacing={0}
+                    cellPadding={0}
+                    align="center"
+                    style={{
+                      msoTableLspace: "0pt",
+                      msoTableRspace: "0pt",
+                      borderCollapse: "collapse",
+                      borderSpacing: 0,
+                      tableLayout: "fixed !important",
+                      width: "100%",
+                      backgroundColor: "transparent",
+                      backgroundRepeat: "repeat",
+                      backgroundPosition: "center top",
+                    }}
+                  >
+                    <tbody>
+                      <tr style={{ borderCollapse: "collapse" }}>
+                        <td align="center" style={{ padding: 0, margin: 0 }}>
+                          <table
+                            className="es-header-body"
+                            style={{
+                              msoTableLspace: "0pt",
+                              msoTableRspace: "0pt",
+                              borderCollapse: "collapse",
+                              borderSpacing: 0,
+                              backgroundColor: "transparent",
+                              width: 1400,
+                            }}
+                            cellSpacing={0}
+                            cellPadding={0}
+                            align="center"
+                          >
+                            <tbody>
+                              <tr style={{ borderCollapse: "collapse" }}>
+                                <td
+                                  align="left"
+                                  style={{ padding: 0, margin: 0 }}
+                                >
+                                  <table
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    width="100%"
                                     style={{
-                                      padding: 0,
-                                      margin: 0,
-                                      paddingTop: 20,
-                                      paddingLeft: 20,
-                                      paddingRight: 20,
+                                      msoTableLspace: "0pt",
+                                      msoTableRspace: "0pt",
+                                      borderCollapse: "collapse",
+                                      borderSpacing: 0,
                                     }}
                                   >
-                                    {/*[if mso]><table style="width:860px" cellpadding="0" cellspacing="0"><tr><td style="width:420px" valign="top"><![endif]*/}
-                                    <table
-                                      cellPadding={0}
-                                      cellSpacing={0}
-                                      className="es-left"
-                                      align="left"
-                                      style={{
-                                        msoTableLspace: "0pt",
-                                        msoTableRspace: "0pt",
-                                        borderCollapse: "collapse",
-                                        borderSpacing: 0,
-                                        float: "left",
-                                      }}
-                                    >
-                                      <tbody>
-                                        <tr
-                                          style={{ borderCollapse: "collapse" }}
+                                    <tbody>
+                                      <tr
+                                        style={{ borderCollapse: "collapse" }}
+                                      >
+                                        <td
+                                          align="center"
+                                          valign="top"
+                                          style={{
+                                            padding: 0,
+                                            margin: 0,
+                                            width: 1400,
+                                          }}
                                         >
-                                          <td
-                                            className="es-m-p20b"
-                                            align="left"
+                                          <table
+                                            cellPadding={0}
+                                            cellSpacing={0}
+                                            width="100%"
+                                            role="presentation"
                                             style={{
-                                              padding: 0,
-                                              margin: 0,
-                                              width: 420,
+                                              msoTableLspace: "0pt",
+                                              msoTableRspace: "0pt",
+                                              borderCollapse: "collapse",
+                                              borderSpacing: 0,
                                             }}
                                           >
-                                            <table
-                                              cellPadding={0}
-                                              cellSpacing={0}
-                                              width="100%"
-                                              role="presentation"
-                                              style={{
-                                                msoTableLspace: "0pt",
-                                                msoTableRspace: "0pt",
-                                                borderCollapse: "collapse",
-                                                borderSpacing: 0,
-                                              }}
-                                            >
-                                              <tbody>
-                                                <tr
+                                            <tbody>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="center"
+                                                  className="container"
                                                   style={{
-                                                    borderCollapse: "collapse",
+                                                    position: "relative",
+                                                    color: "white",
+                                                    padding: 0,
+                                                    margin: 0,
+                                                    fontSize: 0,
                                                   }}
                                                 >
-                                                  <td
-                                                    align="left"
+                                                  <a
+                                                    target="_blank"
+                                                    href
                                                     style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                      paddingBottom: 20,
-                                                      fontSize: 0,
+                                                      WebkitTextSizeAdjust:
+                                                        "none",
+                                                      msTextSizeAdjust: "none",
+                                                      msoLineHeightRule:
+                                                        "exactly",
+                                                      fontFamily:
+                                                        'helvetica, "helvetica neue", arial, verdana, sans-serif',
+                                                      fontSize: 14,
+                                                      textDecoration: "none",
+                                                      color: "#F6A1B4",
                                                     }}
                                                   >
                                                     <img
-                                                      src="https://fodrao.stripocdn.email/content/guids/CABINET_87833819fc781f42211f150e17a54082/images/23441612889339916.png"
+                                                      className="adapt-img"
+                                                      src="https://fodrao.stripocdn.email/content/guids/CABINET_87833819fc781f42211f150e17a54082/images/80231614005633541.jpg"
                                                       alt
                                                       style={{
                                                         display: "block",
@@ -202,2433 +225,2256 @@ export class Print extends React.PureComponent {
                                                         msInterpolationMode:
                                                           "bicubic",
                                                       }}
-                                                      width={269}
-                                                      height={72}
+                                                      width={1400}
+                                                      height={340}
                                                     />
-                                                  </td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                    {/*[if mso]></td><td style="width:20px"></td><td style="width:420px" valign="top"><![endif]*/}
-                                    <table
-                                      cellPadding={0}
-                                      cellSpacing={0}
-                                      className="es-right"
-                                      align="right"
-                                      style={{
-                                        msoTableLspace: "0pt",
-                                        msoTableRspace: "0pt",
-                                        borderCollapse: "collapse",
-                                        borderSpacing: 0,
-                                        float: "right",
-                                      }}
-                                    >
-                                      <tbody>
-                                        <tr
-                                          style={{ borderCollapse: "collapse" }}
-                                        >
-                                          <td
-                                            align="left"
-                                            style={{
-                                              padding: 0,
-                                              margin: 0,
-                                              width: 420,
-                                            }}
-                                          >
-                                            <table
-                                              cellPadding={0}
-                                              cellSpacing={0}
-                                              width="100%"
-                                              role="presentation"
-                                              style={{
-                                                msoTableLspace: "0pt",
-                                                msoTableRspace: "0pt",
-                                                borderCollapse: "collapse",
-                                                borderSpacing: 0,
-                                              }}
-                                            >
-                                              <tbody>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    align="center"
-                                                    height={9}
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                    }}
-                                                  />
-                                                </tr>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    align="right"
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                    }}
-                                                  >
-                                                    <p
+                                                    <div
+                                                      className="imageLeft"
                                                       style={{
-                                                        margin: 0,
-                                                        WebkitTextSizeAdjust:
-                                                          "none",
-                                                        msTextSizeAdjust:
-                                                          "none",
-                                                        msoLineHeightRule:
-                                                          "exactly",
-                                                        fontSize: 14,
-                                                        fontFamily:
-                                                          'helvetica, "helvetica neue", arial, verdana, sans-serif',
-                                                        lineHeight: 0,
-                                                        color: "#666666",
+                                                        position: "absolute",
+                                                        top: "78%",
+                                                        left: "18%",
+                                                        transform:
+                                                          "translate(-50%, -50%)",
                                                       }}
                                                     >
+                                                      <img
+                                                        src="https://fodrao.stripocdn.email/content/guids/CABINET_87833819fc781f42211f150e17a54082/images/76881614006954594.png"
+                                                        alt
+                                                        style={{
+                                                          display: "block",
+                                                          border: 0,
+                                                          outline: "none",
+                                                          textDecoration:
+                                                            "none",
+                                                          msInterpolationMode:
+                                                            "bicubic",
+                                                        }}
+                                                        width={335}
+                                                        height={90}
+                                                      />
+                                                    </div>
+                                                    <div
+                                                      className="centered1"
+                                                      style={{
+                                                        position: "absolute",
+                                                        top: "70%",
+                                                        left: "80.5%",
+                                                        transform:
+                                                          "translate(-50%, -50%)",
+                                                        color: "white",
+                                                        textAlign: "left",
+                                                        fontSize: 18,
+                                                      }}
+                                                    >
+                                                      <b>Cliente:</b>{" "}
                                                       {this.props.dataCliente
                                                         .nombre +
                                                         " " +
                                                         this.props.dataCliente
                                                           .apellido}
-                                                    </p>
-                                                  </td>
-                                                </tr>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    align="right"
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                    }}
-                                                  >
-                                                    <p
+                                                    </div>
+                                                    <div
+                                                      className="centered2"
                                                       style={{
-                                                        margin: 0,
-                                                        WebkitTextSizeAdjust:
-                                                          "none",
-                                                        msTextSizeAdjust:
-                                                          "none",
-                                                        msoLineHeightRule:
-                                                          "exactly",
-                                                        fontSize: 14,
-                                                        fontFamily:
-                                                          'helvetica, "helvetica neue", arial, verdana, sans-serif',
-                                                        lineHeight: 4,
-                                                        color: "#666666",
+                                                        position: "absolute",
+                                                        top: "80%",
+                                                        left: "81%",
+                                                        transform:
+                                                          "translate(-50%, -50%)",
+                                                        color: "white",
+                                                        textAlign: "left",
+                                                        fontSize: 18,
                                                       }}
                                                     >
+                                                      <b>Email:</b>{" "}
                                                       {
                                                         this.props.dataCliente
                                                           .correo
                                                       }
-                                                    </p>
-                                                  </td>
-                                                </tr>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    align="right"
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                    }}
-                                                  >
-                                                    <p
+                                                    </div>
+                                                    <div
+                                                      className="centered3"
                                                       style={{
-                                                        margin: 0,
-                                                        WebkitTextSizeAdjust:
-                                                          "none",
-                                                        msTextSizeAdjust:
-                                                          "none",
-                                                        msoLineHeightRule:
-                                                          "exactly",
-                                                        fontSize: 14,
-                                                        fontFamily:
-                                                          'helvetica, "helvetica neue", arial, verdana, sans-serif',
-                                                        lineHeight: 0,
-                                                        color: "#666666",
+                                                        position: "absolute",
+                                                        top: "90%",
+                                                        left: "77.5%",
+                                                        transform:
+                                                          "translate(-50%, -50%)",
+                                                        color: "white",
+                                                        textAlign: "left",
+                                                        fontSize: 18,
                                                       }}
                                                     >
+                                                      <b>Celular:</b>{" "}
                                                       {
                                                         this.props.dataCliente
                                                           .celular
                                                       }
-                                                    </p>
-                                                  </td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                    {/*[if mso]></td></tr></table><![endif]*/}
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <table
-                      className="es-content"
-                      cellSpacing={0}
-                      cellPadding={0}
-                      align="center"
-                      style={{
-                        msoTableLspace: "0pt",
-                        msoTableRspace: "0pt",
-                        borderCollapse: "collapse",
-                        borderSpacing: 0,
-                        tableLayout: "fixed !important",
-                        width: "100%",
-                      }}
-                    >
-                      <tbody>
-                        <tr style={{ borderCollapse: "collapse" }}>
-                          <td align="center" style={{ padding: 0, margin: 0 }}>
-                            <table
-                              className="es-content-body"
-                              style={{
-                                msoTableLspace: "0pt",
-                                msoTableRspace: "0pt",
-                                borderCollapse: "collapse",
-                                borderSpacing: 0,
-                                backgroundColor: "transparent",
-                                width: "100%",
-                              }}
-                              cellSpacing={0}
-                              cellPadding={0}
-                              align="center"
-                            >
-                              <tbody>
-                                <tr style={{ borderCollapse: "collapse" }}>
-                                  <td
-                                    align="left"
+                                                    </div>
+                                                  </a>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                              <tr style={{ borderCollapse: "collapse" }}>
+                                <td
+                                  align="left"
+                                  style={{ padding: 0, margin: 0 }}
+                                >
+                                  <table
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    width="100%"
                                     style={{
-                                      padding: 0,
-                                      margin: 0,
-                                      paddingTop: 20,
-                                      paddingLeft: 20,
-                                      paddingRight: 20,
+                                      msoTableLspace: "0pt",
+                                      msoTableRspace: "0pt",
+                                      borderCollapse: "collapse",
+                                      borderSpacing: 0,
                                     }}
                                   >
-                                    {/*[if mso]><table style="width:860px" cellpadding="0" cellspacing="0"><tr><td style="width:257px" valign="top"><![endif]*/}
-                                    <table
-                                      cellPadding={0}
-                                      cellSpacing={0}
-                                      className="es-left"
-                                      align="left"
-                                      style={{
-                                        msoTableLspace: "0pt",
-                                        msoTableRspace: "0pt",
-                                        borderCollapse: "collapse",
-                                        borderSpacing: 0,
-                                        float: "left",
-                                      }}
-                                    >
-                                      <tbody>
-                                        <tr
-                                          style={{ borderCollapse: "collapse" }}
+                                    <tbody>
+                                      <tr
+                                        style={{ borderCollapse: "collapse" }}
+                                      >
+                                        <td
+                                          align="center"
+                                          valign="top"
+                                          style={{
+                                            padding: 0,
+                                            margin: 0,
+                                            width: 1400,
+                                          }}
                                         >
-                                          <td
-                                            className="es-m-p0r es-m-p20b"
-                                            align="center"
+                                          <table
+                                            cellPadding={0}
+                                            cellSpacing={0}
+                                            width="100%"
+                                            role="presentation"
                                             style={{
-                                              padding: 0,
-                                              margin: 0,
-                                              width: 247,
+                                              msoTableLspace: "0pt",
+                                              msoTableRspace: "0pt",
+                                              borderCollapse: "collapse",
+                                              borderSpacing: 0,
                                             }}
                                           >
-                                            <table
-                                              cellPadding={0}
-                                              cellSpacing={0}
-                                              width="100%"
-                                              role="presentation"
-                                              style={{
-                                                msoTableLspace: "0pt",
-                                                msoTableRspace: "0pt",
-                                                borderCollapse: "collapse",
-                                                borderSpacing: 0,
-                                              }}
-                                            >
-                                              <tbody>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    className="es-m-txt-l"
-                                                    align="left"
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                      paddingBottom: 10,
-                                                      paddingRight: 20,
-                                                    }}
-                                                  >
-                                                    <h2
-                                                      style={{
-                                                        margin: 0,
-                                                        lineHeight: 1,
-                                                        msoLineHeightRule:
-                                                          "exactly",
-                                                        fontFamily:
-                                                          'helvetica, "helvetica neue", arial, verdana, sans-serif',
-                                                        fontSize: 23,
-                                                        fontStyle: "normal",
-                                                        fontWeight: "normal",
-                                                        color: "#666666",
-                                                      }}
-                                                    >
-                                                      {this.props.dataCliente
-                                                        .ciudadela == "azul" ? (
-                                                        <h1>COSTA AZUL</h1>
-                                                      ) : (
-                                                        <h1>COSTA VERDE</h1>
-                                                      )}
-                                                    </h2>
-                                                  </td>
-                                                </tr>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                      paddingBottom: 5,
-                                                    }}
-                                                  >
-                                                    <table
-                                                      className="tablaPrint"
-                                                      role="presentation"
-                                                      style={{
-                                                        fontFamily: "Helvetica",
-                                                        width: "100%",
-                                                        color: "#666666",
-                                                        fontSize: 11,
-                                                        msoTableLspace: "0pt",
-                                                        msoTableRspace: "0pt",
-                                                        borderCollapse:
-                                                          "collapse",
-                                                        borderSpacing: 0,
-                                                      }}
-                                                    >
-                                                      <tbody>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <th>
-                                                            <b>UBICACION</b>
-                                                          </th>
-                                                          <th />
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Manzana
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            {
-                                                              this.props
-                                                                .dataCliente
-                                                                .manzana
-                                                            }
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Solar
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            {
-                                                              this.props
-                                                                .dataCliente
-                                                                .solar
-                                                            }
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Área de Terreno
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            {
-                                                              this.props
-                                                                .dataCliente
-                                                                .areaSolar
-                                                            }{" "}
-                                                            m2
-                                                          </td>
-                                                        </tr>
-                                                      </tbody>
-                                                    </table>
-                                                  </td>
-                                                </tr>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                    }}
-                                                  >
-                                                    <table
-                                                      className="tablaPrint"
-                                                      role="presentation"
-                                                      style={{
-                                                        fontFamily: "Helvetica",
-                                                        width: "100%",
-                                                        color: "#666666",
-                                                        fontSize: 11,
-                                                        msoTableLspace: "0pt",
-                                                        msoTableRspace: "0pt",
-                                                        borderCollapse:
-                                                          "collapse",
-                                                        borderSpacing: 0,
-                                                      }}
-                                                    >
-                                                      <tbody>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <th>
-                                                            <b>MODELO</b>
-                                                          </th>
-                                                          <th />
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Modelo
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            {
-                                                              this.props
-                                                                .dataCliente
-                                                                .modeloReal
-                                                            }
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Área de Construcción
-                                                            (m2)
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            {
-                                                              this.props
-                                                                .dataCliente
-                                                                .areaConstruccion
-                                                            }
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Fachada
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            {this.props.dataCliente.fachada.toUpperCase()}
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Cubierta de parqueo
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            {this.props.dataCliente.cubierta.toUpperCase()}
-                                                          </td>
-                                                        </tr>
-                                                      </tbody>
-                                                    </table>
-                                                  </td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </td>
-                                          <td
-                                            className="es-hidden"
-                                            style={{
-                                              padding: 0,
-                                              margin: 0,
-                                              width: 10,
-                                            }}
-                                          />
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                    {/*[if mso]></td><td style="width:259px" valign="top"><![endif]*/}
-                                    <table
-                                      cellPadding={0}
-                                      cellSpacing={0}
-                                      className="es-left"
-                                      align="left"
-                                      style={{
-                                        msoTableLspace: "0pt",
-                                        msoTableRspace: "0pt",
-                                        borderCollapse: "collapse",
-                                        borderSpacing: 0,
-                                        float: "left",
-                                      }}
-                                    >
-                                      <tbody>
-                                        <tr
-                                          style={{ borderCollapse: "collapse" }}
-                                        >
-                                          <td
-                                            className="es-m-p20b"
-                                            align="center"
-                                            style={{
-                                              padding: 0,
-                                              margin: 0,
-                                              width: 249,
-                                            }}
-                                          >
-                                            <table
-                                              cellPadding={0}
-                                              cellSpacing={0}
-                                              width="100%"
-                                              role="presentation"
-                                              style={{
-                                                msoTableLspace: "0pt",
-                                                msoTableRspace: "0pt",
-                                                borderCollapse: "collapse",
-                                                borderSpacing: 0,
-                                              }}
-                                            >
-                                              <tbody>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    align="center"
-                                                    height={39}
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                    }}
-                                                  />
-                                                </tr>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    align="left"
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                      fontSize: 0,
-                                                    }}
-                                                  >
-                                                    <img
-                                                      className="adapt-img"
-                                                      src={this.imprimirCasa()}
-                                                      alt="A"
-                                                      style={{
-                                                        display: "block",
-                                                        border: 0,
-                                                        outline: "none",
-                                                        marginTop:
-                                                          "8px !important",
-                                                        textDecoration: "none",
-                                                        msInterpolationMode:
-                                                          "bicubic",
-                                                      }}
-                                                      width={255}
-                                                      height={255}
-                                                    />
-                                                  </td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </td>
-                                          <td
-                                            className="es-hidden"
-                                            style={{
-                                              padding: 0,
-                                              margin: 0,
-                                              width: 10,
-                                            }}
-                                          />
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                    {/*[if mso]></td><td style="width:85px" valign="top"><![endif]*/}
-                                    <table
-                                      cellPadding={0}
-                                      cellSpacing={0}
-                                      className="es-left"
-                                      align="left"
-                                      style={{
-                                        msoTableLspace: "0pt",
-                                        msoTableRspace: "0pt",
-                                        borderCollapse: "collapse",
-                                        borderSpacing: 0,
-                                        float: "left",
-                                      }}
-                                    >
-                                      <tbody>
-                                        <tr
-                                          style={{ borderCollapse: "collapse" }}
-                                        >
-                                          <td
-                                            className="es-m-p20b"
-                                            align="center"
-                                            style={{
-                                              padding: 0,
-                                              margin: 0,
-                                              width: 85,
-                                            }}
-                                          >
-                                            <table
-                                              cellPadding={0}
-                                              cellSpacing={0}
-                                              width="100%"
-                                              role="presentation"
-                                              style={{
-                                                msoTableLspace: "0pt",
-                                                msoTableRspace: "0pt",
-                                                borderCollapse: "collapse",
-                                                borderSpacing: 0,
-                                              }}
-                                            >
-                                              <tbody>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    align="center"
-                                                    height={150}
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                    }}
-                                                  />
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                    {/*[if mso]></td><td style="width:10px"></td><td style="width:249px" valign="top"><![endif]*/}
-                                    <table
-                                      cellPadding={0}
-                                      cellSpacing={0}
-                                      className="es-right"
-                                      align="right"
-                                      style={{
-                                        msoTableLspace: "0pt",
-                                        msoTableRspace: "0pt",
-                                        borderCollapse: "collapse",
-                                        borderSpacing: 0,
-                                        float: "right",
-                                      }}
-                                    >
-                                      <tbody>
-                                        <tr
-                                          style={{ borderCollapse: "collapse" }}
-                                        >
-                                          <td
-                                            align="center"
-                                            style={{
-                                              padding: 0,
-                                              margin: 0,
-                                              width: 249,
-                                            }}
-                                          >
-                                            <table
-                                              cellPadding={0}
-                                              cellSpacing={0}
-                                              width="100%"
-                                              role="presentation"
-                                              style={{
-                                                msoTableLspace: "0pt",
-                                                msoTableRspace: "0pt",
-                                                borderCollapse: "collapse",
-                                                borderSpacing: 0,
-                                              }}
-                                            >
-                                              <tbody>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    align="center"
-                                                    height={21}
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                    }}
-                                                  />
-                                                </tr>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                      paddingBottom: 5,
-                                                    }}
-                                                  >
-                                                    <table
-                                                      className="tablaPrint"
-                                                      role="presentation"
-                                                      style={{
-                                                        fontFamily: "Helvetica",
-                                                        width: "100%",
-                                                        color: "#666666",
-                                                        fontSize: 11,
-                                                        msoTableLspace: "0pt",
-                                                        msoTableRspace: "0pt",
-                                                        borderCollapse:
-                                                          "collapse",
-                                                        borderSpacing: 0,
-                                                      }}
-                                                    >
-                                                      <tbody>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Precio Lista
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            {this.props.dataGeneralFinanciamiento.precioLista.toLocaleString(
-                                                              "en"
-                                                            )}
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Descuento
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            {this.props.dataGeneralFinanciamiento.descuento.toLocaleString(
-                                                              "en"
-                                                            )}
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Precio Final
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            <b>
-                                                              {this.props.dataGeneralFinanciamiento.precioFinal.toLocaleString(
-                                                                "en"
-                                                              )}
-                                                            </b>
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Cuota de Entrada 30%
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            {this.props.dataGeneralFinanciamiento.entrada.toLocaleString(
-                                                              "en"
-                                                            )}
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Pago contra Entrega
-                                                            70%
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            {this.props.dataGeneralFinanciamiento.entrega.toLocaleString(
-                                                              "en"
-                                                            )}
-                                                          </td>
-                                                        </tr>
-                                                      </tbody>
-                                                    </table>
-                                                  </td>
-                                                </tr>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                    }}
-                                                  >
-                                                    <table
-                                                      className="tablaPrint"
-                                                      role="presentation"
-                                                      style={{
-                                                        fontFamily: "Helvetica",
-                                                        width: "100%",
-                                                        color: "#666666",
-                                                        fontSize: 11,
-                                                        msoTableLspace: "0pt",
-                                                        msoTableRspace: "0pt",
-                                                        borderCollapse:
-                                                          "collapse",
-                                                        borderSpacing: 0,
-                                                      }}
-                                                    >
-                                                      <tbody>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <th>
-                                                            <b>
-                                                              FINANCIAMIENTO DE
-                                                              ENTRADA
-                                                            </b>
-                                                          </th>
-                                                          <th />
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Pago a la firma 4%
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            {this.props.dataGeneralFinanciamiento.firma.toLocaleString(
-                                                              "en"
-                                                            )}
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Saldo a financiar
-                                                            26%
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            {this.props.dataGeneralFinanciamiento.financiar.toLocaleString(
-                                                              "en"
-                                                            )}
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Financiamiento
-                                                            (meses)
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            {this.props.dataGeneralFinanciamiento.cuotas.toLocaleString(
-                                                              "en"
-                                                            )}
-                                                          </td>
-                                                        </tr>
-                                                      </tbody>
-                                                    </table>
-                                                  </td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                    {/*[if mso]></td></tr></table><![endif]*/}
-                                  </td>
-                                </tr>
-                                <tr style={{ borderCollapse: "collapse" }}>
-                                  <td
-                                    style={{
-                                      padding: 0,
-                                      margin: 0,
-                                      paddingTop: 50,
-                                      paddingLeft: 20,
-                                      paddingRight: 20,
-                                      backgroundColor: "#fff",
-                                    }}
-                                    bgcolor="#fff"
-                                    align="left"
-                                  >
-                                    <table
-                                      width="100%"
-                                      cellSpacing={0}
-                                      cellPadding={0}
-                                      style={{
-                                        msoTableLspace: "0pt",
-                                        msoTableRspace: "0pt",
-                                        borderCollapse: "collapse",
-                                        borderSpacing: 0,
-                                      }}
-                                    >
-                                      <tbody>
-                                        <tr
-                                          style={{ borderCollapse: "collapse" }}
-                                        >
-                                          <td
-                                            valign="top"
-                                            align="center"
-                                            style={{
-                                              padding: 0,
-                                              margin: 0,
-                                              width: 860,
-                                            }}
-                                          >
-                                            <table
-                                              style={{
-                                                msoTableLspace: "0pt",
-                                                msoTableRspace: "0pt",
-                                                borderCollapse: "separate",
-                                                borderSpacing: 0,
-                                                borderColor: "#EFEFEF",
-                                                borderStyle: "solid",
-                                                borderWidth: 1,
-                                                borderRadius: 3,
-                                                backgroundColor: "#FFFFFF",
-                                              }}
-                                              width="100%"
-                                              cellSpacing={0}
-                                              cellPadding={0}
-                                              bgcolor="#ffffff"
-                                              role="presentation"
-                                            >
-                                              <tbody>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                    }}
-                                                  >
-                                                    <table
-                                                      className="tablaPrintGrande"
-                                                      role="presentation"
-                                                      style={{
-                                                        fontFamily: "Helvetica",
-                                                        width: "100%",
-                                                        color: "#666666",
-                                                        fontSize: 11,
-                                                        msoTableLspace: "0pt",
-                                                        msoTableRspace: "0pt",
-                                                        borderCollapse:
-                                                          "collapse",
-                                                        borderSpacing: 0,
-                                                      }}
-                                                    >
-                                                      <thead>
-                                                        <tr
-                                                          style={{
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <th
-                                                            style={{
-                                                              border:
-                                                                "3px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding:
-                                                                "8px !important",
-                                                            }}
-                                                          >
-                                                            <b>No.</b>
-                                                          </th>
-                                                          <th
-                                                            style={{
-                                                              border:
-                                                                "3px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding:
-                                                                "8px !important",
-                                                            }}
-                                                          >
-                                                            <b>No.</b>
-                                                          </th>
-                                                          <th
-                                                            style={{
-                                                              border:
-                                                                "3px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding:
-                                                                "8px !important",
-                                                            }}
-                                                          >
-                                                            <b>FECHA</b>
-                                                          </th>
-                                                          <th
-                                                            style={{
-                                                              border:
-                                                                "3px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding:
-                                                                "8px !important",
-                                                            }}
-                                                          >
-                                                            <b>SALDO CAPITAL</b>
-                                                          </th>
-                                                          <th
-                                                            style={{
-                                                              border:
-                                                                "3px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding:
-                                                                "8px !important",
-                                                            }}
-                                                          >
-                                                            <b>AB. CAPITAL</b>
-                                                          </th>
-                                                          <th
-                                                            style={{
-                                                              border:
-                                                                "3px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding:
-                                                                "8px !important",
-                                                            }}
-                                                          >
-                                                            <b>INTERES</b>
-                                                          </th>
-                                                          <th
-                                                            style={{
-                                                              border:
-                                                                "3px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding:
-                                                                "8px !important",
-                                                            }}
-                                                          >
-                                                            <b>CUOTA</b>
-                                                          </th>
-                                                        </tr>
-                                                      </thead>
-                                                      <tbody>
-                                                        {this.props.dataFinanciamiento.map(
-                                                          (row) => {
-                                                            return (
-                                                              <tr
-                                                                style={{
-                                                                  borderCollapse:
-                                                                    "collapse",
-                                                                }}
-                                                              >
-                                                                <td
-                                                                  style={{
-                                                                    textAlign:
-                                                                      "left",
-                                                                    padding: 0,
-                                                                    margin: 0,
-                                                                  }}
-                                                                >
-                                                                  {row.valor}
-                                                                </td>
-                                                                <td
-                                                                  style={{
-                                                                    textAlign:
-                                                                      "left",
-                                                                    padding: 0,
-                                                                    margin: 0,
-                                                                  }}
-                                                                >
-                                                                  0
-                                                                </td>
-                                                                <td
-                                                                  style={{
-                                                                    textAlign:
-                                                                      "left",
-                                                                    padding: 0,
-                                                                    margin: 0,
-                                                                  }}
-                                                                >
-                                                                  {month[
-                                                                    row.mesTemp
-                                                                  ] +
-                                                                    " " +
-                                                                    row.anoInicial}
-                                                                </td>
-                                                                <td
-                                                                  style={{
-                                                                    textAlign:
-                                                                      "left",
-                                                                    padding: 0,
-                                                                    margin: 0,
-                                                                  }}
-                                                                >
-                                                                  ${" "}
-                                                                  {row.total.toLocaleString(
-                                                                    "en"
-                                                                  )}
-                                                                </td>
-                                                                <td
-                                                                  style={{
-                                                                    textAlign:
-                                                                      "left",
-                                                                    padding: 0,
-                                                                    margin: 0,
-                                                                  }}
-                                                                >
-                                                                  ${" "}
-                                                                  {row.cuota.toLocaleString(
-                                                                    "en"
-                                                                  )}
-                                                                </td>
-
-                                                                <td
-                                                                  style={{
-                                                                    textAlign:
-                                                                      "left",
-                                                                    padding: 0,
-                                                                    margin: 0,
-                                                                  }}
-                                                                >
-                                                                  $ 0
-                                                                </td>
-                                                                <td
-                                                                  style={{
-                                                                    textAlign:
-                                                                      "left",
-                                                                    padding: 0,
-                                                                    margin: 0,
-                                                                  }}
-                                                                >
-                                                                  ${" "}
-                                                                  {row.cuota.toLocaleString(
-                                                                    "en"
-                                                                  )}
-                                                                </td>
-                                                              </tr>
-                                                            );
-                                                          }
-                                                        )}
-                                                      </tbody>
-                                                      <tfoot>
-                                                        <tr
-                                                          style={{
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          />
-                                                          <td
-                                                            style={{
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          />
-                                                          <td
-                                                            style={{
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          />
-                                                          <td
-                                                            style={{
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          />
-                                                          <td
-                                                            style={{
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            <b>
-                                                              ${" "}
-                                                              {this.obtenerTotal()}
-                                                            </b>
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            <b>0</b>
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            <b>
-                                                              ${" "}
-                                                              {this.obtenerTotal()}
-                                                            </b>
-                                                          </td>
-                                                        </tr>
-                                                      </tfoot>
-                                                    </table>
-                                                  </td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <br />
-                    <br />
-                    <br />
-                    <table
-                      className="es-content"
-                      cellSpacing={0}
-                      cellPadding={0}
-                      align="center"
-                      style={{
-                        msoTableLspace: "0pt",
-                        msoTableRspace: "0pt",
-                        borderCollapse: "collapse",
-                        borderSpacing: 0,
-                        tableLayout: "fixed !important",
-                        width: "100%",
-                      }}
-                    >
-                      <tbody>
-                        <tr style={{ borderCollapse: "collapse" }}>
-                          <td align="center" style={{ padding: 0, margin: 0 }}>
-                            <table
-                              className="es-content-body"
-                              style={{
-                                msoTableLspace: "0pt",
-                                msoTableRspace: "0pt",
-                                borderCollapse: "collapse",
-                                borderSpacing: 0,
-                                backgroundColor: "#fff",
-                                width: "100%",
-                              }}
-                              cellSpacing={0}
-                              cellPadding={0}
-                              bgcolor="#fff"
-                              align="center"
-                            >
-                              <tbody>
-                                <tr style={{ borderCollapse: "collapse" }}>
-                                  <td
-                                    align="left"
-                                    style={{
-                                      padding: 0,
-                                      margin: 0,
-                                      paddingTop: 100,
-                                      paddingLeft: 20,
-                                      paddingRight: 20,
-                                    }}
-                                  >
-                                    {/*[if mso]><table style="width:860px" cellpadding="0" cellspacing="0"><tr><td style="width:536px" valign="top"><![endif]*/}
-                                    <table
-                                      cellPadding={0}
-                                      cellSpacing={0}
-                                      className="es-left"
-                                      align="left"
-                                      style={{
-                                        msoTableLspace: "0pt",
-                                        msoTableRspace: "0pt",
-                                        borderCollapse: "collapse",
-                                        borderSpacing: 0,
-                                        float: "left",
-                                      }}
-                                    >
-                                      <tbody>
-                                        <tr
-                                          style={{ borderCollapse: "collapse" }}
-                                        >
-                                          <td
-                                            className="es-m-p20b"
-                                            align="left"
-                                            style={{
-                                              padding: 0,
-                                              margin: 0,
-                                              width: 536,
-                                            }}
-                                          >
-                                            <table
-                                              cellPadding={0}
-                                              cellSpacing={0}
-                                              width="100%"
-                                              role="presentation"
-                                              style={{
-                                                msoTableLspace: "0pt",
-                                                msoTableRspace: "0pt",
-                                                borderCollapse: "collapse",
-                                                borderSpacing: 0,
-                                              }}
-                                            >
-                                              <tbody>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    align="center"
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                      fontSize: 0,
-                                                    }}
-                                                  >
-                                                    <img
-                                                      className="adapt-img"
-                                                      src={`./images/planos/CASA-${this.props.dataCliente.modeloReal}.jpg`}
-                                                      alt="A"
-                                                      // src={`./images/planos/CASA-${this.props.dataCliente.modeloReal}.jpg`}
-                                                      style={{
-                                                        display: "block",
-                                                        border: 0,
-                                                        outline: "none",
-                                                        textDecoration: "none",
-                                                        msInterpolationMode:
-                                                          "bicubic",
-                                                      }}
-                                                      width={536}
-                                                      height={675}
-                                                    />
-                                                  </td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                    {/*[if mso]></td><td style="width:15px"></td><td style="width:309px" valign="top"><![endif]*/}
-                                    <table
-                                      cellPadding={0}
-                                      cellSpacing={0}
-                                      className="es-right"
-                                      align="right"
-                                      style={{
-                                        msoTableLspace: "0pt",
-                                        msoTableRspace: "0pt",
-                                        borderCollapse: "collapse",
-                                        borderSpacing: 0,
-                                        float: "right",
-                                      }}
-                                    >
-                                      <tbody>
-                                        <tr
-                                          style={{ borderCollapse: "collapse" }}
-                                        >
-                                          <td
-                                            align="left"
-                                            style={{
-                                              padding: 0,
-                                              margin: 0,
-                                              width: 309,
-                                            }}
-                                          >
-                                            <table
-                                              cellPadding={0}
-                                              cellSpacing={0}
-                                              width="100%"
-                                              role="presentation"
-                                              style={{
-                                                msoTableLspace: "0pt",
-                                                msoTableRspace: "0pt",
-                                                borderCollapse: "collapse",
-                                                borderSpacing: 0,
-                                              }}
-                                            >
-                                              <tbody>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    align="center"
-                                                    height={22}
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                    }}
-                                                  />
-                                                </tr>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                    }}
-                                                  >
-                                                    <h4
-                                                      style={{
-                                                        margin: 0,
-                                                        lineHeight: "120%",
-                                                        msoLineHeightRule:
-                                                          "exactly",
-                                                        fontFamily:
-                                                          'roboto, "helvetica neue", helvetica, arial, sans-serif',
-                                                      }}
-                                                    >
-                                                      <b>
-                                                        Tipo{" "}
-                                                        {
-                                                          this.props.dataCliente
-                                                            .modeloReal
-                                                        }
-                                                      </b>
-                                                    </h4>
-                                                    <br />
-                                                    <table
-                                                      className="tablaPrint"
-                                                      role="presentation"
-                                                      style={{
-                                                        fontFamily: "Helvetica",
-                                                        width: "100%",
-                                                        color: "#666666",
-                                                        fontSize: 11,
-                                                        msoTableLspace: "0pt",
-                                                        msoTableRspace: "0pt",
-                                                        borderCollapse:
-                                                          "collapse",
-                                                        borderSpacing: 0,
-                                                      }}
-                                                    >
-                                                      <tbody>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <th>
-                                                            <b>
-                                                              CUADRO DE AREAS
-                                                            </b>
-                                                          </th>
-                                                          <th />
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Planta Baja
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            {
-                                                              this.modeloInfo
-                                                                .areas
-                                                                .plantaBaja
-                                                            }{" "}
-                                                            m2
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Planta Alta
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            {
-                                                              this.modeloInfo
-                                                                .areas
-                                                                .plantaAlta
-                                                            }{" "}
-                                                            m2
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Total
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            {
-                                                              this.modeloInfo
-                                                                .areas.total
-                                                            }{" "}
-                                                            m2
-                                                          </td>
-                                                        </tr>
-                                                      </tbody>
-                                                    </table>
-                                                  </td>
-                                                </tr>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    align="center"
-                                                    height={10}
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                    }}
-                                                  />
-                                                </tr>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                    }}
-                                                  >
-                                                    <table
-                                                      className="tablaPrint"
-                                                      role="presentation"
-                                                      style={{
-                                                        fontFamily: "Helvetica",
-                                                        width: "100%",
-                                                        color: "#666666",
-                                                        fontSize: 11,
-                                                        msoTableLspace: "0pt",
-                                                        msoTableRspace: "0pt",
-                                                        borderCollapse:
-                                                          "collapse",
-                                                        borderSpacing: 0,
-                                                      }}
-                                                    >
-                                                      <tbody>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <th colSpan={2}>
-                                                            <b>
-                                                              ESPECIFICACIONES
-                                                              TÉCNICAS
-                                                            </b>
-                                                          </th>
-                                                          <th />
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Tumbados
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            De gypsum o similar.
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Closeths
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Módulo de cajones y
-                                                            repisas, con
-                                                            colgadores de ropa y
-                                                            puertas.
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Baños
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Anaqueles altos y
-                                                            bajos con puertas y
-                                                            una repisa.
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Muebles de Cocina
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Anaqueles altos y
-                                                            bajos con puertas y
-                                                            una repisa.
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Recubrimiento de
-                                                            Cocina
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Granito importado.
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Lavaplatos
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            De acero inoxidable
-                                                            de dos pozos.
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style={{
-                                                            border:
-                                                              "1px solid #DDDDDD",
-                                                            textAlign: "left",
-                                                            padding: 12,
-                                                            borderCollapse:
-                                                              "collapse",
-                                                          }}
-                                                        >
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Recubrimiento de
-                                                            Pisos
-                                                          </td>
-                                                          <td
-                                                            style={{
-                                                              border:
-                                                                "1px solid #DDDDDD",
-                                                              textAlign: "left",
-                                                              padding: 0,
-                                                              margin: 0,
-                                                            }}
-                                                          >
-                                                            Piso interior Y
-                                                            escaleras con
-                                                            porcelanato.
-                                                          </td>
-                                                        </tr>
-                                                      </tbody>
-                                                    </table>
-                                                  </td>
-                                                </tr>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    align="center"
-                                                    height={10}
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                    }}
-                                                  />
-                                                </tr>
-                                                <tr
-                                                  style={{
-                                                    borderCollapse: "collapse",
-                                                  }}
-                                                >
-                                                  <td
-                                                    align="left"
-                                                    style={{
-                                                      padding: 0,
-                                                      margin: 0,
-                                                    }}
-                                                  >
-                                                    <p
-                                                      style={{
-                                                        margin: 0,
-                                                        WebkitTextSizeAdjust:
-                                                          "none",
-                                                        msTextSizeAdjust:
-                                                          "none",
-                                                        msoLineHeightRule:
-                                                          "exactly",
-                                                        fontSize: 14,
-                                                        fontFamily:
-                                                          'helvetica, "helvetica neue", arial, verdana, sans-serif',
-                                                        lineHeight: 1.5,
-                                                        color: "#666666",
-                                                        marginTop: "10px",
-                                                      }}
-                                                    >
-                                                      {this.modeloInfo.detalle.extras.map(
-                                                        (value) => {
-                                                          return (
-                                                            <div>
-                                                              - {value}
-                                                              <br />
-                                                            </div>
-                                                          );
-                                                        }
-                                                      )}
-                                                    </p>
-                                                  </td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                    {/*[if mso]></td></tr></table><![endif]*/}
-                                    <table
-                                      className="es-content"
-                                      cellSpacing={0}
-                                      cellPadding={0}
-                                      style={{
-                                        msoTableLspace: "0pt",
-                                        msoTableRspace: "0pt",
-                                        borderCollapse: "collapse",
-                                        borderSpacing: 0,
-                                        tableLayout: "fixed !important",
-                                        width: "100%",
-                                      }}
-                                    >
-                                      <tbody>
-                                        <tr
-                                          style={{ borderCollapse: "collapse" }}
-                                        >
-                                          <td style={{ padding: 0, margin: 0 }}>
-                                            <tr
-                                              style={{
-                                                borderCollapse: "collapse",
-                                              }}
-                                            >
-                                              <td
+                                            <tbody>
+                                              <tr
                                                 style={{
-                                                  padding: 0,
-                                                  margin: 0,
-                                                  paddingTop: 10,
-                                                  paddingLeft: 0,
-                                                  paddingRight: 20,
-                                                  backgroundColor: "#fff",
+                                                  borderCollapse: "collapse",
                                                 }}
-                                                bgcolor="#fff"
-                                                align="left"
                                               >
-                                                <br />
-                                                <h3>
-                                                  <b>
-                                                    Cuotas de Crédito
-                                                    Hipotecario
-                                                  </b>
-                                                </h3>
-                                                <table
-                                                  width="52%"
-                                                  cellSpacing={0}
-                                                  cellPadding={0}
+                                                <td
                                                   style={{
-                                                    msoTableLspace: "0pt",
-                                                    msoTableRspace: "0pt",
-                                                    borderCollapse: "collapse",
-                                                    borderSpacing: 0,
+                                                    padding: 0,
+                                                    margin: 0,
+                                                    fontSize: 0,
                                                   }}
                                                 >
-                                                  <tbody>
-                                                    <tr
-                                                      style={{
-                                                        borderCollapse:
-                                                          "collapse",
-                                                      }}
-                                                    >
-                                                      <td
-                                                        valign="top"
+                                                  {" "}
+                                                  .container {"{"} position:
+                                                  relative; text-align: center;
+                                                  color: white; {"}"}{" "}
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                              <tr style={{ borderCollapse: "collapse" }}>
+                                <td
+                                  align="left"
+                                  style={{
+                                    padding: 0,
+                                    margin: 0,
+                                    paddingLeft: 20,
+                                    paddingRight: 20,
+                                  }}
+                                >
+                                  <table
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    width="100%"
+                                    style={{
+                                      msoTableLspace: "0pt",
+                                      msoTableRspace: "0pt",
+                                      borderCollapse: "collapse",
+                                      borderSpacing: 0,
+                                    }}
+                                  >
+                                    <tbody>
+                                      <tr
+                                        style={{ borderCollapse: "collapse" }}
+                                      >
+                                        <td
+                                          align="center"
+                                          valign="top"
+                                          style={{
+                                            padding: 0,
+                                            margin: 0,
+                                            width: 860,
+                                          }}
+                                        >
+                                          <table
+                                            cellPadding={0}
+                                            cellSpacing={0}
+                                            width="100%"
+                                            role="presentation"
+                                            style={{
+                                              msoTableLspace: "0pt",
+                                              msoTableRspace: "0pt",
+                                              borderCollapse: "collapse",
+                                              borderSpacing: 0,
+                                            }}
+                                          >
+                                            <tbody>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="center"
+                                                  height={6}
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                />
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table
+                    className="es-content"
+                    cellSpacing={0}
+                    cellPadding={0}
+                    align="center"
+                    style={{
+                      msoTableLspace: "0pt",
+                      msoTableRspace: "0pt",
+                      borderCollapse: "collapse",
+                      borderSpacing: 0,
+                      tableLayout: "fixed !important",
+                      width: "100%",
+                    }}
+                  >
+                    <tbody>
+                      <tr style={{ borderCollapse: "collapse" }}>
+                        <td align="center" style={{ padding: 0, margin: 0 }}>
+                          <table
+                            className="es-content-body"
+                            style={{
+                              msoTableLspace: "0pt",
+                              msoTableRspace: "0pt",
+                              borderCollapse: "collapse",
+                              borderSpacing: 0,
+                              backgroundColor: "transparent",
+                              width: 1400,
+                            }}
+                            cellSpacing={0}
+                            cellPadding={0}
+                            align="center"
+                          >
+                            <tbody>
+                              <tr style={{ borderCollapse: "collapse" }}>
+                                <td
+                                  align="left"
+                                  style={{
+                                    padding: 0,
+                                    margin: 0,
+                                    paddingLeft: 15,
+                                    paddingRight: 20,
+                                  }}
+                                >
+                                  <table
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    width="100%"
+                                    style={{
+                                      msoTableLspace: "0pt",
+                                      msoTableRspace: "0pt",
+                                      borderCollapse: "collapse",
+                                      borderSpacing: 0,
+                                    }}
+                                  >
+                                    <tbody>
+                                      <tr
+                                        style={{ borderCollapse: "collapse" }}
+                                      >
+                                        <td
+                                          align="center"
+                                          valign="top"
+                                          style={{
+                                            padding: 0,
+                                            margin: 0,
+                                            width: 865,
+                                          }}
+                                        >
+                                          <table
+                                            cellPadding={0}
+                                            cellSpacing={0}
+                                            width="100%"
+                                            role="presentation"
+                                            style={{
+                                              msoTableLspace: "0pt",
+                                              msoTableRspace: "0pt",
+                                              borderCollapse: "collapse",
+                                              borderSpacing: 0,
+                                            }}
+                                          >
+                                            <tbody>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  className="es-m-txt-l"
+                                                  align="left"
+                                                  bgcolor="#af8447"
+                                                  style={{
+                                                    margin: 0,
+                                                    paddingTop: 10,
+                                                    paddingBottom: 10,
+                                                    paddingLeft: 10,
+                                                    paddingRight: 20,
+                                                  }}
+                                                >
+                                                  <h2
+                                                    style={{
+                                                      margin: 0,
+                                                      lineHeight: 1,
+                                                      msoLineHeightRule:
+                                                        "exactly",
+                                                      fontFamily:
+                                                        'helvetica, "helvetica neue", arial, verdana, sans-serif',
+                                                      fontSize: 22,
+                                                      fontStyle: "normal",
+                                                      fontWeight: "normal",
+                                                      color: "#FFFFFF",
+                                                    }}
+                                                  >
+                                                    PROYECTO LA COSTA -{" "}
+                                                    {this.props.dataCliente
+                                                      .ciudadela == "azul"
+                                                      ? "COSTA AZUL"
+                                                      : "COSTA VERDE"}
+                                                  </h2>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                              <tr style={{ borderCollapse: "collapse" }}>
+                                <td
+                                  align="left"
+                                  style={{
+                                    padding: 0,
+                                    margin: 0,
+                                    paddingTop: 20,
+                                    paddingLeft: 20,
+                                    paddingRight: 20,
+                                  }}
+                                >
+                                  {/*[if mso]><table style="width:860px" cellpadding="0" cellspacing="0"><tr><td style="width:184px" valign="top"><![endif]*/}
+                                  <table
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    className="es-left"
+                                    align="left"
+                                    style={{
+                                      msoTableLspace: "0pt",
+                                      msoTableRspace: "0pt",
+                                      borderCollapse: "collapse",
+                                      borderSpacing: 0,
+                                      float: "left",
+                                    }}
+                                  >
+                                    <tbody>
+                                      <tr
+                                        style={{
+                                          borderCollapse: "collapse",
+                                          fontSize: "20px !important",
+                                        }}
+                                      >
+                                        <td
+                                          className="es-m-p0r es-m-p20b"
+                                          align="center"
+                                          style={{
+                                            padding: 0,
+                                            margin: 0,
+                                            width: 290,
+                                          }}
+                                        >
+                                          <table
+                                            cellPadding={0}
+                                            cellSpacing={0}
+                                            width="100%"
+                                            role="presentation"
+                                            style={{
+                                              msoTableLspace: "0pt",
+                                              msoTableRspace: "0pt",
+                                              borderCollapse: "collapse",
+                                              borderSpacing: 0,
+                                            }}
+                                          >
+                                            <tbody>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="left"
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                >
+                                                  <p
+                                                    style={{
+                                                      margin: 0,
+                                                      WebkitTextSizeAdjust:
+                                                        "none",
+                                                      msTextSizeAdjust: "none",
+                                                      msoLineHeightRule:
+                                                        "exactly",
+                                                      fontSize: 14,
+                                                      fontFamily:
+                                                        'helvetica, "helvetica neue", arial, verdana, sans-serif',
+                                                      lineHeight: 1.5,
+                                                      color: "#333333",
+                                                    }}
+                                                  >
+                                                    <strong>
+                                                      <u>UBICACIÓN</u>
+                                                      <br />
+                                                      Manzana
+                                                      <br />
+                                                      Solar
+                                                      <br />
+                                                      Área de Terreno
+                                                    </strong>
+                                                  </p>
+                                                </td>
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="center"
+                                                  height={40}
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                />
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="left"
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                >
+                                                  <p
+                                                    style={{
+                                                      margin: 0,
+                                                      WebkitTextSizeAdjust:
+                                                        "none",
+                                                      msTextSizeAdjust: "none",
+                                                      msoLineHeightRule:
+                                                        "exactly",
+                                                      fontSize: 14,
+                                                      fontFamily:
+                                                        'helvetica, "helvetica neue", arial, verdana, sans-serif',
+                                                      lineHeight: 1.5,
+                                                      color: "#333333",
+                                                    }}
+                                                  >
+                                                    <strong>
+                                                      <u>MODELO</u>
+                                                      <br />
+                                                      Modelo
+                                                      <br />
+                                                      Área de Contrucción (m2)
+                                                      <br />
+                                                      Fachada
+                                                      <br />
+                                                      Cubierta de parqueo
+                                                    </strong>
+                                                  </p>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                        <td
+                                          className="es-hidden"
+                                          style={{
+                                            padding: 0,
+                                            margin: 0,
+                                            width: 20,
+                                          }}
+                                        />
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  {/*[if mso]></td><td style="width:124px" valign="top"><![endif]*/}
+                                  <table
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    className="es-left"
+                                    align="left"
+                                    style={{
+                                      msoTableLspace: "0pt",
+                                      msoTableRspace: "0pt",
+                                      borderCollapse: "collapse",
+                                      borderSpacing: 0,
+                                      float: "left",
+                                    }}
+                                  >
+                                    <tbody>
+                                      <tr
+                                        style={{ borderCollapse: "collapse" }}
+                                      >
+                                        <td
+                                          className="es-m-p20b"
+                                          align="center"
+                                          style={{
+                                            padding: 0,
+                                            margin: 0,
+                                            width: 104,
+                                          }}
+                                        >
+                                          <table
+                                            cellPadding={0}
+                                            cellSpacing={0}
+                                            width="100%"
+                                            role="presentation"
+                                            style={{
+                                              msoTableLspace: "0pt",
+                                              msoTableRspace: "0pt",
+                                              borderCollapse: "collapse",
+                                              borderSpacing: 0,
+                                            }}
+                                          >
+                                            <tbody>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="left"
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                >
+                                                  <p
+                                                    style={{
+                                                      margin: 0,
+                                                      WebkitTextSizeAdjust:
+                                                        "none",
+                                                      msTextSizeAdjust: "none",
+                                                      msoLineHeightRule:
+                                                        "exactly",
+                                                      fontSize: 14,
+                                                      fontFamily:
+                                                        'helvetica, "helvetica neue", arial, verdana, sans-serif',
+                                                      lineHeight: 1.5,
+                                                      color: "#333333",
+                                                    }}
+                                                  >
+                                                    <br />
+                                                    {
+                                                      this.props.dataCliente
+                                                        .manzana
+                                                    }
+                                                    <br />
+                                                    {
+                                                      this.props.dataCliente
+                                                        .solar
+                                                    }
+                                                    <br />
+                                                    {
+                                                      this.props.dataCliente
+                                                        .areaSolar
+                                                    }{" "}
+                                                    m2
+                                                  </p>
+                                                </td>
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="center"
+                                                  height={40}
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                />
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="left"
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                >
+                                                  <p
+                                                    style={{
+                                                      margin: 0,
+                                                      WebkitTextSizeAdjust:
+                                                        "none",
+                                                      msTextSizeAdjust: "none",
+                                                      msoLineHeightRule:
+                                                        "exactly",
+                                                      fontSize: 14,
+                                                      fontFamily:
+                                                        'helvetica, "helvetica neue", arial, verdana, sans-serif',
+                                                      lineHeight: 1.5,
+                                                      color: "#333333",
+                                                    }}
+                                                  >
+                                                    <br />
+                                                    {
+                                                      this.props.dataCliente
+                                                        .modeloReal
+                                                    }
+                                                    <br />
+                                                    {
+                                                      this.props.dataCliente
+                                                        .areaConstruccion
+                                                    }
+                                                    <br />
+                                                    {this.props.dataCliente.fachada.toUpperCase()}
+                                                    <br />
+                                                    {this.props.dataCliente.cubierta.toUpperCase()}
+                                                    <br />
+                                                  </p>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                        <td
+                                          className="es-hidden"
+                                          style={{
+                                            padding: 0,
+                                            margin: 0,
+                                            width: 20,
+                                          }}
+                                        />
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  {/*[if mso]></td><td style="width:240px" valign="top"><![endif]*/}
+                                  <table
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    className="es-left"
+                                    align="left"
+                                    style={{
+                                      msoTableLspace: "0pt",
+                                      msoTableRspace: "0pt",
+                                      borderCollapse: "collapse",
+                                      borderSpacing: 0,
+                                      float: "left",
+                                    }}
+                                    width={420}
+                                  >
+                                    <tbody>
+                                      <tr
+                                        style={{ borderCollapse: "collapse" }}
+                                      >
+                                        <td
+                                          className="es-m-p20b"
+                                          align="center"
+                                          style={{
+                                            padding: 0,
+                                            margin: 0,
+                                            width: 220,
+                                          }}
+                                        >
+                                          <table
+                                            cellPadding={0}
+                                            cellSpacing={0}
+                                            width={420}
+                                            role="presentation"
+                                            style={{
+                                              msoTableLspace: "0pt",
+                                              msoTableRspace: "0pt",
+                                              borderCollapse: "collapse",
+                                              borderSpacing: 0,
+                                            }}
+                                          >
+                                            <tbody>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="left"
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                >
+                                                  <p
+                                                    style={{
+                                                      margin: 0,
+                                                      WebkitTextSizeAdjust:
+                                                        "none",
+                                                      msTextSizeAdjust: "none",
+                                                      msoLineHeightRule:
+                                                        "exactly",
+                                                      fontSize: 14,
+                                                      fontFamily:
+                                                        'helvetica, "helvetica neue", arial, verdana, sans-serif',
+                                                      lineHeight: 1.5,
+                                                      color: "#333333",
+                                                    }}
+                                                  >
+                                                    <strong>
+                                                      Precio Lista
+                                                      <br />
+                                                      Descuento
+                                                      <br />
+                                                      Precio Final
+                                                      <br />
+                                                      Financiamiento de Entrada
+                                                      30%
+                                                      <br />
+                                                      Pago contra entrega 70%
+                                                    </strong>
+                                                  </p>
+                                                </td>
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="center"
+                                                  height={40}
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                />
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="left"
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                >
+                                                  <p
+                                                    style={{
+                                                      margin: 0,
+                                                      WebkitTextSizeAdjust:
+                                                        "none",
+                                                      msTextSizeAdjust: "none",
+                                                      msoLineHeightRule:
+                                                        "exactly",
+                                                      fontSize: 14,
+                                                      fontFamily:
+                                                        'helvetica, "helvetica neue", arial, verdana, sans-serif',
+                                                      lineHeight: 1.5,
+                                                      color: "#333333",
+                                                    }}
+                                                  >
+                                                    <strong>
+                                                      <u>
+                                                        FINANCIAMIENTO DE
+                                                        ENTRADA
+                                                      </u>
+                                                      <br />
+                                                      Pago a la Firma 4%
+                                                      <br />
+                                                      Saldo a Financiar 26%
+                                                      <br />
+                                                      Financiamiento (meses)
+                                                    </strong>
+                                                  </p>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                        <td
+                                          className="es-hidden"
+                                          style={{
+                                            padding: 0,
+                                            margin: 0,
+                                            width: 20,
+                                          }}
+                                        />
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  {/*[if mso]></td><td style="width:62px" valign="top"><![endif]*/}
+                                  <table
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    className="es-left"
+                                    align="left"
+                                    style={{
+                                      msoTableLspace: "0pt",
+                                      msoTableRspace: "0pt",
+                                      borderCollapse: "collapse",
+                                      borderSpacing: 0,
+                                      float: "left",
+                                    }}
+                                  >
+                                    <tbody>
+                                      <tr
+                                        style={{ borderCollapse: "collapse" }}
+                                      >
+                                        <td
+                                          align="center"
+                                          className="es-m-p20b"
+                                          style={{
+                                            padding: 0,
+                                            margin: 0,
+                                            width: 62,
+                                          }}
+                                        >
+                                          <table
+                                            cellPadding={0}
+                                            cellSpacing={0}
+                                            width="100%"
+                                            role="presentation"
+                                            style={{
+                                              msoTableLspace: "0pt",
+                                              msoTableRspace: "0pt",
+                                              borderCollapse: "collapse",
+                                              borderSpacing: 0,
+                                            }}
+                                          >
+                                            <tbody>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="left"
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                >
+                                                  <p
+                                                    style={{
+                                                      margin: 0,
+                                                      WebkitTextSizeAdjust:
+                                                        "none",
+                                                      msTextSizeAdjust: "none",
+                                                      msoLineHeightRule:
+                                                        "exactly",
+                                                      fontSize: 14,
+                                                      fontFamily:
+                                                        'helvetica, "helvetica neue", arial, verdana, sans-serif',
+                                                      lineHeight: 1.5,
+                                                      color: "#333333",
+                                                    }}
+                                                  >
+                                                    ${""}
+                                                    {this.props.dataGeneralFinanciamiento.precioLista.toLocaleString(
+                                                      undefined,
+                                                      {
+                                                        minimumFractionDigits: 2,
+                                                        maximumFractionDigits: 2,
+                                                      }
+                                                    )}
+                                                    <br />${""}
+                                                    {this.props.dataGeneralFinanciamiento.descuento.toLocaleString(
+                                                      undefined,
+                                                      {
+                                                        minimumFractionDigits: 2,
+                                                        maximumFractionDigits: 2,
+                                                      }
+                                                    )}
+                                                    <br />${""}
+                                                    {this.props.dataGeneralFinanciamiento.precioFinal.toLocaleString(
+                                                      undefined,
+                                                      {
+                                                        minimumFractionDigits: 2,
+                                                        maximumFractionDigits: 2,
+                                                      }
+                                                    )}
+                                                    <br />${""}
+                                                    {this.props.dataGeneralFinanciamiento.entrada.toLocaleString(
+                                                      undefined,
+                                                      {
+                                                        minimumFractionDigits: 2,
+                                                        maximumFractionDigits: 2,
+                                                      }
+                                                    )}
+                                                    <br />${""}
+                                                    {this.props.dataGeneralFinanciamiento.entrega.toLocaleString(
+                                                      undefined,
+                                                      {
+                                                        minimumFractionDigits: 2,
+                                                        maximumFractionDigits: 2,
+                                                      }
+                                                    )}
+                                                    <br />
+                                                  </p>
+                                                </td>
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="center"
+                                                  height={40}
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                />
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="left"
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                >
+                                                  <p
+                                                    style={{
+                                                      margin: 0,
+                                                      WebkitTextSizeAdjust:
+                                                        "none",
+                                                      msTextSizeAdjust: "none",
+                                                      msoLineHeightRule:
+                                                        "exactly",
+                                                      fontSize: 14,
+                                                      fontFamily:
+                                                        'helvetica, "helvetica neue", arial, verdana, sans-serif',
+                                                      lineHeight: 1.5,
+                                                      color: "#333333",
+                                                    }}
+                                                  >
+                                                    <br /> ${""}
+                                                    {this.props.dataGeneralFinanciamiento.firma.toLocaleString(
+                                                      undefined,
+                                                      {
+                                                        minimumFractionDigits: 2,
+                                                        maximumFractionDigits: 2,
+                                                      }
+                                                    )}
+                                                    <br />${""}
+                                                    {this.props.dataGeneralFinanciamiento.financiar.toLocaleString(
+                                                      undefined,
+                                                      {
+                                                        minimumFractionDigits: 2,
+                                                        maximumFractionDigits: 2,
+                                                      }
+                                                    )}
+                                                    <br />${""}
+                                                    {this.props.dataGeneralFinanciamiento.cuotas.toLocaleString(
+                                                      undefined,
+                                                      {
+                                                        minimumFractionDigits: 2,
+                                                        maximumFractionDigits: 2,
+                                                      }
+                                                    )}
+                                                  </p>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  {/*[if mso]></td><td style="width:20px"></td><td style="width:230px" valign="top"><![endif]*/}
+                                  <table
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    className="es-right"
+                                    align="right"
+                                    style={{
+                                      msoTableLspace: "0pt",
+                                      msoTableRspace: "0pt",
+                                      borderCollapse: "collapse",
+                                      borderSpacing: 0,
+                                      float: "right",
+                                    }}
+                                  >
+                                    <tbody>
+                                      <tr
+                                        style={{ borderCollapse: "collapse" }}
+                                      >
+                                        <td
+                                          align="left"
+                                          style={{
+                                            padding: 0,
+                                            margin: 0,
+                                            width: 230,
+                                          }}
+                                        >
+                                          <table
+                                            cellPadding={0}
+                                            cellSpacing={0}
+                                            width="100%"
+                                            role="presentation"
+                                            style={{
+                                              msoTableLspace: "0pt",
+                                              msoTableRspace: "0pt",
+                                              borderCollapse: "collapse",
+                                              borderSpacing: 0,
+                                            }}
+                                          >
+                                            <tbody>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="right"
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                    paddingRight: 75,
+                                                    fontSize: 0,
+                                                  }}
+                                                >
+                                                  <img
+                                                    className="adapt-img"
+                                                    src={this.imprimirCasa()}
+                                                    alt
+                                                    style={{
+                                                      display: "block",
+                                                      border: 0,
+                                                      outline: "none",
+                                                      textDecoration: "none",
+                                                      msInterpolationMode:
+                                                        "bicubic",
+                                                    }}
+                                                    width={260}
+                                                    height={260}
+                                                  />
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  {/*[if mso]></td></tr></table><![endif]*/}
+                                </td>
+                              </tr>
+                              <tr style={{ borderCollapse: "collapse" }}>
+                                <td
+                                  align="left"
+                                  style={{
+                                    padding: 0,
+                                    margin: 0,
+                                    paddingTop: 20,
+                                    paddingLeft: 20,
+                                    paddingRight: 20,
+                                  }}
+                                >
+                                  {/*[if mso]><table style="width:860px" cellpadding="0" cellspacing="0"><tr><td style="width:571px" valign="top"><![endif]*/}
+                                  <table
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    className="es-left"
+                                    align="left"
+                                    style={{
+                                      msoTableLspace: "0pt",
+                                      msoTableRspace: "0pt",
+                                      borderCollapse: "collapse",
+                                      borderSpacing: 0,
+                                      float: "left",
+                                    }}
+                                  >
+                                    <tbody>
+                                      <tr
+                                        style={{ borderCollapse: "collapse" }}
+                                      >
+                                        <td
+                                          className="es-m-p20b"
+                                          align="left"
+                                          style={{
+                                            padding: 0,
+                                            margin: 0,
+                                            width: 571,
+                                          }}
+                                        >
+                                          <table
+                                            cellPadding={0}
+                                            cellSpacing={0}
+                                            width="100%"
+                                            role="presentation"
+                                            style={{
+                                              msoTableLspace: "0pt",
+                                              msoTableRspace: "0pt",
+                                              borderCollapse: "collapse",
+                                              borderSpacing: 0,
+                                            }}
+                                          >
+                                            <tbody>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  className="es-m-txt-l"
+                                                  align="left"
+                                                  bgcolor="#af8447"
+                                                  style={{
+                                                    margin: 0,
+                                                    paddingTop: 10,
+                                                    paddingBottom: 10,
+                                                    paddingLeft: 10,
+                                                    paddingRight: 20,
+                                                  }}
+                                                >
+                                                  <h2
+                                                    style={{
+                                                      margin: 0,
+                                                      lineHeight: 1,
+                                                      msoLineHeightRule:
+                                                        "exactly",
+                                                      fontFamily:
+                                                        'helvetica, "helvetica neue", arial, verdana, sans-serif',
+                                                      fontSize: 22,
+                                                      fontStyle: "normal",
+                                                      fontWeight: "normal",
+                                                      color: "#FFFFFF",
+                                                    }}
+                                                  >
+                                                    Plano de Construcción
+                                                  </h2>
+                                                </td>
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="center"
+                                                  height={22}
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                />
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="center"
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                    fontSize: 0,
+                                                  }}
+                                                >
+                                                  <img
+                                                    className="adapt-img"
+                                                    src={`./images/planos/CASA-${this.props.dataCliente.modeloReal}.jpg`}
+                                                    alt
+                                                    style={{
+                                                      display: "block",
+                                                      border: 0,
+                                                      outline: "none",
+                                                      textDecoration: "none",
+                                                      msInterpolationMode:
+                                                        "bicubic",
+                                                    }}
+                                                    width={950}
+                                                    height={1200}
+                                                  />
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  {/*[if mso]></td><td style="width:15px"></td><td style="width:274px" valign="top"><![endif]*/}
+                                  <table
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    className="es-right"
+                                    align="right"
+                                    style={{
+                                      msoTableLspace: "0pt",
+                                      msoTableRspace: "0pt",
+                                      borderCollapse: "collapse",
+                                      borderSpacing: 0,
+                                      float: "right",
+                                    }}
+                                  >
+                                    <tbody>
+                                      <tr
+                                        style={{ borderCollapse: "collapse" }}
+                                      >
+                                        <td
+                                          align="left"
+                                          style={{
+                                            padding: 0,
+                                            margin: 0,
+                                            width: 274,
+                                          }}
+                                        >
+                                          <table
+                                            cellPadding={0}
+                                            cellSpacing={0}
+                                            width={420}
+                                            role="presentation"
+                                            style={{
+                                              msoTableLspace: "0pt",
+                                              msoTableRspace: "0pt",
+                                              borderCollapse: "collapse",
+                                              borderSpacing: 0,
+                                            }}
+                                          >
+                                            <tbody>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  className="es-m-txt-l"
+                                                  align="left"
+                                                  bgcolor="#af8447"
+                                                  style={{
+                                                    margin: 0,
+                                                    paddingTop: 10,
+                                                    paddingBottom: 10,
+                                                    paddingLeft: 10,
+                                                    paddingRight: 20,
+                                                  }}
+                                                >
+                                                  <h2
+                                                    style={{
+                                                      margin: 0,
+                                                      lineHeight: 1,
+                                                      msoLineHeightRule:
+                                                        "exactly",
+                                                      fontFamily:
+                                                        'helvetica, "helvetica neue", arial, verdana, sans-serif',
+                                                      fontSize: 22,
+                                                      fontStyle: "normal",
+                                                      fontWeight: "normal",
+                                                      color: "#FFFFFF",
+                                                    }}
+                                                  >
+                                                    Modelo G2B
+                                                  </h2>
+                                                </td>
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="center"
+                                                  height={22}
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                />
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                >
+                                                  <table
+                                                    className="tablaPrint"
+                                                    role="presentation"
+                                                    style={{
+                                                      fontFamily: "Helvetica",
+                                                      width: "100%",
+                                                      color: "#666666",
+                                                      border: "none",
+                                                      fontSize: 14,
+                                                      msoTableLspace: "0pt",
+                                                      msoTableRspace: "0pt",
+                                                      borderCollapse:
+                                                        "collapse",
+                                                      borderSpacing: 0,
+                                                    }}
+                                                  >
+                                                    <tbody>
+                                                      <tr
                                                         style={{
-                                                          padding: 0,
-                                                          margin: 0,
-                                                          width: 860,
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
                                                         }}
                                                       >
-                                                        <table
+                                                        <th
                                                           style={{
-                                                            msoTableLspace:
-                                                              "0pt",
-                                                            msoTableRspace:
-                                                              "0pt",
-                                                            borderCollapse:
-                                                              "separate",
-                                                            borderSpacing: 0,
-                                                            borderColor:
-                                                              "#EFEFEF",
-                                                            borderStyle:
-                                                              "solid",
-                                                            borderWidth: 1,
-                                                            borderRadius: 3,
-                                                            backgroundColor:
-                                                              "#FFFFFF",
+                                                            paddingLeft: 8,
+                                                            color: "black",
                                                           }}
-                                                          width="100%"
-                                                          cellSpacing={0}
-                                                          cellPadding={0}
-                                                          bgcolor="#ffffff"
-                                                          role="presentation"
                                                         >
-                                                          <tbody>
+                                                          <b>CUADRO DE AREAS</b>
+                                                        </th>
+                                                        <th
+                                                          style={{
+                                                            paddingLeft: 8,
+                                                          }}
+                                                        />
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          Planta Baja
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          {
+                                                            this.modeloInfo
+                                                              .areas.plantaBaja
+                                                          }{" "}
+                                                          m2
+                                                        </td>
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          Planta Alta
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          {
+                                                            this.modeloInfo
+                                                              .areas.plantaAlta
+                                                          }{" "}
+                                                          m2
+                                                        </td>
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          Total
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          {
+                                                            this.modeloInfo
+                                                              .areas.total
+                                                          }{" "}
+                                                          m2
+                                                        </td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="center"
+                                                  height={10}
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                />
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                >
+                                                  <table
+                                                    className="tablaPrint"
+                                                    role="presentation"
+                                                    style={{
+                                                      fontFamily: "Helvetica",
+                                                      width: "100%",
+                                                      color: "#666666",
+                                                      border: "none",
+                                                      fontSize: 14,
+                                                      msoTableLspace: "0pt",
+                                                      msoTableRspace: "0pt",
+                                                      borderCollapse:
+                                                        "collapse",
+                                                      borderSpacing: 0,
+                                                    }}
+                                                  >
+                                                    <tbody>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <th
+                                                          colSpan={2}
+                                                          style={{
+                                                            paddingLeft: 8,
+                                                            color: "black",
+                                                          }}
+                                                        >
+                                                          <b>
+                                                            ESPECIFICACIONES
+                                                            TÉCNICAS
+                                                          </b>
+                                                        </th>
+                                                        <th
+                                                          style={{
+                                                            paddingLeft: 8,
+                                                          }}
+                                                        />
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          Tumbados
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          De gypsum o similar.
+                                                        </td>
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          Closeths
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          Módulo de cajones y
+                                                          repisas, con
+                                                          colgadores de ropa y
+                                                          puertas.
+                                                        </td>
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          Baños
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          Anaqueles altos y
+                                                          bajos con puertas y
+                                                          una repisa.
+                                                        </td>
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          Muebles de Cocina
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          Anaqueles altos y
+                                                          bajos con puertas y
+                                                          una repisa.
+                                                        </td>
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          Recubrimiento de
+                                                          Cocina
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          Granito importado.
+                                                        </td>
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          Lavaplatos
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          De acero inoxidable de
+                                                          dos pozos.
+                                                        </td>
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          Recubrimiento de Pisos
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          Piso interior Y
+                                                          escaleras con
+                                                          porcelanato.
+                                                        </td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="center"
+                                                  height={10}
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                />
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="left"
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                >
+                                                  <p
+                                                    style={{
+                                                      margin: 0,
+                                                      WebkitTextSizeAdjust:
+                                                        "none",
+                                                      msTextSizeAdjust: "none",
+                                                      msoLineHeightRule:
+                                                        "exactly",
+                                                      fontSize: 14,
+                                                      fontFamily:
+                                                        'helvetica, "helvetica neue", arial, verdana, sans-serif',
+                                                      lineHeight: 1.5,
+                                                      color: "#666666",
+                                                    }}
+                                                  >
+                                                    <h3
+                                                      style={{
+                                                        color: "black",
+                                                        marginLeft: 8,
+                                                        marginBottom: 11,
+                                                        marginTop: 10,
+                                                        fontSize: 14,
+                                                      }}
+                                                    >
+                                                      <b>CUENTA CON:</b>
+                                                    </h3>
+                                                    {this.modeloInfo.detalle.extras.map(
+                                                      (value) => {
+                                                        return (
+                                                          <div
+                                                            style={{
+                                                              marginLeft: 8,
+                                                            }}
+                                                          >
+                                                            - {value}
+                                                            <br />
+                                                          </div>
+                                                        );
+                                                      }
+                                                    )}
+                                                  </p>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  {/*[if mso]></td></tr></table><![endif]*/}
+                                </td>
+                              </tr>
+                              <tr style={{ borderCollapse: "collapse" }}>
+                                <td
+                                  style={{
+                                    padding: 0,
+                                    margin: 0,
+                                    paddingTop: 10,
+                                    paddingLeft: 20,
+                                    paddingRight: 20,
+                                    backgroundColor: "#FCFCFC",
+                                  }}
+                                  bgcolor="#fcfcfc"
+                                  align="left"
+                                >
+                                  <table
+                                    width="100%"
+                                    cellSpacing={0}
+                                    cellPadding={0}
+                                    style={{
+                                      msoTableLspace: "0pt",
+                                      msoTableRspace: "0pt",
+                                      borderCollapse: "collapse",
+                                      borderSpacing: 0,
+                                    }}
+                                  >
+                                    <tbody>
+                                      <tr
+                                        style={{ borderCollapse: "collapse" }}
+                                      >
+                                        <td
+                                          valign="top"
+                                          align="center"
+                                          style={{
+                                            padding: 0,
+                                            margin: 0,
+                                            width: 860,
+                                          }}
+                                        >
+                                          <table
+                                            style={{
+                                              msoTableLspace: "0pt",
+                                              msoTableRspace: "0pt",
+                                              borderCollapse: "separate",
+                                              borderSpacing: 0,
+                                              borderColor: "#EFEFEF",
+                                              borderStyle: "solid",
+                                              borderWidth: 1,
+                                              borderRadius: 3,
+                                              backgroundColor: "#FFFFFF",
+                                            }}
+                                            width="100%"
+                                            cellSpacing={0}
+                                            cellPadding={0}
+                                            bgcolor="#ffffff"
+                                            role="presentation"
+                                          >
+                                            <tbody>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="center"
+                                                  className="container"
+                                                  style={{
+                                                    position: "relative",
+                                                    color: "white",
+                                                    padding: 0,
+                                                    margin: 0,
+                                                    fontSize: 0,
+                                                  }}
+                                                >
+                                                  <a
+                                                    target="_blank"
+                                                    href
+                                                    style={{
+                                                      WebkitTextSizeAdjust:
+                                                        "none",
+                                                      msTextSizeAdjust: "none",
+                                                      msoLineHeightRule:
+                                                        "exactly",
+                                                      fontFamily:
+                                                        'helvetica, "helvetica neue", arial, verdana, sans-serif',
+                                                      fontSize: 14,
+                                                      textDecoration: "none",
+                                                      color: "#F6A1B4",
+                                                    }}
+                                                  >
+                                                    <img
+                                                      className="adapt-img"
+                                                      src="https://fodrao.stripocdn.email/content/guids/CABINET_87833819fc781f42211f150e17a54082/images/80231614005633541.jpg"
+                                                      alt
+                                                      style={{
+                                                        display: "block",
+                                                        border: 0,
+                                                        outline: "none",
+                                                        textDecoration: "none",
+                                                        msInterpolationMode:
+                                                          "bicubic",
+                                                      }}
+                                                      width={1400}
+                                                      height={340}
+                                                    />
+                                                    <div
+                                                      className="imageLeft"
+                                                      style={{
+                                                        position: "absolute",
+                                                        top: "78%",
+                                                        left: "18%",
+                                                        transform:
+                                                          "translate(-50%, -50%)",
+                                                      }}
+                                                    >
+                                                      <img
+                                                        src="https://fodrao.stripocdn.email/content/guids/CABINET_87833819fc781f42211f150e17a54082/images/76881614006954594.png"
+                                                        alt
+                                                        style={{
+                                                          display: "block",
+                                                          border: 0,
+                                                          outline: "none",
+                                                          textDecoration:
+                                                            "none",
+                                                          msInterpolationMode:
+                                                            "bicubic",
+                                                        }}
+                                                        width={335}
+                                                        height={90}
+                                                      />
+                                                    </div>
+                                                    <div
+                                                      className="centered1"
+                                                      style={{
+                                                        position: "absolute",
+                                                        top: "70%",
+                                                        left: "80.5%",
+                                                        transform:
+                                                          "translate(-50%, -50%)",
+                                                        color: "white",
+                                                        textAlign: "left",
+                                                        fontSize: 18,
+                                                      }}
+                                                    >
+                                                      <b>Cliente:</b>{" "}
+                                                      {this.props.dataCliente
+                                                        .nombre +
+                                                        " " +
+                                                        this.props.dataCliente
+                                                          .apellido}
+                                                    </div>
+                                                    <div
+                                                      className="centered2"
+                                                      style={{
+                                                        position: "absolute",
+                                                        top: "80%",
+                                                        left: "81%",
+                                                        transform:
+                                                          "translate(-50%, -50%)",
+                                                        color: "white",
+                                                        textAlign: "left",
+                                                        fontSize: 18,
+                                                      }}
+                                                    >
+                                                      <b>Email:</b>{" "}
+                                                      {
+                                                        this.props.dataCliente
+                                                          .correo
+                                                      }
+                                                    </div>
+                                                    <div
+                                                      className="centered3"
+                                                      style={{
+                                                        position: "absolute",
+                                                        top: "90%",
+                                                        left: "77.5%",
+                                                        transform:
+                                                          "translate(-50%, -50%)",
+                                                        color: "white",
+                                                        textAlign: "left",
+                                                        fontSize: 18,
+                                                      }}
+                                                    >
+                                                      <b>Celular:</b>{" "}
+                                                      {
+                                                        this.props.dataCliente
+                                                          .celular
+                                                      }
+                                                    </div>
+                                                  </a>
+                                                </td>
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="center"
+                                                  height={7}
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                />
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  className="es-m-txt-l"
+                                                  align="left"
+                                                  bgcolor="#af8447"
+                                                  style={{
+                                                    margin: 0,
+                                                    paddingTop: 10,
+                                                    paddingBottom: 10,
+                                                    paddingLeft: 10,
+                                                    paddingRight: 20,
+                                                  }}
+                                                >
+                                                  <h2
+                                                    style={{
+                                                      margin: 0,
+                                                      lineHeight: 1,
+                                                      msoLineHeightRule:
+                                                        "exactly",
+                                                      fontFamily:
+                                                        'helvetica, "helvetica neue", arial, verdana, sans-serif',
+                                                      fontSize: 22,
+                                                      fontStyle: "normal",
+                                                      fontWeight: "normal",
+                                                      color: "#FFFFFF",
+                                                    }}
+                                                  >
+                                                    Información de
+                                                    Financiamiento
+                                                  </h2>
+                                                </td>
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="center"
+                                                  height={12}
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                />
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                              <tr style={{ borderCollapse: "collapse" }}>
+                                <td
+                                  align="left"
+                                  style={{
+                                    padding: 0,
+                                    margin: 0,
+                                    paddingLeft: 20,
+                                    paddingRight: 20,
+                                  }}
+                                >
+                                  {/*[if mso]><table style="width:860px" cellpadding="0" cellspacing="0"><tr><td style="width:575px" valign="top"><![endif]*/}
+                                  <table
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    className="es-left"
+                                    align="left"
+                                    style={{
+                                      msoTableLspace: "0pt",
+                                      msoTableRspace: "0pt",
+                                      borderCollapse: "collapse",
+                                      borderSpacing: 0,
+                                      float: "left",
+                                    }}
+                                  >
+                                    <tbody>
+                                      <tr
+                                        style={{ borderCollapse: "collapse" }}
+                                      >
+                                        <td
+                                          className="es-m-p20b"
+                                          align="left"
+                                          style={{
+                                            padding: 0,
+                                            margin: 0,
+                                            width: 900,
+                                          }}
+                                        >
+                                          <table
+                                            cellPadding={0}
+                                            cellSpacing={0}
+                                            width="100%"
+                                            role="presentation"
+                                            style={{
+                                              msoTableLspace: "0pt",
+                                              msoTableRspace: "0pt",
+                                              borderCollapse: "collapse",
+                                              borderSpacing: 0,
+                                            }}
+                                          >
+                                            <tbody>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                >
+                                                  <table
+                                                    className="tablaPrintGrande"
+                                                    role="presentation"
+                                                    style={{
+                                                      fontFamily: "Helvetica",
+                                                      width: "100%",
+                                                      color: "#666666",
+                                                      fontSize: 13,
+                                                      msoTableLspace: "0pt",
+                                                      msoTableRspace: "0pt",
+                                                      borderCollapse:
+                                                        "collapse",
+                                                      borderSpacing: 0,
+                                                    }}
+                                                  >
+                                                    <thead>
+                                                      <tr
+                                                        style={{
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <th
+                                                          style={{
+                                                            border: "2px solid",
+                                                            textAlign: "center",
+                                                            padding:
+                                                              "8px !important",
+                                                          }}
+                                                        >
+                                                          <b>No.</b>
+                                                        </th>
+                                                        <th
+                                                          style={{
+                                                            border: "2px solid",
+                                                            textAlign: "center",
+                                                            padding:
+                                                              "8px !important",
+                                                          }}
+                                                        >
+                                                          <b>FECHA</b>
+                                                        </th>
+                                                        <th
+                                                          style={{
+                                                            border: "2px solid",
+                                                            textAlign: "center",
+                                                            padding:
+                                                              "8px !important",
+                                                          }}
+                                                        >
+                                                          <b>SALDO CAPITAL</b>
+                                                        </th>
+                                                        <th
+                                                          style={{
+                                                            border: "2px solid",
+                                                            textAlign: "center",
+                                                            padding:
+                                                              "8px !important",
+                                                          }}
+                                                        >
+                                                          <b>CUOTA</b>
+                                                        </th>
+                                                      </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                      {this.props.dataFinanciamiento.map(
+                                                        (row) => {
+                                                          return (
                                                             <tr
                                                               style={{
                                                                 borderCollapse:
@@ -2637,158 +2483,975 @@ export class Print extends React.PureComponent {
                                                             >
                                                               <td
                                                                 style={{
+                                                                  textAlign:
+                                                                    "center",
                                                                   padding: 0,
                                                                   margin: 0,
                                                                 }}
                                                               >
-                                                                <table
-                                                                  className="tablaPrintGrande"
-                                                                  role="presentation"
-                                                                  style={{
-                                                                    fontFamily:
-                                                                      "Helvetica",
-                                                                    width:
-                                                                      "100%",
-                                                                    color:
-                                                                      "#666666",
-                                                                    fontSize: 11,
-                                                                    msoTableLspace:
-                                                                      "0pt",
-                                                                    msoTableRspace:
-                                                                      "0pt",
-                                                                    borderCollapse:
-                                                                      "collapse",
-                                                                    borderSpacing: 0,
-                                                                  }}
-                                                                >
-                                                                  <thead>
-                                                                    <tr
-                                                                      style={{
-                                                                        borderCollapse:
-                                                                          "collapse",
-                                                                      }}
-                                                                    >
-                                                                      <th
-                                                                        style={{
-                                                                          border:
-                                                                            "3px solid #DDDDDD",
-                                                                          textAlign:
-                                                                            "left",
-                                                                          padding:
-                                                                            "8px !important",
-                                                                        }}
-                                                                      >
-                                                                        <b>
-                                                                          10
-                                                                          años
-                                                                        </b>
-                                                                      </th>
-                                                                      <th
-                                                                        style={{
-                                                                          border:
-                                                                            "3px solid #DDDDDD",
-                                                                          textAlign:
-                                                                            "left",
-                                                                          padding:
-                                                                            "8px !important",
-                                                                        }}
-                                                                      >
-                                                                        <b>
-                                                                          15
-                                                                          años
-                                                                        </b>
-                                                                      </th>
-                                                                      <th
-                                                                        style={{
-                                                                          border:
-                                                                            "3px solid #DDDDDD",
-                                                                          textAlign:
-                                                                            "left",
-                                                                          padding:
-                                                                            "8px !important",
-                                                                        }}
-                                                                      >
-                                                                        <b>
-                                                                          20
-                                                                          años
-                                                                        </b>
-                                                                      </th>
-                                                                    </tr>
-                                                                  </thead>
-                                                                  <tbody>
-                                                                    <tr
-                                                                      style={{
-                                                                        borderCollapse:
-                                                                          "collapse",
-                                                                      }}
-                                                                    >
-                                                                      <td
-                                                                        style={{
-                                                                          textAlign:
-                                                                            "left",
-                                                                          padding: 0,
-                                                                          margin: 0,
-                                                                        }}
-                                                                      >
-                                                                        {this.props.creditoHipotecario.diez.toLocaleString(
-                                                                          "en"
-                                                                        )}
-                                                                      </td>
-                                                                      <td
-                                                                        style={{
-                                                                          textAlign:
-                                                                            "left",
-                                                                          padding: 0,
-                                                                          margin: 0,
-                                                                        }}
-                                                                      >
-                                                                        {this.props.creditoHipotecario.quince.toLocaleString(
-                                                                          "en"
-                                                                        )}
-                                                                      </td>
-                                                                      <td
-                                                                        style={{
-                                                                          textAlign:
-                                                                            "left",
-                                                                          padding: 0,
-                                                                          margin: 0,
-                                                                        }}
-                                                                      >
-                                                                        {this.props.creditoHipotecario.veinte.toLocaleString(
-                                                                          "en"
-                                                                        )}
-                                                                      </td>
-                                                                    </tr>
-                                                                  </tbody>
-                                                                </table>
+                                                                {row.valor}
+                                                              </td>
+                                                              <td
+                                                                style={{
+                                                                  textAlign:
+                                                                    "center",
+                                                                  padding: 0,
+                                                                  margin: 0,
+                                                                }}
+                                                              >
+                                                                {month[
+                                                                  row.mesTemp
+                                                                ] +
+                                                                  " " +
+                                                                  row.anoInicial}
+                                                              </td>
+                                                              <td
+                                                                style={{
+                                                                  textAlign:
+                                                                    "center",
+                                                                  padding: 0,
+                                                                  margin: 0,
+                                                                }}
+                                                              >
+                                                                ${" "}
+                                                                {row.total.toLocaleString(
+                                                                  undefined,
+                                                                  {
+                                                                    minimumFractionDigits: 2,
+                                                                    maximumFractionDigits: 2,
+                                                                  }
+                                                                )}
+                                                              </td>
+                                                              <td
+                                                                style={{
+                                                                  textAlign:
+                                                                    "center",
+                                                                  padding: 0,
+                                                                  margin: 0,
+                                                                }}
+                                                              >
+                                                                ${" "}
+                                                                {row.cuota.toLocaleString(
+                                                                  undefined,
+                                                                  {
+                                                                    minimumFractionDigits: 2,
+                                                                    maximumFractionDigits: 2,
+                                                                  }
+                                                                )}
                                                               </td>
                                                             </tr>
-                                                          </tbody>
-                                                        </table>
-                                                      </td>
-                                                    </tr>
-                                                  </tbody>
-                                                </table>
-                                              </td>
-                                            </tr>
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                    {/*AAAAAAAAAAAAAAAAAA */}
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                                                          );
+                                                        }
+                                                      )}
+                                                    </tbody>
+                                                    <tfoot>
+                                                      <tr
+                                                        style={{
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "center",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        />
+                                                        <td
+                                                          style={{
+                                                            textAlign: "center",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        />
+                                                        <td
+                                                          style={{
+                                                            textAlign: "center",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          <b>
+                                                            ${" "}
+                                                            {this.obtenerTotal()}
+                                                          </b>
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "center",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          <b>
+                                                            ${" "}
+                                                            {this.obtenerTotal()}
+                                                          </b>
+                                                        </td>
+                                                      </tr>
+                                                    </tfoot>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  {/*[if mso]></td><td style="width:20px"></td><td style="width:265px" valign="top"><![endif]*/}
+                                  <table
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    className="es-right"
+                                    align="right"
+                                    style={{
+                                      msoTableLspace: "0pt",
+                                      msoTableRspace: "0pt",
+                                      borderCollapse: "collapse",
+                                      borderSpacing: 0,
+                                      float: "right",
+                                    }}
+                                  >
+                                    <tbody>
+                                      <tr
+                                        style={{ borderCollapse: "collapse" }}
+                                      >
+                                        <td
+                                          align="left"
+                                          style={{
+                                            padding: 0,
+                                            margin: 0,
+                                            width: 430,
+                                          }}
+                                        >
+                                          <table
+                                            cellPadding={0}
+                                            cellSpacing={0}
+                                            width="100%"
+                                            role="presentation"
+                                            style={{
+                                              msoTableLspace: "0pt",
+                                              msoTableRspace: "0pt",
+                                              borderCollapse: "collapse",
+                                              borderSpacing: 0,
+                                            }}
+                                          >
+                                            <tbody>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                >
+                                                  <table
+                                                    className="tablaPrint"
+                                                    role="presentation"
+                                                    style={{
+                                                      fontFamily: "Helvetica",
+                                                      width: "100%",
+                                                      color: "#666666",
+                                                      border: "none",
+                                                      fontSize: 14,
+                                                      msoTableLspace: "0pt",
+                                                      msoTableRspace: "0pt",
+                                                      borderCollapse:
+                                                        "collapse",
+                                                      borderSpacing: 0,
+                                                    }}
+                                                  >
+                                                    <tbody>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <th
+                                                          colSpan={2}
+                                                          style={{
+                                                            paddingLeft: 8,
+                                                            color: "black",
+                                                          }}
+                                                        >
+                                                          <b />
+                                                        </th>
+                                                        <th
+                                                          style={{
+                                                            paddingLeft: 8,
+                                                          }}
+                                                        />
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          <b>Precio Lista</b>
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          ${" "}
+                                                          {this.props.dataGeneralFinanciamiento.precioLista.toLocaleString(
+                                                            undefined,
+                                                            {
+                                                              minimumFractionDigits: 2,
+                                                              maximumFractionDigits: 2,
+                                                            }
+                                                          )}
+                                                        </td>
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          <b>Descuento</b>
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          ${" "}
+                                                          {this.props.dataGeneralFinanciamiento.descuento.toLocaleString(
+                                                            undefined,
+                                                            {
+                                                              minimumFractionDigits: 2,
+                                                              maximumFractionDigits: 2,
+                                                            }
+                                                          )}
+                                                        </td>
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          <b>Precio Final</b>
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          ${" "}
+                                                          {this.props.dataGeneralFinanciamiento.precioFinal.toLocaleString(
+                                                            undefined,
+                                                            {
+                                                              minimumFractionDigits: 2,
+                                                              maximumFractionDigits: 2,
+                                                            }
+                                                          )}
+                                                        </td>
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          <b>
+                                                            Financiamiento de
+                                                            Entrada 30%
+                                                          </b>
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          ${" "}
+                                                          {this.props.dataGeneralFinanciamiento.entrada.toLocaleString(
+                                                            undefined,
+                                                            {
+                                                              minimumFractionDigits: 2,
+                                                              maximumFractionDigits: 2,
+                                                            }
+                                                          )}
+                                                        </td>
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          <b>
+                                                            Pago contra entrega
+                                                            70%
+                                                          </b>
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          ${" "}
+                                                          {this.props.dataGeneralFinanciamiento.entrega.toLocaleString(
+                                                            undefined,
+                                                            {
+                                                              minimumFractionDigits: 2,
+                                                              maximumFractionDigits: 2,
+                                                            }
+                                                          )}
+                                                        </td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="center"
+                                                  height={16}
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                />
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                  }}
+                                                >
+                                                  <table
+                                                    className="tablaPrint"
+                                                    role="presentation"
+                                                    style={{
+                                                      fontFamily: "Helvetica",
+                                                      width: "100%",
+                                                      color: "#666666",
+                                                      border: "none",
+                                                      fontSize: 14,
+                                                      msoTableLspace: "0pt",
+                                                      msoTableRspace: "0pt",
+                                                      borderCollapse:
+                                                        "collapse",
+                                                      borderSpacing: 0,
+                                                    }}
+                                                  >
+                                                    <tbody>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <th
+                                                          colSpan={2}
+                                                          style={{
+                                                            paddingLeft: 8,
+                                                            color: "black",
+                                                          }}
+                                                        >
+                                                          <b>
+                                                            Financiamiento de
+                                                            Entrada
+                                                          </b>
+                                                        </th>
+                                                        <th
+                                                          style={{
+                                                            paddingLeft: 8,
+                                                          }}
+                                                        />
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          <b>
+                                                            Pago a la Firma 4%
+                                                          </b>
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          ${" "}
+                                                          {this.props.dataGeneralFinanciamiento.firma.toLocaleString(
+                                                            undefined,
+                                                            {
+                                                              minimumFractionDigits: 2,
+                                                              maximumFractionDigits: 2,
+                                                            }
+                                                          )}
+                                                        </td>
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          <b>
+                                                            Saldo a Financiar
+                                                            26%
+                                                          </b>
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          ${" "}
+                                                          {this.props.dataGeneralFinanciamiento.financiar.toLocaleString(
+                                                            undefined,
+                                                            {
+                                                              minimumFractionDigits: 2,
+                                                              maximumFractionDigits: 2,
+                                                            }
+                                                          )}
+                                                        </td>
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          <b>
+                                                            Financiamiento
+                                                            (meses)
+                                                          </b>
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                            paddingLeft: 20,
+                                                            marginLeft: 20,
+                                                          }}
+                                                        >
+                                                          ${" "}
+                                                          {this.props.dataGeneralFinanciamiento.cuotas.toLocaleString(
+                                                            undefined,
+                                                            {
+                                                              minimumFractionDigits: 2,
+                                                              maximumFractionDigits: 2,
+                                                            }
+                                                          )}
+                                                        </td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="center"
+                                                  style={{
+                                                    margin: 0,
+                                                    paddingTop: 15,
+                                                    paddingBottom: 15,
+                                                    paddingLeft: 20,
+                                                    paddingRight: 20,
+                                                    fontSize: 0,
+                                                  }}
+                                                >
+                                                  <table
+                                                    border={0}
+                                                    width="100%"
+                                                    height="100%"
+                                                    cellPadding={0}
+                                                    cellSpacing={0}
+                                                    role="presentation"
+                                                    style={{
+                                                      msoTableLspace: "0pt",
+                                                      msoTableRspace: "0pt",
+                                                      borderCollapse:
+                                                        "collapse",
+                                                      borderSpacing: 0,
+                                                    }}
+                                                  >
+                                                    <tbody>
+                                                      <tr
+                                                        style={{
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            padding: 0,
+                                                            margin: 0,
+                                                            borderBottom:
+                                                              "1px solid #CCCCCC",
+                                                            background: "none",
+                                                            height: 1,
+                                                            width: "100%",
+                                                          }}
+                                                        ></td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                    paddingRight: 5,
+                                                    paddingLeft: 25,
+                                                  }}
+                                                >
+                                                  <table
+                                                    className="tablaPrint"
+                                                    role="presentation"
+                                                    style={{
+                                                      fontFamily: "Helvetica",
+                                                      width: "100%",
+                                                      color: "#666666",
+                                                      border: "none",
+                                                      fontSize: 14,
+                                                      msoTableLspace: "0pt",
+                                                      msoTableRspace: "0pt",
+                                                      borderCollapse:
+                                                        "collapse",
+                                                      borderSpacing: 0,
+                                                    }}
+                                                  >
+                                                    <tbody>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <th
+                                                          colSpan={3}
+                                                          style={{
+                                                            paddingLeft: 8,
+                                                            color: "black",
+                                                          }}
+                                                        >
+                                                          <b>
+                                                            Cuotas de crédito
+                                                            Hipotecario
+                                                          </b>
+                                                        </th>
+                                                        <th
+                                                          style={{
+                                                            paddingLeft: 8,
+                                                          }}
+                                                        />
+                                                        <th
+                                                          style={{
+                                                            paddingLeft: 8,
+                                                          }}
+                                                        />
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          <b>10 años</b>
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          ${" "}
+                                                          {this.props.creditoHipotecario.diez.toLocaleString(
+                                                            undefined,
+                                                            {
+                                                              minimumFractionDigits: 2,
+                                                              maximumFractionDigits: 2,
+                                                            }
+                                                          )}
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          REF
+                                                        </td>
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          <b>15 años</b>
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          ${" "}
+                                                          {this.props.creditoHipotecario.quince.toLocaleString(
+                                                            undefined,
+                                                            {
+                                                              minimumFractionDigits: 2,
+                                                              maximumFractionDigits: 2,
+                                                            }
+                                                          )}
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          REF
+                                                        </td>
+                                                      </tr>
+                                                      <tr
+                                                        style={{
+                                                          textAlign: "left",
+                                                          border: "none",
+                                                          padding: 12,
+                                                          borderCollapse:
+                                                            "collapse",
+                                                        }}
+                                                      >
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          <b>20 años</b>
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          ${" "}
+                                                          {this.props.creditoHipotecario.veinte.toLocaleString(
+                                                            undefined,
+                                                            {
+                                                              minimumFractionDigits: 2,
+                                                              maximumFractionDigits: 2,
+                                                            }
+                                                          )}
+                                                        </td>
+                                                        <td
+                                                          style={{
+                                                            textAlign: "left",
+                                                            border: "none",
+                                                            padding: 0,
+                                                            margin: 0,
+                                                          }}
+                                                        >
+                                                          REF
+                                                        </td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  {/*[if mso]></td></tr></table><![endif]*/}
+                                </td>
+                              </tr>
+                              <tr style={{ borderCollapse: "collapse" }}>
+                                <td
+                                  align="left"
+                                  style={{ padding: 0, margin: 0 }}
+                                >
+                                  <table
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    width="100%"
+                                    style={{
+                                      msoTableLspace: "0pt",
+                                      msoTableRspace: "0pt",
+                                      borderCollapse: "collapse",
+                                      borderSpacing: 0,
+                                    }}
+                                  >
+                                    <tbody>
+                                      <tr
+                                        style={{ borderCollapse: "collapse" }}
+                                      >
+                                        <td
+                                          align="center"
+                                          valign="top"
+                                          style={{
+                                            padding: 0,
+                                            margin: 0,
+                                            width: 1400,
+                                          }}
+                                        >
+                                          <table
+                                            cellPadding={0}
+                                            cellSpacing={0}
+                                            width="100%"
+                                            role="presentation"
+                                            style={{
+                                              msoTableLspace: "0pt",
+                                              msoTableRspace: "0pt",
+                                              borderCollapse: "collapse",
+                                              borderSpacing: 0,
+                                            }}
+                                          >
+                                            <tbody>
+                                              <tr
+                                                style={{
+                                                  borderCollapse: "collapse",
+                                                }}
+                                              >
+                                                <td
+                                                  align="left"
+                                                  style={{
+                                                    padding: 0,
+                                                    margin: 0,
+                                                    paddingTop: 10,
+                                                    paddingRight: 10,
+                                                    paddingLeft: 30,
+                                                  }}
+                                                >
+                                                  <p
+                                                    style={{
+                                                      margin: 0,
+                                                      WebkitTextSizeAdjust:
+                                                        "none",
+                                                      msTextSizeAdjust: "none",
+                                                      msoLineHeightRule:
+                                                        "exactly",
+                                                      fontSize: 12,
+                                                      fontFamily:
+                                                        'helvetica, "helvetica neue", arial, verdana, sans-serif',
+                                                      lineHeight: 1.7,
+                                                      color: "#333333",
+                                                    }}
+                                                  >
+                                                    Nota: Los precios de esta
+                                                    cotización pueden ser
+                                                    modificados por la empresa
+                                                    promotora sin previo aviso
+                                                    Vencimiento de la cotización
+                                                    tres días hábiles después de
+                                                    su Cotización. Cotización
+                                                    sujeta a cambios al momento
+                                                    de su contratación.
+                                                  </p>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     );

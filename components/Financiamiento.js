@@ -190,7 +190,10 @@ const Financiamiento = ({ dataCliente, base }) => {
                     <input
                       className="form-control"
                       id="precioLista"
-                      value={precioLista.toLocaleString("en")}
+                      value={precioLista.toLocaleString(undefined, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+})}
                     />
                   </fieldset>
                 </div>
@@ -224,7 +227,10 @@ const Financiamiento = ({ dataCliente, base }) => {
                     className="form-control"
                     id="precioFinal"
                     type="text"
-                    value={precioFinal.toLocaleString("en")}
+                    value={precioFinal.toLocaleString(undefined, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+})}
                     readOnly
                   />
                 </fieldset>
@@ -242,7 +248,10 @@ const Financiamiento = ({ dataCliente, base }) => {
                       className="form-control"
                       id="cuotaEntrada"
                       type="text"
-                      value={porcentajes.treinta.toLocaleString("en")}
+                      value={porcentajes.treinta.toLocaleString(undefined, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+})}
                       readOnly
                     />
                   </fieldset>
@@ -259,7 +268,10 @@ const Financiamiento = ({ dataCliente, base }) => {
                       className="form-control"
                       id="contraEntrega"
                       type="text"
-                      value={porcentajes.setenta.toLocaleString("en")}
+                      value={porcentajes.setenta.toLocaleString(undefined, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+})}
                       readOnly
                     />
                   </fieldset>
@@ -275,7 +287,10 @@ const Financiamiento = ({ dataCliente, base }) => {
                       className="form-control"
                       id="pagoFirma"
                       type="text"
-                      value={porcentajes.cuatro.toLocaleString("en")}
+                      value={porcentajes.cuatro.toLocaleString(undefined, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+})}
                       readOnly
                     />
                   </fieldset>
@@ -289,7 +304,10 @@ const Financiamiento = ({ dataCliente, base }) => {
                       className="form-control"
                       id="saldoFinanciar"
                       type="text"
-                      value={porcentajes.financiar.toLocaleString("en")}
+                      value={porcentajes.financiar.toLocaleString(undefined, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+})}
                       readOnly
                     />
                   </fieldset>
@@ -335,7 +353,10 @@ const Financiamiento = ({ dataCliente, base }) => {
                       className="form-control"
                       id="valorPagar"
                       type="text"
-                      value={porcentajes.pagar.toLocaleString("en")}
+                      value={porcentajes.pagar.toLocaleString(undefined, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+})}
                       readOnly
                     />
                   </fieldset>
@@ -349,7 +370,10 @@ const Financiamiento = ({ dataCliente, base }) => {
                       className="form-control"
                       id="cuotasDe"
                       type="text"
-                      value={porcentajes.cuotas.toLocaleString("en")}
+                      value={porcentajes.cuotas.toLocaleString(undefined, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+})}
                       readonly
                     />
                   </fieldset>
@@ -367,7 +391,10 @@ const Financiamiento = ({ dataCliente, base }) => {
                       className="form-control"
                       id="10anos"
                       type="text"
-                      value={creditoHipotecario.diez.toLocaleString("en")}
+                      value={creditoHipotecario.diez.toLocaleString(undefined, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+})}
                       readOnly
                     />
                   </fieldset>
@@ -379,7 +406,10 @@ const Financiamiento = ({ dataCliente, base }) => {
                       className="form-control"
                       id="15anos"
                       type="text"
-                      value={creditoHipotecario.quince.toLocaleString("en")}
+                      value={creditoHipotecario.quince.toLocaleString(undefined, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+})}
                       readonly
                     />
                   </fieldset>
@@ -391,7 +421,10 @@ const Financiamiento = ({ dataCliente, base }) => {
                       className="form-control"
                       id="20anos"
                       type="text"
-                      value={creditoHipotecario.veinte.toLocaleString("en")}
+                      value={creditoHipotecario.veinte.toLocaleString(undefined, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+})}
                       readonly
                     />
                   </fieldset>

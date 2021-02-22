@@ -144,7 +144,10 @@
             <td style={{ textAlign: "center" }}>
               {month[row.mesTemp] + " " + row.anoInicial}
             </td>
-            <td>{row.cuota.toLocaleString("en")}</td>
+            <td>{row.cuota.toLocaleString(undefined, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+})}</td>
           </tr>
         );
       })}
@@ -153,7 +156,10 @@
         <td />
         <td>
           Total:{" "}
-          {this.props.dataGeneralFinanciamiento.pagar.toLocaleString("en")}
+          {this.props.dataGeneralFinanciamiento.pagar.toLocaleString(undefined, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+})}
         </td>
       </tr>
       <tr className="information">

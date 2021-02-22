@@ -127,7 +127,10 @@ const Table = ({
                 cuota={row.valor}
                 mes={row.mesTemp}
                 ano={row.anoInicial}
-                pago={row.cuota.toLocaleString("en")}
+                pago={row.cuota.toLocaleString(undefined, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+})}
                 updateRows={updateRows}
                 limitarEdicion={limitarEdicion}
               />
