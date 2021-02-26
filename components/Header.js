@@ -1,3 +1,5 @@
+import Title from "./Title";
+
 const Header = () => {
   return (
     <div>
@@ -17,7 +19,7 @@ const Header = () => {
                 }}
               />
             </a>
-
+            <Title />
             <a
               className="btn font-weight-500 ml-lg-4 btn-secondary dorado"
               href="https://lacostasamborondon.com/"

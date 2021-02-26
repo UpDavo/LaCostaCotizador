@@ -6,37 +6,35 @@ import Print from "./Print";
 import ReactToPrint from "react-to-print";
 
 var valorFinal = 0;
+var arregloImprimir = [];
 
 const Financiamiento = ({ dataCliente, base }) => {
-  const [startDate, setStartDate] = useState(new Date());
+  var fecha = new Date();
+  fecha.setMonth(fecha.getMonth() + 1);
+  const [startDate, setStartDate] = useState(fecha);
   const [precioLista, setPrecioLista] = useState(0);
   const [descuento, setDescuento] = useState(0);
   const [precioFinal, setPrecioFinal] = useState(precioLista - descuento);
   const [financiamiento, setFinanciamiento] = useState(
-    dataCliente.ciudadela == "verde" ? 24 : 32
+    dataCliente.ciudadela == "verde" ? 32 : 24
   );
+
   const [porcentajes, setPorcentajes] = useState({
     treinta: precioFinal * 0.3,
     setenta: precioFinal * 0.7,
     cuatro: precioFinal * 0.04,
+    financiar: precioFinal * 0.26,
     pagar: precioFinal * 0.3 - precioFinal * 0.04,
-    cuotas: (precioFinal * 0.3 - precioFinal * 0.04) / financiamiento,
+    cuotas:
+      (precioFinal * 0.3 - precioFinal * 0.04) /
+      (dataCliente.ciudadela == "verde" ? 32 : 24),
   });
 
-  //Referencia para el boton de imprimir
-  const componentRef = useRef();
-
-  //Arreglo creado para la impresion del financiamiento
-  let arregloImpresionFinanciamiento = {
-    precioLista: precioLista,
-    descuento: descuento,
-    precioFinal: precioFinal,
-    entrada: porcentajes.treinta,
-    entrega: porcentajes.setenta,
-    firma: porcentajes.cuatro,
-    pagar: porcentajes.pagar,
-    cuotas: porcentajes.cuotas,
-  };
+  const [creditoHipotecario, setCreditoHipotecario] = useState({
+    diez: PMT(0.095 / 12, 10 * 12, precioFinal * 0.7),
+    quince: PMT(0.095 / 12, 15 * 12, precioFinal * 0.7),
+    veinte: PMT(0.095 / 12, 20 * 12, precioFinal * 0.7),
+  });
 
   /*Funcionalidad Pre Render */
   //Actualiza el precio dependiendo de la casa
@@ -47,16 +45,16 @@ const Financiamiento = ({ dataCliente, base }) => {
     ) {
       if (cliente.fachada == "estandar") {
         if (cliente.cubierta == "si") {
-          valorFinal = casa[cliente.modelo] + 7000;
+          valorFinal = casa[cliente.modelo] + 7000 + 3000;
         } else {
           valorFinal = casa[cliente.modelo];
         }
       } else {
         if (cliente.fachada == "top") {
           if (cliente.cubierta == "si") {
-            valorFinal = casa[cliente.modelo] + 17000;
+            valorFinal = casa[cliente.modelo] + 17000 + 3000;
           } else {
-            valorFinal = casa[cliente.modelo] + 10000;
+            valorFinal = casa[cliente.modelo] + 10000 + 3000;
           }
         }
       }
@@ -66,7 +64,7 @@ const Financiamiento = ({ dataCliente, base }) => {
   //Funcionalidad para aplicar el descuento
   const aplicarDescuento = (event) => {
     event.preventDefault();
-    const re = /^[0-9\b]+$/;
+    const re = /^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$/;
     const tomarDescuento = parseInt(document.querySelector("#descuento").value);
     if (re.test(tomarDescuento)) {
       setDescuento(tomarDescuento);
@@ -90,16 +88,58 @@ const Financiamiento = ({ dataCliente, base }) => {
       setenta: precioFinal * 0.7,
       cuatro: precioFinal * 0.04,
       pagar: precioFinal * 0.3 - precioFinal * 0.04,
-      cuotas: (precioFinal * 0.3 - precioFinal * 0.04) / financiamiento,
+      cuotas:
+        (precioFinal * 0.3 - precioFinal * 0.04) /
+        (dataCliente.ciudadela == "verde" ? 32 : 24),
+      financiar: precioFinal * 0.26,
     });
-    setFinanciamiento(dataCliente.ciudadela == "verde" ? 24 : 32);
+    setFinanciamiento(dataCliente.ciudadela == "verde" ? 32 : 24);
+    setCreditoHipotecario({
+      diez: PMT(0.095 / 12, 10 * 12, -(precioFinal * 0.7)),
+      quince: PMT(0.095 / 12, 15 * 12, -(precioFinal * 0.7)),
+      veinte: PMT(0.095 / 12, 20 * 12, -(precioFinal * 0.7)),
+    });
   }, [precioFinal, dataCliente, precioLista, descuento]);
 
-  const [dataImprimirFinanciamiento, setDataImprimirFinanciamiento] = useState(
-    []
-  );
+  /*-------------------------------Imprimir-------------------------------- */
 
-  const imprimirFinanciamiento = (arregloCuotas) => {
+  const [dataImprimirFinanciamiento, setDataImprimirFinanciamiento] = useState(
+    arregloImprimir
+  );
+  const [handleChanges, setHandleChanges] = useState(false);
+
+  //Referencia para el boton de imprimir
+  const componentRef = useRef();
+
+  //Arreglo creado para la impresion del financiamiento
+  let arregloImpresionFinanciamiento = {
+    precioLista: precioLista,
+    descuento: descuento,
+    precioFinal: precioFinal,
+    entrada: porcentajes.treinta,
+    entrega: porcentajes.setenta,
+    firma: porcentajes.cuatro,
+    pagar: porcentajes.pagar,
+    cuotas: porcentajes.cuotas,
+    financiar: porcentajes.financiar,
+  };
+
+  const datosDeFinanciamiento = (financiamiento) => {
+    arregloImprimir = [];
+    arregloImprimir = financiamiento;
+    console.log("Este es el financiamiento");
+    console.log(arregloImprimir);
+    setHandleChanges(!handleChanges);
+  };
+
+  const inicializarImpresionFinanciamiento = (dataInicial) => {
+    arregloImprimir = [];
+    arregloImprimir = dataInicial;
+    setDataImprimirFinanciamiento(arregloImprimir);
+  };
+
+  useEffect(() => {
+    //Esto organiza los datos de los valores superiores de la tabla
     arregloImpresionFinanciamiento = {
       precioLista: precioLista,
       descuento: descuento,
@@ -109,9 +149,13 @@ const Financiamiento = ({ dataCliente, base }) => {
       firma: porcentajes.cuatro,
       pagar: porcentajes.pagar,
       cuotas: porcentajes.cuotas,
+      financiar: porcentajes.financiar,
     };
-    setDataImprimirFinanciamiento(arregloCuotas);
-  };
+
+    setDataImprimirFinanciamiento(arregloImprimir);
+  }, [handleChanges]);
+
+  /*-------------------------------Imprimir-------------------------------- */
 
   return (
     <div className="row align-items-center mt-5">
@@ -121,7 +165,10 @@ const Financiamiento = ({ dataCliente, base }) => {
           cuota={porcentajes.cuotas}
           mesInicial={startDate}
           anoInicial={2021}
-          functionReturn={imprimirFinanciamiento}
+          setDataImprimirFinanciamiento={datosDeFinanciamiento}
+          inicializarImpresionFinanciamiento={
+            inicializarImpresionFinanciamiento
+          }
         />
       </div>
       <div className="col-lg-5">
@@ -143,7 +190,10 @@ const Financiamiento = ({ dataCliente, base }) => {
                     <input
                       className="form-control"
                       id="precioLista"
-                      value={precioLista.toLocaleString("en")}
+                      value={precioLista.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                     />
                   </fieldset>
                 </div>
@@ -177,7 +227,10 @@ const Financiamiento = ({ dataCliente, base }) => {
                     className="form-control"
                     id="precioFinal"
                     type="text"
-                    value={precioFinal.toLocaleString("en")}
+                    value={precioFinal.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
                     readOnly
                   />
                 </fieldset>
@@ -189,13 +242,16 @@ const Financiamiento = ({ dataCliente, base }) => {
                       className="small text-gray-600"
                       htmlFor="cuotaEntrada"
                     >
-                      Cuota de Entrada 30%
+                      Cuota de Entrada 30 %
                     </label>
                     <input
                       className="form-control"
                       id="cuotaEntrada"
                       type="text"
-                      value={porcentajes.treinta.toLocaleString("en")}
+                      value={porcentajes.treinta.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                       readOnly
                     />
                   </fieldset>
@@ -206,40 +262,65 @@ const Financiamiento = ({ dataCliente, base }) => {
                       className="small text-gray-600"
                       htmlFor="pagoContraEntrega"
                     >
-                      Pago contra Entrega 70%
+                      Pago contra Entrega 70 %
                     </label>
                     <input
                       className="form-control"
                       id="contraEntrega"
                       type="text"
-                      value={porcentajes.setenta.toLocaleString("en")}
+                      value={porcentajes.setenta.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                      readOnly
+                    />
+                  </fieldset>
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <fieldset disabled>
+                    <label className="small text-gray-600" htmlFor="pagoFirma">
+                      Pago a la Firma 4 %
+                    </label>
+                    <input
+                      className="form-control"
+                      id="pagoFirma"
+                      type="text"
+                      value={porcentajes.cuatro.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                      readOnly
+                    />
+                  </fieldset>
+                </div>
+                <div className="form-group col-md-6">
+                  <fieldset disabled>
+                    <label className="small text-gray-600" htmlFor="pagoFirma">
+                      Saldo a Financiar 26 %
+                    </label>
+                    <input
+                      className="form-control"
+                      id="saldoFinanciar"
+                      type="text"
+                      value={porcentajes.financiar.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                       readOnly
                     />
                   </fieldset>
                 </div>
               </div>
 
-              <div className="form-group">
-                <fieldset disabled>
-                  <label className="small text-gray-600" htmlFor="pagoFirma">
-                    Pago a la Firma 4%
-                  </label>
-                  <input
-                    className="form-control"
-                    id="pagoFirma"
-                    type="text"
-                    value={porcentajes.cuatro.toLocaleString("en")}
-                    readOnly
-                  />
-                </fieldset>
-              </div>
               <div className="pt-2 pb-2">
                 <hr color="darkGray" />
               </div>
               <div className="form-row">
                 <div className="form-group col-md-6">
                   <label className="small text-gray-600" htmlFor="pagoFirma">
-                    Fecha de inicio de Financiamiento
+                    Inicio de Financiamiento
                   </label>
                   <DatePicker
                     selected={startDate}
@@ -250,7 +331,7 @@ const Financiamiento = ({ dataCliente, base }) => {
                 <div className="form-group col-md-6">
                   <fieldset disabled>
                     <label className="small text-gray-600" htmlFor="pagoFirma">
-                      Financiamiento (meses)
+                      Financiamiento(meses)
                     </label>
                     <input
                       className="form-control"
@@ -272,12 +353,14 @@ const Financiamiento = ({ dataCliente, base }) => {
                       className="form-control"
                       id="valorPagar"
                       type="text"
-                      value={porcentajes.pagar.toLocaleString("en")}
+                      value={porcentajes.pagar.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                       readOnly
                     />
                   </fieldset>
                 </div>
-
                 <div className="form-group col-md-6">
                   <fieldset disabled>
                     <label className="small text-gray-600" htmlFor="pagoFirma">
@@ -287,14 +370,73 @@ const Financiamiento = ({ dataCliente, base }) => {
                       className="form-control"
                       id="cuotasDe"
                       type="text"
-                      value={porcentajes.cuotas.toLocaleString("en")}
+                      value={porcentajes.cuotas.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                      readonly
+                    />
+                  </fieldset>
+                </div>
+              </div>
+              <div align="center" className="pt-2 pb-3">
+                <hr color="darkGray" />
+                <h2 className="pt-2">Credito hipotecario</h2>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-4">
+                  <fieldset disabled>
+                    <label className="small text-gray-600">10 Años</label>
+                    <input
+                      className="form-control"
+                      id="10anos"
+                      type="text"
+                      value={creditoHipotecario.diez.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                      readOnly
+                    />
+                  </fieldset>
+                </div>
+                <div className="form-group col-md-4">
+                  <fieldset disabled>
+                    <label className="small text-gray-600">15 Años</label>
+                    <input
+                      className="form-control"
+                      id="15anos"
+                      type="text"
+                      value={creditoHipotecario.quince.toLocaleString(
+                        undefined,
+                        {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        }
+                      )}
+                      readonly
+                    />
+                  </fieldset>
+                </div>
+                <div className="form-group col-md-4">
+                  <fieldset disabled>
+                    <label className="small text-gray-600">20 Años</label>
+                    <input
+                      className="form-control"
+                      id="20anos"
+                      type="text"
+                      value={creditoHipotecario.veinte.toLocaleString(
+                        undefined,
+                        {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        }
+                      )}
                       readonly
                     />
                   </fieldset>
                 </div>
               </div>
             </form>
-
             <ReactToPrint
               trigger={() => (
                 <button
@@ -317,12 +459,12 @@ const Financiamiento = ({ dataCliente, base }) => {
               content={() => componentRef.current}
               bodyClass="blanco"
             />
-
             <Print
               ref={componentRef}
               dataCliente={dataCliente}
               dataFinanciamiento={dataImprimirFinanciamiento}
               dataGeneralFinanciamiento={arregloImpresionFinanciamiento}
+              creditoHipotecario={creditoHipotecario}
             />
           </div>
         </div>
@@ -330,5 +472,30 @@ const Financiamiento = ({ dataCliente, base }) => {
     </div>
   );
 };
+
+function PMT(ir, np, pv, fv, type) {
+  /*
+   * ir   - interest rate per month
+   * np   - number of periods (months)
+   * pv   - present value
+   * fv   - future value
+   * type - when the payments are due:
+   *        0: end of the period, e.g. end of month (default)
+   *        1: beginning of period
+   */
+  var pmt, pvif;
+
+  fv || (fv = 0);
+  type || (type = 0);
+
+  if (ir === 0) return -(pv + fv) / np;
+
+  pvif = Math.pow(1 + ir, np);
+  pmt = (-ir * pv * (pvif + fv)) / (pvif - 1);
+
+  if (type === 1) pmt /= 1 + ir;
+
+  return pmt;
+}
 
 export default Financiamiento;

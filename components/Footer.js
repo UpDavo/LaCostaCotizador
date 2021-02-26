@@ -8,8 +8,12 @@ const Footer = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-3">
-              <div className="footer-brand">Heimdal</div>
-              <div className="mb-3">Conectamos el presente con el futuro</div>
+              <div className="footer-brand" style={{ color: "#334447" }}>
+                Heimdal
+              </div>
+              <div className="mb-3" style={{ color: "#334447" }}>
+                Conectamos el presente con el futuro
+              </div>
               <div className="icon-list-social mb-5">
                 <a
                   className="icon-list-social-link"
@@ -28,7 +32,7 @@ const Footer = () => {
           </div>
           <hr className="my-0" />
           <div className="row align-items-center">
-            <div className="col-md-6 small">
+            <div className="col-md-6 small" style={{ color: "#334447" }}>
               Copyright © Heimdal {new Date().getFullYear()}
             </div>
           </div>

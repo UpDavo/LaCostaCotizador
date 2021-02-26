@@ -17,19 +17,28 @@ const fadeInDown = {
   },
 };
 
+const stagger = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
 const Header = () => {
   return (
     <motion.div
-      variants={fadeInDown}
-      style={{
-        marginTop: "-60px",
-        marginBottom: "30px",
-        color: "white",
-      }}
+      exit="pageExit"
+      initial="initial"
+      animate="animate"
+      variants={stagger}
+      style={{ marginTop: "6px" }}
     >
-      <h1 className="display-3" style={{ color: "white" }}>
-        <b>La Costa Cotizador</b>
-      </h1>
+      <motion.div variants={fadeInDown}>
+        <h3 className="display-4 texto" style={{ color: "#334447" }}>
+          <b>La Costa Cotizador</b>
+        </h3>
+      </motion.div>
     </motion.div>
   );
 };

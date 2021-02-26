@@ -1,14 +1,12 @@
 import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Image from "../components/Image";
 import Form from "../components/Form";
-import Plano from "../components/Plano";
 import Head from "next/head";
 import Financiamiento from "../components/Financiamiento";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import Title from "../components/Title";
+import CarouselPlanos from "../components/CarouselPlanos";
 
 const stagger = {
   animate: {
@@ -37,7 +35,7 @@ const Index = () => {
           };
           plano = {
             src: `images/planos/CASA-${real}.jpg`,
-            descripcion: `Fachada ${real} Top Cubierta`,
+            descripcion: `Plano - Fachada ${real} Top Cubierta`,
           };
         } else {
           casa = {
@@ -46,7 +44,7 @@ const Index = () => {
           };
           plano = {
             src: `images/planos/CASA-${real}.jpg`,
-            descripcion: `Fachada ${real} Top`,
+            descripcion: `Plano - Fachada ${real} Top`,
           };
         }
       } else {
@@ -57,7 +55,7 @@ const Index = () => {
           };
           plano = {
             src: `images/planos/CASA-${real}.jpg`,
-            descripcion: `Fachada ${real} Cubierta`,
+            descripcion: `Plano - Fachada ${real} Cubierta`,
           };
         } else {
           casa = {
@@ -66,13 +64,16 @@ const Index = () => {
           };
           plano = {
             src: `images/planos/CASA-${real}.jpg`,
-            descripcion: `Fachada ${real}`,
+            descripcion: `Plano - Fachada ${real}`,
           };
         }
       }
     };
 
     switch (modelo) {
+      case "A2":
+        selector("A", modelo);
+        break;
       case "B1":
         selector("B", modelo);
         break;
@@ -133,12 +134,11 @@ const Index = () => {
         className="page-header page-header-dark bg-img-repeat bg-secondary"
         style={{
           backgroundImage: `url("images/pattern-shapes.png")`,
-          backgroundColor: "#3c8090 !important",
         }}
       >
-        <div className="page-header-content">
+        <div className="page-header-content" style={{ marginTop: "-80px" }}>
           <div className="container">
-            <div className="row">
+            {/* <div className="row">
               <motion.div
                 exit="pageExit"
                 initial="initial"
@@ -146,9 +146,8 @@ const Index = () => {
                 variants={stagger}
                 className="col-lg-12 d-flex justify-content-center"
               >
-                <Title />
               </motion.div>
-            </div>
+            </div> */}
             <div className="row align-items-center">
               <motion.div
                 exit="pageExit"
@@ -169,16 +168,20 @@ const Index = () => {
                 variants={stagger}
                 className="col-lg-8"
               >
-                <Image
-                  img={image === undefined ? "images/la-costa.png" : image.src}
-                  descripcion={
-                    image === undefined ? "La Costa" : image.descripcion
+                <CarouselPlanos
+                  urlImage={
+                    image === undefined ? "images/la-costa.png" : image.src
                   }
-                />
-                <Plano
-                  img={image == undefined ? "images/la-costa.png" : plano.src}
-                  descripcion={
-                    image == undefined ? "La Costa" : plano.descripcion
+                  imageDescription={
+                    image === undefined
+                      ? "Fachada - La Costa"
+                      : image.descripcion
+                  }
+                  urlPlano={
+                    image == undefined ? "images/la-costa.png" : plano.src
+                  }
+                  planoDescription={
+                    image == undefined ? "Plano - La Costa" : plano.descripcion
                   }
                 />
               </motion.div>

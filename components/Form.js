@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 var infoCiudadelas;
 const modelos = {
   A: 198.9,
+  A2: 198.9,
   B1: 177.75,
   B2: 177.75,
   C: 155.17,
@@ -89,10 +90,14 @@ const Form = ({ actualizarImagenes, enviarDatos }) => {
     actualizarImagenes(modelo, cubierta, fachada);
   };
 
+  //Esta función envía los datos a la tabla de financiamiento
   const generarTabla = (event) => {
     event.preventDefault();
     let modeloActualizado;
     switch (document.querySelector("#modelo").value) {
+      case "A2":
+        modeloActualizado = "A";
+        break;
       case "D2":
         modeloActualizado = "D";
         break;
@@ -162,7 +167,7 @@ const Form = ({ actualizarImagenes, enviarDatos }) => {
       variants={fadeInRight}
       className="card rounded-lg text-dark formulario"
     >
-      <div className="card-header py-4" style={{ color: "#b58648" }}>
+      <div className="card-header py-4" style={{ color: "#b58648 !important" }}>
         DATOS DE LA PERSONA QUE REALIZA LA COTIZACIÓN
       </div>
       <div className="card-body">
@@ -293,6 +298,7 @@ const Form = ({ actualizarImagenes, enviarDatos }) => {
                 Seleccione un modelo
               </option>
               <option value="A">A</option>
+              <option value="A2">A2</option>
               <option value="B1">B1</option>
               <option value="B2">B2</option>
               <option value="C">C</option>
